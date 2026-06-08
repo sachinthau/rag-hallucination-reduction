@@ -5,5 +5,5 @@ __pycache__/
 logs/*.csv
 logs/ingestion_progress.json
 .DS_Store
-*.egg-info/
+*.egg-info/git add .gitignore .env.template
 dist/
