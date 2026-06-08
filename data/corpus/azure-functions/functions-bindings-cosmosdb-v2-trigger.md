@@ -1,0 +1,695 @@
+---
+title: Azure Cosmos DB trigger for Functions 2.x and higher
+description: Learn to use the Azure Cosmos DB trigger in Azure Functions.
+ms.topic: reference
+ms.date: 04/13/2026
+ms.devlang: csharp
+# ms.devlang: csharp, java, javascript, powershell, python
+zone_pivot_groups: programming-languages-set-functions
+ms.custom:
+  - devx-track-csharp
+  - devx-track-python
+  - devx-track-extended-java
+  - devx-track-js
+  - devx-track-ts
+  - sfi-ropc-nochange
+---
+
+# Azure Cosmos DB trigger for Azure Functions 2.x and higher
+
+The Azure Cosmos DB Trigger uses the [Azure Cosmos DB change feed](/azure/cosmos-db/change-feed) to listen for inserts and updates across partitions. The change feed publishes new and updated items, not including updates from deletions. For an end-to-end scenario that uses the Azure Cosmos DB trigger, see [Quickstart: Respond to database changes in Azure Cosmos DB using Azure Functions](scenario-database-changes-azure-cosmosdb.md).
+
+For information on setup and configuration details, see the [overview](./functions-bindings-cosmosdb-v2.md).
+
+Cosmos DB scaling decisions for the Consumption and Premium plans are done via target-based scaling. For more information, see [Target-based scaling](functions-target-based-scaling.md).
+
+::: zone pivot="programming-language-javascript,programming-language-typescript"
+[!INCLUDE [functions-nodejs-model-tabs-description](../../includes/functions-nodejs-model-tabs-description.md)]
+::: zone-end
+::: zone pivot="programming-language-python"
+[!INCLUDE [functions-bindings-python-models-intro](../../includes/functions-bindings-python-models-intro.md)]
+
+::: zone-end
+
+For a complete end-to-end example of using the Azure Cosmos DB trigger, see [Respond to database changes in Azure Cosmos DB using Azure Functions](scenario-database-changes-azure-cosmosdb.md).
+
+## Example
+
+::: zone pivot="programming-language-csharp"
+
+The usage of the trigger depends on the extension package version and the C# modality used in your function app, which can be one of the following:
+
+# [Isolated worker model](#tab/isolated-process)
+
+An isolated worker process class library compiled C# function runs in a process isolated from the runtime.
+
+# [In-process model](#tab/in-process)
+
+[!INCLUDE [functions-in-process-model-retirement-note](../../includes/functions-in-process-model-retirement-note.md)]
+
+An in-process class library is a compiled C# function that runs in the same process as the Functions runtime.
+ 
+---
+
+The following examples depend on the extension version for the given C# mode.
+
+# [Extension 4.x+](#tab/extensionv4/in-process)
+
+Apps that use [Azure Cosmos DB extension version 4.x](./functions-bindings-cosmosdb-v2.md?tabs=extensionv4) or higher use different attribute properties. This section shows those properties. The example uses app settings references and includes error handling.
+
+```cs
+namespace CosmosDBSamplesV2
+{
+    public class ToDoItem
+    {
+        public string id { get; set; }
+        public string Description { get; set; }
+    }
+}
+```
+
+```cs
+using System;
+using System.Collections.Generic;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
+
+namespace CosmosDBSamplesV2
+{
+    public static class CosmosTrigger
+    {
+        [FunctionName("CosmosTrigger")]
+        public static void Run([CosmosDBTrigger(
+            databaseName: "%COSMOS_DATABASE_NAME%",
+            containerName: "%COSMOS_CONTAINER_NAME%",
+            Connection = "COSMOS_CONNECTION",
+            LeaseContainerName = "leases",
+            CreateLeaseContainerIfNotExists = true)]IReadOnlyList<ToDoItem> documents, ILogger log)
+        {
+            if (documents != null && documents.Count > 0)
+            {
+                log.LogInformation("Documents modified: {count}", documents.Count);
+                foreach (var doc in documents)
+                {
+                    try
+                    {
+                        log.LogInformation("Processing document Id: {id}", doc.id);
+                        // Add your business logic here
+                    }
+                    catch (Exception ex)
+                    {
+                        log.LogError(ex, "Error processing document {id}", doc.id);
+                        // Continue processing remaining documents
+                    }
+                }
+            }
+        }
+
+        [FunctionName("health")]
+        public static IActionResult HealthCheck(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "health")] HttpRequest req)
+        {
+            return new OkResult();
+        }
+    }
+}
+```
+
+The preceding example uses app settings references (`%VAR_NAME%`) instead of hardcoded values.
+
+**App settings**
+
+Configure these application settings for identity-based connections:
+
+| Setting | Description | Example |
+|---------|-------------|---------|
+| `COSMOS_DATABASE_NAME` | Name of the Azure Cosmos DB database | `my-database` |
+| `COSMOS_CONTAINER_NAME` | Name of the container to monitor | `my-container` |
+| `COSMOS_CONNECTION__accountEndpoint` | Azure Cosmos DB account endpoint | `https://mycosmosdb.documents.azure.com:443/` |
+| `COSMOS_CONNECTION__credential` | Set to `managedidentity` for UAMI | `managedidentity` |
+| `COSMOS_CONNECTION__clientId` | Client ID of the user-assigned managed identity | `00000000-0000-0000-0000-000000000000` |
+
+**Local development**
+
+For local development, create a `local.settings.json` file:
+
+```json
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+        "COSMOS_DATABASE_NAME": "my-database",
+        "COSMOS_CONTAINER_NAME": "my-container",
+        "COSMOS_CONNECTION__accountEndpoint": "https://mycosmosdb.documents.azure.com:443/"
+    }
+}
+```
+
+> [!TIP]
+> For local development, omit `COSMOS_CONNECTION__credential` and `COSMOS_CONNECTION__clientId`. The [`DefaultAzureCredential`](/dotnet/azure/sdk/authentication/credential-chains#defaultazurecredential-overview) tries multiple credentials in order, including your Azure CLI login credentials.
+
+**Prerequisites for local development:**
+- [Azure CLI](/cli/azure/install-azure-cli) with `az login` completed
+- [Azurite storage emulator](/azure/storage/common/storage-use-azurite) running (`azurite --silent`)
+
+# [Functions 2.x+](#tab/functionsv2/in-process)
+
+The following example shows a [C# function](functions-dotnet-class-library.md) that runs when inserts or updates occur in the specified database and collection.
+
+```cs
+using Microsoft.Azure.Documents;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Host;
+using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
+
+namespace CosmosDBSamplesV2
+{
+    public static class CosmosTrigger
+    {
+        [FunctionName("CosmosTrigger")]
+        public static void Run([CosmosDBTrigger(
+            databaseName: "ToDoItems",
+            collectionName: "Items",
+            ConnectionStringSetting = "CosmosDBConnection",
+            LeaseCollectionName = "leases",
+            CreateLeaseCollectionIfNotExists = true)]IReadOnlyList<Document> documents,
+            ILogger log)
+        {
+            if (documents != null && documents.Count > 0)
+            {
+                log.LogInformation($"Documents modified: {documents.Count}");
+                log.LogInformation($"First document Id: {documents[0].Id}");
+            }
+        }
+    }
+}
+```
+
+# [Extension 4.x+](#tab/extensionv4/isolated-process)
+
+This example uses app settings references and includes error handling. First, define your model type:
+
+```csharp
+public class ToDoItem
+{
+    public string? Id { get; set; }
+    public string? Description { get; set; }
+}
+```
+
+The following function runs when inserts or updates occur in the specified database and container:
+
+```csharp
+[Function("CosmosTrigger")]
+public void Run([CosmosDBTrigger(
+    databaseName: "%COSMOS_DATABASE_NAME%",
+    containerName: "%COSMOS_CONTAINER_NAME%",
+    Connection = "COSMOS_CONNECTION",
+    LeaseContainerName = "leases",
+    CreateLeaseContainerIfNotExists = true)] IReadOnlyList<ToDoItem> documents,
+    FunctionContext context)
+{
+    if (documents is not null && documents.Any())
+    {
+        _logger.LogInformation("Documents modified: {count}", documents.Count);
+        foreach (var doc in documents)
+        {
+            try
+            {
+                _logger.LogInformation("Processing document Id: {id}", doc.Id);
+                // Add your business logic here
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error processing document {id}", doc.Id);
+                // Continue processing remaining documents
+            }
+        }
+    }
+}
+
+[Function("health")]
+public IActionResult HealthCheck([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "health")] HttpRequest req)
+{
+    return new OkResult();
+}
+```
+
+The preceding example uses app settings references (`%VAR_NAME%`) instead of hardcoded values. For configuration details, see the app settings and local development guidance in the in-process tab.
+
+# [Functions 2.x+](#tab/functionsv2/isolated-process)
+
+The following code defines a `MyDocument` type:
+<!--
+:::code language="csharp" source="~/azure-functions-dotnet-worker/samples/Extensions/CosmosDB/CosmosDBFunction.cs" range="49-58":::
+-->
+The following example uses an [`IReadOnlyList<T>`](/dotnet/api/system.collections.generic.ireadonlylist-1) as the Azure Cosmos DB trigger binding parameter:
+<!--
+:::code language="csharp" source="~/azure-functions-dotnet-worker/samples/Extensions/CosmosDB/CosmosDBFunction.cs" id="docsnippet_exponential_backoff_retry_example":::
+-->
+This example requires the following `using` statements:
+<!--
+:::code language="csharp" source="~/azure-functions-dotnet-worker/samples/Extensions/CosmosDB/CosmosDBFunction.cs" range="4-7":::
+-->
+---
+
+::: zone-end
+::: zone pivot="programming-language-java"
+
+This function is invoked when there are inserts or updates in the specified database and container.
+
+# [Extension 4.x+](#tab/extensionv4)
+
+[!INCLUDE [functions-cosmosdb-extension-java-note](../../includes/functions-cosmosdb-extension-java-note.md)]
+
+```java
+    @FunctionName("CosmosDBTriggerFunction")
+    public void run(
+        @CosmosDBTrigger(
+            name = "items",
+            databaseName = "ToDoList",
+            containerName = "Items",
+            leaseContainerName="leases",
+            connection = "AzureCosmosDBConnection",
+            createLeaseContainerIfNotExists = true
+        )
+        Object inputItem,
+        final ExecutionContext context
+    ) {
+        context.getLogger().info("Items modified: " + inputItems.size());
+    }
+```
+
+# [Functions 2.x+](#tab/functionsv2)
+
+```java
+    @FunctionName("cosmosDBMonitor")
+    public void cosmosDbProcessor(
+        @CosmosDBTrigger(name = "items",
+            databaseName = "ToDoList",
+            collectionName = "Items",
+            leaseCollectionName = "leases",
+            createLeaseCollectionIfNotExists = true,
+            connectionStringSetting = "AzureCosmosDBConnection") String[] items,
+            final ExecutionContext context ) {
+                context.getLogger().info(items.length + "item(s) is/are changed.");
+            }
+```
+
+---
+
+In the [Java functions runtime library](/java/api/overview/azure/functions/runtime), use the `@CosmosDBTrigger` annotation on parameters whose value comes from Azure Cosmos DB. Use this annotation with native Java types, plain-old Java objects (POJOs), or nullable values by using `Optional<T>`.
+
+::: zone-end  
+::: zone pivot="programming-language-typescript"  
+
+# [Model v4](#tab/nodejs-v4)
+
+The following example shows an Azure Cosmos DB trigger [TypeScript function](functions-reference-node.md?tabs=typescript). The function writes log messages when Azure Cosmos DB records are added or modified.
+
+:::code language="typescript" source="~/azure-functions-nodejs-v4/ts/src/functions/cosmosDBTrigger1.ts" :::
+
+# [Model v3](#tab/nodejs-v3)
+
+TypeScript samples aren't documented for model v3.
+
+---
+
+::: zone-end  
+::: zone pivot="programming-language-javascript"  
+
+# [Model v4](#tab/nodejs-v4)
+
+The following example shows an Azure Cosmos DB trigger [JavaScript function](functions-reference-node.md). The function writes log messages when Azure Cosmos DB records are added or modified.
+
+:::code language="javascript" source="~/azure-functions-nodejs-v4/js/src/functions/cosmosDBTrigger1.js" :::
+
+# [Model v3](#tab/nodejs-v3)
+
+The following example shows an Azure Cosmos DB trigger binding in a *function.json* file and a [JavaScript function](functions-reference-node.md) that uses the binding. The function writes log messages when Azure Cosmos DB records are added or modified.
+
+Here's the binding data in the *function.json* file:
+
+[!INCLUDE [functions-cosmosdb-trigger-attributes](../../includes/functions-cosmosdb-trigger-attributes.md)]
+
+Here's the JavaScript code:
+
+```javascript
+    module.exports = async function (context, documents) {
+      context.log('First document Id modified : ', documents[0].id);
+    }
+```
+
+---
+
+::: zone-end  
+::: zone pivot="programming-language-powershell"  
+
+The following example shows how to run a function as data changes in Azure Cosmos DB.
+
+[!INCLUDE [functions-cosmosdb-trigger-attributes](../../includes/functions-cosmosdb-trigger-attributes.md)]
+
+In the _run.ps1_ file, you have access to the document that triggers the function via the `$Documents` parameter.
+
+```powershell
+param($Documents, $TriggerMetadata) 
+
+Write-Host "First document Id modified : $($Documents[0].id)" 
+```
+
+::: zone-end  
+::: zone pivot="programming-language-python"  
+
+The following example shows an Azure Cosmos DB trigger binding. The example depends on whether you use the [v1 or v2 Python programming model](functions-reference-python.md).
+
+# [v2](#tab/python-v2)
+
+```python
+import logging
+import azure.functions as func
+
+app = func.FunctionApp()
+
+@app.function_name(name="CosmosDBTrigger")
+@app.cosmos_db_trigger(arg_name="documents", 
+                       database_name="%COSMOS_DATABASE_NAME%", 
+                       container_name="%COSMOS_CONTAINER_NAME%",
+                       connection="COSMOS_CONNECTION",
+                       lease_container_name="leases",
+                       create_lease_container_if_not_exists="true")
+def cosmos_trigger(documents: func.DocumentList) -> str:
+    if documents:
+        for doc in documents:
+            try:
+                logging.info('Processing document id: %s', doc['id'])
+                # Add your business logic here
+            except Exception as e:
+                logging.error('Error processing document %s: %s', doc.get('id', 'unknown'), str(e))
+                # Continue processing remaining documents
+
+@app.function_name(name="health")
+@app.route(route="health", methods=["GET"])
+def health_check(req: func.HttpRequest) -> func.HttpResponse:
+    """Health check endpoint for monitoring."""
+    return func.HttpResponse("OK", status_code=200)
+```
+
+The preceding example uses app settings references (`%VAR_NAME%`) instead of hardcoded values.
+
+**App settings**
+
+Configure these application settings for identity-based connections:
+
+| Setting | Description | Example |
+|---------|-------------|---------|
+| `COSMOS_DATABASE_NAME` | Name of the Azure Cosmos DB database | `my-database` |
+| `COSMOS_CONTAINER_NAME` | Name of the container to monitor | `my-container` |
+| `COSMOS_CONNECTION__accountEndpoint` | Azure Cosmos DB account endpoint | `https://mycosmosdb.documents.azure.com:443/` |
+| `COSMOS_CONNECTION__credential` | Set to `managedidentity` for UAMI | `managedidentity` |
+| `COSMOS_CONNECTION__clientId` | Client ID of the user-assigned managed identity | `00000000-0000-0000-0000-000000000000` |
+
+**Local development**
+
+For local development, create a `local.settings.json` file:
+
+```json
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "FUNCTIONS_WORKER_RUNTIME": "python",
+        "COSMOS_DATABASE_NAME": "my-database",
+        "COSMOS_CONTAINER_NAME": "my-container",
+        "COSMOS_CONNECTION__accountEndpoint": "https://mycosmosdb.documents.azure.com:443/"
+    }
+}
+```
+
+> [!TIP]
+> For local development, omit `COSMOS_CONNECTION__credential` and `COSMOS_CONNECTION__clientId`. The [`DefaultAzureCredential`](/python/api/azure-identity/azure.identity.defaultazurecredential) tries multiple credentials in order, including your Azure CLI login credentials.
+
+**Prerequisites for local development:**
+- [Azure CLI](/cli/azure/install-azure-cli) with `az login` completed
+- [Azurite storage emulator](/azure/storage/common/storage-use-azurite) running (`azurite --silent`)
+
+# [v1](#tab/python-v1)
+
+The function writes log messages when Azure Cosmos DB records are modified. Here's the binding data in the *function.json* file:
+
+[!INCLUDE [functions-cosmosdb-trigger-attributes](../../includes/functions-cosmosdb-trigger-attributes.md)]
+
+Here's the Python code:
+
+```python
+    import logging
+    import azure.functions as func
+
+
+    def main(documents: func.DocumentList) -> str:
+        if documents:
+            logging.info('First document Id modified: %s', documents[0]['id'])
+```
+
+---
+
+::: zone-end  
+::: zone pivot="programming-language-go"
+
+The following example shows an Azure Cosmos DB trigger function that logs each changed document:
+
+```go
+package main
+
+import (
+	"context"
+	"log"
+
+	"github.com/azure/azure-functions-golang-worker/sdk"
+	"github.com/azure/azure-functions-golang-worker/sdk/bindings"
+	"github.com/azure/azure-functions-golang-worker/worker"
+)
+
+func main() {
+	app := sdk.FunctionApp()
+	app.CosmosDB("cosmosDBTrigger", processChanges,
+		sdk.WithDatabase("mydb"),
+		sdk.WithContainer("mycontainer"),
+		sdk.WithConnection("CosmosDBConnection"),
+	)
+	worker.Start(app)
+}
+
+func processChanges(ctx context.Context, docs []bindings.CosmosDocument) error {
+	for _, doc := range docs {
+		log.Printf("Document modified: %s", doc.ID)
+	}
+	return nil
+}
+```
+
+::: zone-end  
+::: zone pivot="programming-language-csharp"
+## Attributes
+
+Both [in-process](functions-dotnet-class-library.md) and [isolated process](dotnet-isolated-process-guide.md) C# libraries use `CosmosDBTriggerAttribute` to define the function. C# script instead uses a function.json configuration file as described in the [C# scripting guide](./functions-reference-csharp.md#azure-cosmos-db-v2-trigger).
+
+The specific properties depend on both the process model and the extension version:
+
+# [Extension 4.x+](#tab/extensionv4/in-process)
+
+In-process libraries use [CosmosDBTriggerAttribute](https://github.com/Azure/azure-webjobs-sdk-extensions/blob/master/src/WebJobs.Extensions.CosmosDB/Trigger/CosmosDBTriggerAttribute.cs) from the `Microsoft.Azure.WebJobs` namespace, which defines these properties:
+
+[!INCLUDE [functions-cosmosdb-attributes-v4](../../includes/functions-cosmosdb-attributes-v4.md)]
+
+# [Functions 2.x+](#tab/functionsv2/in-process)
+
+In-process libraries use [CosmosDBTriggerAttribute](https://github.com/Azure/azure-webjobs-sdk-extensions/blob/master/src/WebJobs.Extensions.CosmosDB/Trigger/CosmosDBTriggerAttribute.cs) from the `Microsoft.Azure.WebJobs` namespace, which defines these properties:
+
+[!INCLUDE [functions-cosmosdb-attributes-v3](../../includes/functions-cosmosdb-attributes-v3.md)] 
+
+# [Extension 4.x+](#tab/extensionv4/isolated-process)
+
+Isolated worker process libraries use [CosmosDBTriggerAttribute](https://github.com/Azure/azure-functions-dotnet-worker/blob/main/extensions/Worker.Extensions.CosmosDB/src/CosmosDBTriggerAttribute.cs) from the `Microsoft.Azure.Functions.Worker` namespace, which defines these properties:
+
+[!INCLUDE [functions-cosmosdb-attributes-v4](../../includes/functions-cosmosdb-attributes-v4.md)]
+
+# [Functions 2.x+](#tab/functionsv2/isolated-process)
+
+Isolated worker process libraries use [CosmosDBTriggerAttribute](https://github.com/Azure/azure-functions-dotnet-worker/blob/main/extensions/Worker.Extensions.CosmosDB/src/CosmosDBTriggerAttribute.cs) from the `Microsoft.Azure.Functions.Worker` namespace, which defines these properties:
+
+[!INCLUDE [functions-cosmosdb-attributes-v3](../../includes/functions-cosmosdb-attributes-v3.md)]
+
+---
+
+::: zone-end  
+::: zone pivot="programming-language-python"
+## Decorators
+
+_Applies only to the Python v2 programming model._
+
+For Python v2 functions defined by using a decorator, the `cosmos_db_trigger` (Extension 4.x) supports the following properties:
+
+| Property    | Description |
+|-------------|-----------------------------|
+|`arg_name` | The variable name used in function code that represents the list of documents with changes. |
+|`database_name`  | The name of the Azure Cosmos DB database. Supports `%VAR_NAME%` syntax to reference app settings. |
+|`container_name`  | The name of the Azure Cosmos DB container being monitored. Supports `%VAR_NAME%` syntax. |
+|`connection` | The name of an app setting or setting prefix for identity-based connections (for example, `COSMOS_CONNECTION` resolves to `COSMOS_CONNECTION__accountEndpoint`, and so on). |
+|`lease_container_name` | The name of the container used to store leases. |
+|`create_lease_container_if_not_exists` | When `true`, automatically creates the lease container if it doesn't exist. |
+
+For Python functions defined by using *function.json*, see the [Configuration](#configuration) section.
+::: zone-end
+
+::: zone pivot="programming-language-java"  
+## Annotations
+
+# [Extension 4.x+](#tab/extensionv4)
+
+[!INCLUDE [functions-cosmosdb-extension-java-note](../../includes/functions-cosmosdb-extension-java-note.md)]
+
+Use the `@CosmosDBTrigger` annotation on parameters that read data from Azure Cosmos DB. The annotation supports the following properties:
+
+|Attribute property | Description|
+|---------|----------------------|
+|**connection** | The name of an app setting or setting collection that specifies how to connect to the Azure Cosmos DB account being monitored. For more information, see [Connections](#connections).|
+|**name** | The name of the function. |
+|**databaseName**  | The name of the Azure Cosmos DB database with the container being monitored. |
+|**containerName** | The name of the container being monitored. |
+|**leaseConnectionStringSetting** | (Optional) The name of an app setting or setting collection that specifies how to connect to the Azure Cosmos DB account that holds the lease container. <br><br> When not set, the `Connection` value is used. This parameter is automatically set when the binding is created in the portal. The connection string for the leases container must have write permissions.|
+|**leaseDatabaseName** | (Optional) The name of the database that holds the container used to store leases. When not set, the value of the `databaseName` setting is used. |
+|**leaseContainerName** | (Optional) The name of the container used to store leases. When not set, the value `leases` is used. |
+|**createLeaseContainerIfNotExists** | (Optional) When set to `true`, the leases container is automatically created when it doesn't already exist. The default value is `false`. When using Microsoft Entra identities if you set the value to `true`, creating containers isn't [an allowed operation](/azure/cosmos-db/troubleshoot-forbidden#nondata-operations-arent-allowed) and your function app isn't allowed to start.|
+|**leasesContainerThroughput** | (Optional) Defines the number of Request Units to assign when the leases container is created. This setting is only used when `CreateLeaseContainerIfNotExists` is set to `true`. This parameter is automatically set when the binding is created using the portal. |
+|**leaseContainerPrefix** | (Optional) When set, the value is added as a prefix to the leases created in the Lease container for this function. Using a prefix allows two separate Azure Functions to share the same Lease container by using different prefixes. |
+|**feedPollDelay**| (Optional) The time (in milliseconds) for the delay between polling a partition for new changes on the feed, after all current changes are drained. Default is 5,000 milliseconds, or 5 seconds.|
+|**leaseAcquireInterval**| (Optional) When set, it defines, in milliseconds, the interval to kick off a task to compute if partitions are distributed evenly among known host instances. Default is 13000 (13 seconds). |
+|**leaseExpirationInterval**| (Optional) When set, it defines, in milliseconds, the interval for which the lease is taken on a lease representing a partition. If the lease isn't renewed within this interval, it expires and ownership of the partition moves to another instance. Default is 60000 (60 seconds).|
+|**leaseRenewInterval**| (Optional) When set, it defines, in milliseconds, the renewal interval for all leases for partitions currently held by an instance. Default is 17000 (17 seconds). |
+|**maxItemsPerInvocation**| (Optional) When set, this property sets the maximum number of items received per Function call. If operations in the monitored container are performed through stored procedures, [transaction scope](/azure/cosmos-db/stored-procedures-triggers-udfs#transactions) is preserved when reading items from the change feed. As a result, the number of items received could be higher than the specified value so that the items changed by the same transaction are returned as part of one atomic batch. |
+|**startFromBeginning**| (Optional) This option tells the Trigger to read changes from the beginning of the container's change history instead of starting at the current time. Reading from the beginning only works the first time the trigger starts, as in subsequent runs, the checkpoints are already stored. Setting this option to `true` when there are leases already created has no effect. |
+|**preferredLocations**| (Optional) Defines preferred locations (regions) for geo-replicated database accounts in the Azure Cosmos DB service. Values should be comma-separated. For example, `East US,South Central US,North Europe`. |
+
+# [Functions 2.x+](#tab/functionsv2)
+
+From the [Java functions runtime library](/java/api/overview/azure/functions/runtime), use the `@CosmosDBTrigger` annotation on parameters that read data from Azure Cosmos DB. The annotation supports the following properties:
+
++ [name](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.name)
++ [connectionStringSetting](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.connectionstringsetting)
++ [databaseName](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.databasename)
++ [collectionName](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.collectionname)
++ [leaseConnectionStringSetting](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.leaseconnectionstringsetting)
++ [leaseDatabaseName](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.leasedatabasename)
++ [leaseCollectionName](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.leasecollectionname)
++ [createLeaseCollectionIfNotExists](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.createleasecollectionifnotexists)
++ [leasesCollectionThroughput](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.leasescollectionthroughput)
++ [leaseCollectionPrefix](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.leasecollectionprefix)
++ [feedPollDelay](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.feedpolldelay)
++ [leaseAcquireInterval](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.leaseacquireinterval)
++ [leaseExpirationInterval](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.leaseexpirationinterval)
++ [leaseRenewInterval](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.leaserenewinterval)
++ [checkpointInterval](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.checkpointinterval)
++ [checkpointDocumentCount](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.checkpointdocumentcount)
++ [maxItemsPerInvocation](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.maxitemsperinvocation)
++ [startFromBeginning](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.startfrombeginning)
++ [preferredLocations](/java/api/com.microsoft.azure.functions.annotation.cosmosdbtrigger.preferredlocations)
+
+---
+
+::: zone-end  
+::: zone pivot="programming-language-javascript,programming-language-typescript,programming-language-powershell,programming-language-python"  
+## Configuration
+::: zone-end
+
+::: zone pivot="programming-language-python" 
+_Applies only to the Python v1 programming model._
+
+::: zone-end
+::: zone pivot="programming-language-javascript,programming-language-typescript"  
+
+# [Model v4](#tab/nodejs-v4)
+
+The following table explains the properties that you can set on the `options` object you pass to the `app.cosmosDB()` method. The `type`, `direction`, and `name` properties don't apply to the v4 model.
+
+# [Model v3](#tab/nodejs-v3)
+
+The following table explains the binding configuration properties that you set in the *function.json* file, where properties differ by extension version:  
+
+---
+
+::: zone-end
+::: zone pivot="programming-language-powershell,programming-language-python"  
+
+The following table explains the binding configuration properties that you set in the *function.json* file, where properties differ by extension version:  
+
+::: zone-end
+::: zone pivot="programming-language-javascript,programming-language-typescript,programming-language-powershell,programming-language-python"  
+
+# [Extension 4.x+](#tab/extensionv4)
+
+[!INCLUDE [functions-cosmosdb-settings-v4](../../includes/functions-cosmosdb-settings-v4.md)]
+
+# [Functions 2.x+](#tab/functionsv2)
+
+[!INCLUDE [functions-cosmosdb-settings-v3](../../includes/functions-cosmosdb-settings-v3.md)]
+
+---
+
+::: zone-end  
+
+For complete examples, see the [Example section](#example).
+
+## Usage
+
+The trigger requires a second collection that it uses to store _leases_ over the partitions. The trigger works only if both the collection you're monitoring and the collection that contains the leases are available.
+
+::: zone pivot="programming-language-csharp"  
+>[!IMPORTANT]
+> If you configure multiple functions to use an Azure Cosmos DB trigger for the same collection, each function should use a dedicated lease collection or specify a different `LeaseCollectionPrefix` for each function. Otherwise, only one of the functions is triggered. For information about the prefix, see the [Attributes section](#attributes).
+::: zone-end
+::: zone pivot="programming-language-java"  
+>[!IMPORTANT]
+> If you configure multiple functions to use an Azure Cosmos DB trigger for the same collection, each function should use a dedicated lease collection or specify a different `leaseCollectionPrefix` for each function. Otherwise, only one of the functions is triggered. For information about the prefix, see the [Annotations section](#annotations).
+::: zone-end
+::: zone pivot="programming-language-javascript,programming-language-typescript,programming-language-powershell,programming-language-python"  
+>[!IMPORTANT]
+> If you configure multiple functions to use an Azure Cosmos DB trigger for the same collection, each function should use a dedicated lease collection or specify a different `leaseCollectionPrefix` for each function. Otherwise, only one of the functions is triggered. For information about the prefix, see the [Configuration section](#configuration).
+::: zone-end
+
+The trigger doesn't indicate whether a document was updated or inserted. It just provides the document itself. If you need to handle updates and inserts differently, implement timestamp fields for insertion or update.
+
+::: zone pivot="programming-language-csharp"
+
+The parameter type supported by the Azure Cosmos DB trigger depends on the Functions runtime version, the extension package version, and the C# modality used.
+
+# [Extension 4.x+](#tab/extensionv4/in-process)
+
+See [Binding types](./functions-bindings-cosmosdb-v2.md?tabs=in-process%2Cextensionv4&pivots=programming-language-csharp#binding-types) for a list of supported types.
+
+# [Functions 2.x+](#tab/functionsv2/in-process)
+
+For a list of supported types, see [Binding types](./functions-bindings-cosmosdb-v2.md?tabs=in-process%2Cfunctionsv2&pivots=programming-language-csharp#binding-types).
+
+# [Extension 4.x+](#tab/extensionv4/isolated-process)
+
+[!INCLUDE [functions-bindings-cosmosdb-v2-trigger-dotnet-isolated-types](../../includes/functions-bindings-cosmosdb-v2-trigger-dotnet-isolated-types.md)]
+
+# [Functions 2.x+](#tab/functionsv2/isolated-process)
+
+For a list of supported types, see [Binding types](./functions-bindings-cosmosdb-v2.md?tabs=isolated-process%2Cfunctionsv2&pivots=programming-language-csharp#binding-types).
+
+---
+
+::: zone-end
+
+[!INCLUDE [functions-cosmosdb-connections](../../includes/functions-cosmosdb-connections.md)]
+
+## Next steps
+
+- [Read an Azure Cosmos DB document (Input binding)](./functions-bindings-cosmosdb-v2-input.md)
+- [Save changes to an Azure Cosmos DB document (Output binding)](./functions-bindings-cosmosdb-v2-output.md)
+
+[version 4.x of the extension]: ./functions-bindings-cosmosdb-v2.md?tabs=extensionv4

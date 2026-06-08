@@ -1,0 +1,12 @@
+[
+  {"id": "D001", "question": "What embedding dimensions does text-embedding-3-large produce?", "in_corpus": true, "expected_answer": "3072 dimensions", "category": "azure_openai"},
+  {"id": "D002", "question": "How does Azure AI Search hybrid retrieval combine keyword and vector search?", "in_corpus": true, "expected_answer": "Uses BM25 for keyword matching combined with vector similarity, then applies semantic re-ranking", "category": "azure_search"},
+  {"id": "D003", "question": "What is the maximum block blob size in Azure Blob Storage?", "in_corpus": true, "expected_answer": "Up to 190.7 TiB for block blobs", "category": "azure_storage"},
+  {"id": "D004", "question": "How do you enable soft delete for Azure Blob containers?", "in_corpus": true, "expected_answer": "Through the Data Protection settings in the storage account", "category": "azure_storage"},
+  {"id": "D005", "question": "What is the partition key in Azure Table Storage?", "in_corpus": true, "expected_answer": "A string value that groups related entities together for efficient querying", "category": "azure_storage"},
+  {"id": "D006", "question": "What virtual network peering types does Azure support?", "in_corpus": true, "expected_answer": "Virtual network peering and global virtual network peering", "category": "azure_networking"},
+  {"id": "D007", "question": "What is the semantic ranker in Azure AI Search?", "in_corpus": true, "expected_answer": "A re-ranking layer that uses language models to improve relevance of hybrid search results", "category": "azure_search"},
+  {"id": "D008", "question": "What is the recommended chunk overlap percentage for RAG pipelines according to the Azure documentation?", "in_corpus": false, "expected_answer": null, "category": "out_of_corpus"},
+  {"id": "D009", "question": "Which version of Python was Azure originally developed in?", "in_corpus": false, "expected_answer": null, "category": "out_of_corpus"},
+  {"id": "D010", "question": "What IPv6 subnet prefix length does Azure require for virtual networks?", "in_corpus": true, "expected_answer": "/64 subnet prefix length is required for IPv6 subnets", "category": "azure_networking"}
+]
