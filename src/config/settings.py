@@ -38,5 +38,6 @@ class Settings:
     PHI4_ENDPOINT: str = os.getenv("PHI4_ENDPOINT", "")
     PHI4_DEPLOYMENT: str = os.getenv("PHI4_DEPLOYMENT", "Phi-4-deployment")
     PHI4_API_KEY: str = os.getenv("PHI4_API_KEY", "")
+    PHI4_API_VERSION: str = os.getenv("PHI4_API_VERSION", "2024-05-01-preview")
 
 settings = Settings()

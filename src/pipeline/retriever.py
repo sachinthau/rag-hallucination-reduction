@@ -12,9 +12,9 @@ def retrieve_chunks(question: str) -> list:
         embedding_function=embeddings.embed_query,
         semantic_configuration_name="default"
     )
-    retriever = vector_store.as_retriever(
-        search_type="hybrid",
-        search_kwargs={"k": settings.TOP_K_CHUNKS}
+    # Use similarity search instead of hybrid to avoid the k conflict bug
+    chunks = vector_store.similarity_search(
+        query=question,
+        k=settings.TOP_K_CHUNKS
     )
-    chunks = retriever.invoke(question)
     return chunks

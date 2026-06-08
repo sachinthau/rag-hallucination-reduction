@@ -1,18 +1,28 @@
+# src/utils/logger.py
 import uuid
 import datetime
 from azure.data.tables import TableServiceClient
 from src.config.settings import settings
 
 
-def log_result(result: dict):
-    """Logs a pipeline result to Azure Table Storage. Fails silently to avoid breaking the pipeline."""
+def get_table_client():
+    service = TableServiceClient.from_connection_string(settings.STORAGE_CONNECTION_STRING)
+    # Create table if it does not exist
     try:
-        service = TableServiceClient.from_connection_string(settings.STORAGE_CONNECTION_STRING)
-        table = service.get_table_client(settings.TABLE_NAME)
+        service.create_table(settings.TABLE_NAME)
+        print(f"[Logger] Created table: {settings.TABLE_NAME}")
+    except Exception:
+        pass  # Table already exists, that is fine
+    return service.get_table_client(settings.TABLE_NAME)
+
+
+def log_result(result: dict):
+    try:
+        table = get_table_client()
         entity = {
             "PartitionKey": result.get("config", "unknown"),
             "RowKey": str(uuid.uuid4()),
-            "logged_at": datetime.datetime.utcnow().isoformat(),
+            "logged_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
             "question": str(result.get("question", ""))[:500],
             "answer": str(result.get("answer", ""))[:1000],
             "latency_ms": int(result.get("latency_ms", 0)),

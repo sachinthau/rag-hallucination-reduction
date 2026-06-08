@@ -1,4 +1,3 @@
-cat > TODO.md << 'EOF'
 # Project TODO List
 
 ## Known Issues / Tech Debt
@@ -26,4 +25,21 @@ cat > TODO.md << 'EOF'
 - [ ] Run full evaluation (150 questions x 3 configs)
 - [ ] Manual annotation of 50 responses per config
 - [ ] Calculate precision, recall, F1, Cohen's Kappa
-EOF
+
+
+## Known Warnings (Non-Critical)
+
+- [ ] **Hugging Face unauthenticated warning**: cross-encoder/nli-deberta-v3-base downloads
+      anonymously from HF Hub. Warning appears on first download only, model is now cached.
+      Fix: Create free HF account, get token, add HF_TOKEN to .env and layer_crossencoder.py
+      Impact: None, model works fine without token. Only affects download speed.
+
+## Layer 3 Final Model: cross-encoder/ms-marco-MiniLM-L6-v2
+- Selected from Hugging Face Text Ranking category
+- 75.6M downloads, most proven reranking model available
+- Runs locally, free, no API dependency
+- Pair order: (chunk, answer) because ms-marco was trained document-first
+- Score normalised using sigmoid function to get 0-1 range
+- Layer 1 (DeBERTa): logical entailment signal
+- Layer 2 (RAGAS): claim-level factual precision
+- Layer 3 (MiniLM): overall relevance ranking signal
