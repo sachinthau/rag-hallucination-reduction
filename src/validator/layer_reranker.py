@@ -10,7 +10,7 @@ from sentence_transformers import CrossEncoder
 _model = None
 MODEL_NAME = "cross-encoder/ms-marco-MiniLM-L6-v2"
 
-
+# Relevance scoring using cross-encoder/ms-marco-MiniLM-L6-v2
 def get_model():
     global _model
     if _model is None:

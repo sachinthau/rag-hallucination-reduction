@@ -5,7 +5,7 @@ from src.config.settings import settings
 
 _model = None
 
-
+# Logic and NLI-based scoring using cross-encoder models
 def get_model() -> CrossEncoder:
     global _model
     if _model is None:
