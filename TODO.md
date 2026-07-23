@@ -43,3 +43,12 @@
 - Layer 1 (DeBERTa): logical entailment signal
 - Layer 2 (RAGAS): claim-level factual precision
 - Layer 3 (MiniLM): overall relevance ranking signal
+## RAGAS Layer 2 Independence - Final Status
+- gpt-4.1-mini used as practical measure (circular dependency acknowledged)
+- Alternatives tried and failed:
+  - Phi-4-mini-instruct: Azure Global Standard timeout on student subscription
+  - Llama 3.2 3B (Ollama): JSON schema incompatibility with RAGAS prompts
+  - Mistral-small-2503: Azure deployment capacity failure
+- Root cause: RAGAS makes multiple rapid internal API calls which exceed
+  Global Standard rate limits on student subscriptions
+- Future work: self-hosted model or higher Azure tier would resolve this

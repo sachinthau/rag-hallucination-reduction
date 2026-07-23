@@ -33,9 +33,5 @@ class Settings:
     GRV_WEIGHT_CROSSENCODER: float = 0.30
     GRV_WEIGHT_RAGAS: float = 0.30
     GRV_WEIGHT_PHI4: float = 0.40
-
-    # Ollama local model for RAGAS Layer 2
-    OLLAMA_MODEL: str = os.getenv("OLLAMA_MODEL", "llama3.2:3b")
-    OLLAMA_BASE_URL: str = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
-
+    
 settings = Settings()
