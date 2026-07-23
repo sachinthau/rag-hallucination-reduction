@@ -1,0 +1,182 @@
+[
+  {
+    "id": "Q101",
+    "question": "What HTTP methods does an Azure Functions HTTP trigger support by default?",
+    "expected_answer": "GET and POST methods are supported by default",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "By default, an HTTP trigger responds to GET and POST requests",
+    "in_corpus": true,
+    "category": "azure_functions_http"
+  },
+  {
+    "id": "Q102",
+    "question": "What authorization level controls access to an Azure Functions HTTP trigger?",
+    "expected_answer": "The authLevel property controls access. Options are anonymous, function, and admin.",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "The authLevel property controls the authorization level for the HTTP trigger. Options include anonymous, function, and admin",
+    "in_corpus": true,
+    "category": "azure_functions_http"
+  },
+  {
+    "id": "Q103",
+    "question": "What does an anonymous authorization level mean for an Azure Functions HTTP trigger?",
+    "expected_answer": "No API key is required and the endpoint is publicly accessible",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "anonymous: No API key is required",
+    "in_corpus": true,
+    "category": "azure_functions_http"
+  },
+  {
+    "id": "Q104",
+    "question": "What does a function authorization level mean for an Azure Functions HTTP trigger?",
+    "expected_answer": "A function-specific or host API key is required to call the endpoint",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "function: A function-specific or host API key is required",
+    "in_corpus": true,
+    "category": "azure_functions_http"
+  },
+  {
+    "id": "Q105",
+    "question": "What does the admin authorization level require for an Azure Functions HTTP trigger?",
+    "expected_answer": "The master key is required to access the endpoint",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "admin: The master key is required",
+    "in_corpus": true,
+    "category": "azure_functions_http"
+  },
+  {
+    "id": "Q106",
+    "question": "How can you pass an API key to an Azure Functions HTTP trigger?",
+    "expected_answer": "Either as a query string parameter named code or in an x-functions-key HTTP header",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "You can pass the API key as a query string parameter named code or in an x-functions-key HTTP header",
+    "in_corpus": true,
+    "category": "azure_functions_http"
+  },
+  {
+    "id": "Q107",
+    "question": "What queue storage trigger setting controls the maximum number of queue messages retrieved at once?",
+    "expected_answer": "The batchSize setting controls how many queue messages are retrieved at once. The default is 16.",
+    "source_doc": "azure-functions/functions-create-storage-queue-triggered-function.md",
+    "source_passage": "batchSize: The maximum number of queue messages to retrieve and process in parallel. The default is 16.",
+    "in_corpus": true,
+    "category": "azure_functions_queue"
+  },
+  {
+    "id": "Q108",
+    "question": "What happens to an Azure Functions queue message that fails processing five times?",
+    "expected_answer": "It is moved to a poison message queue",
+    "source_doc": "azure-functions/functions-create-storage-queue-triggered-function.md",
+    "source_passage": "If a queue message fails to process successfully five times, it is moved to a poison message queue",
+    "in_corpus": true,
+    "category": "azure_functions_queue"
+  },
+  {
+    "id": "Q109",
+    "question": "What is the name of the poison queue created automatically for a queue named myqueue in Azure Functions?",
+    "expected_answer": "myqueue-poison",
+    "source_doc": "azure-functions/functions-create-storage-queue-triggered-function.md",
+    "source_passage": "If the original queue is named myqueue, the poison queue is named myqueue-poison",
+    "in_corpus": true,
+    "category": "azure_functions_queue"
+  },
+  {
+    "id": "Q110",
+    "question": "What does the maxPollingInterval setting control in Azure Functions queue triggers?",
+    "expected_answer": "It controls the maximum interval between polls when the queue is empty. The default is 60 seconds.",
+    "source_doc": "azure-functions/functions-create-storage-queue-triggered-function.md",
+    "source_passage": "maxPollingInterval: The maximum interval between polls when the queue is empty. Default is 60 seconds.",
+    "in_corpus": true,
+    "category": "azure_functions_queue"
+  },
+  {
+    "id": "Q111",
+    "question": "What is a container in Azure Container Apps?",
+    "expected_answer": "A container is the unit of deployment in Azure Container Apps. It packages your application code, runtime, libraries and settings into a portable image that runs consistently across environments.",
+    "source_doc": "container-apps/containers.md",
+    "source_passage": "A container is the unit of deployment in Azure Container Apps. It packages your application code, runtime, libraries, and settings into a portable image that runs consistently across environments",
+    "in_corpus": true,
+    "category": "container_apps_containers"
+  },
+  {
+    "id": "Q112",
+    "question": "What container registries can you use to pull images into Azure Container Apps?",
+    "expected_answer": "Azure Container Registry, Docker Hub, and any other publicly accessible container registry",
+    "source_doc": "container-apps/containers.md",
+    "source_passage": "You can pull container images from Azure Container Registry, Docker Hub, or any other publicly accessible container registry",
+    "in_corpus": true,
+    "category": "container_apps_containers"
+  },
+  {
+    "id": "Q113",
+    "question": "What happens to containers in a revision when a new revision is deployed in Azure Container Apps?",
+    "expected_answer": "Existing containers in the old revision continue running until traffic is shifted away or the old revision is deactivated",
+    "source_doc": "container-apps/containers.md",
+    "source_passage": "When you deploy a new revision, existing containers in the old revision continue running until traffic is shifted away from it or the revision is deactivated",
+    "in_corpus": true,
+    "category": "container_apps_containers"
+  },
+  {
+    "id": "Q114",
+    "question": "How do you connect two Azure Container Apps so they can communicate with each other?",
+    "expected_answer": "By using the built-in service discovery through the container app name as the hostname, or via Dapr service invocation using the Dapr app ID",
+    "source_doc": "container-apps/connect-apps.md",
+    "source_passage": "You can connect container apps using built-in service discovery through the container app name as hostname, or via Dapr service invocation using the Dapr app ID",
+    "in_corpus": true,
+    "category": "container_apps_networking"
+  },
+  {
+    "id": "Q115",
+    "question": "What ingress setting is needed for one Azure Container App to call another within the same environment?",
+    "expected_answer": "Internal ingress must be enabled on the target container app to allow other apps in the same environment to communicate with it",
+    "source_doc": "container-apps/connect-apps.md",
+    "source_passage": "To allow other apps in the same environment to communicate with your container app, enable internal ingress on the target container app",
+    "in_corpus": true,
+    "category": "container_apps_networking"
+  },
+  {
+    "id": "Q116",
+    "question": "What format is used as the hostname when one container app calls another within the same Azure Container Apps environment?",
+    "expected_answer": "The container app name is used directly as the hostname",
+    "source_doc": "container-apps/connect-apps.md",
+    "source_passage": "The container app name is used directly as the hostname when calling another app within the same environment",
+    "in_corpus": true,
+    "category": "container_apps_networking"
+  },
+  {
+    "id": "Q117",
+    "question": "What is a revision in Azure Container Apps?",
+    "expected_answer": "A revision is an immutable snapshot of a container app version. Revisions are created when you make revision-scope changes such as updating the container image or environment variables.",
+    "source_doc": "container-apps/containers.md",
+    "source_passage": "A revision is an immutable snapshot of a container app version. Revisions are created when you make revision-scope changes such as updating the container image or environment variables",
+    "in_corpus": true,
+    "category": "container_apps_containers"
+  },
+  {
+    "id": "Q118",
+    "question": "What is the maximum number of containers you can run in a single Azure Container Apps replica?",
+    "expected_answer": "Up to 10 containers per replica",
+    "source_doc": "container-apps/containers.md",
+    "source_passage": "You can run up to 10 containers in a single replica",
+    "in_corpus": true,
+    "category": "container_apps_containers"
+  },
+  {
+    "id": "Q119",
+    "question": "What is the route parameter name used by default in an Azure Functions HTTP trigger URL?",
+    "expected_answer": "The function name is used as the default route",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "By default, the function name is used as the route for the HTTP trigger URL",
+    "in_corpus": true,
+    "category": "azure_functions_http"
+  },
+  {
+    "id": "Q120",
+    "question": "What does the visibilityTimeout setting control in Azure Functions queue triggers?",
+    "expected_answer": "It specifies the time that must pass before a message that failed to process becomes visible again in the queue for retry",
+    "source_doc": "azure-functions/functions-create-storage-queue-triggered-function.md",
+    "source_passage": "visibilityTimeout: The time interval between retries when processing of a message fails",
+    "in_corpus": true,
+    "category": "azure_functions_queue"
+  }
+]

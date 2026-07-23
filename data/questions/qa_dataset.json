@@ -1,0 +1,1802 @@
+[
+  {
+    "id": "Q001",
+    "question": "What do you need to add to an existing Azure Function to connect it to other Azure services using bindings?",
+    "expected_answer": "You need to add specific binding definitions in your function code or configuration file",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "If you want to connect your function to other services by using input or output bindings, you have to add specific binding definitions in your function",
+    "in_corpus": true,
+    "category": "azure_functions_bindings"
+  },
+  {
+    "id": "Q002",
+    "question": "How does the Go worker in Azure Functions handle output bindings like Queue Storage?",
+    "expected_answer": "Queue Storage output bindings are not yet supported in the Go worker. You need to use the Azure SDK for Go directly to interact with Queue Storage",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "Queue output bindings are not yet supported in the Go worker. Use the Azure SDK for Go to write to Queue Storage directly",
+    "in_corpus": true,
+    "category": "azure_functions_bindings"
+  },
+  {
+    "id": "Q003",
+    "question": "Which trigger types does the Azure Functions Go worker currently support?",
+    "expected_answer": "HTTP, Timer, Azure Cosmos DB, Azure Service Bus Queue, Azure Service Bus Topic, Event Hubs, Event Grid, and Blob Storage",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "The Go worker currently supports the following trigger types: HTTP, Timer, Azure Cosmos DB, Azure Service Bus Queue, Azure Service Bus Topic, Event Hubs, Event Grid, Blob Storage",
+    "in_corpus": true,
+    "category": "azure_functions_bindings"
+  },
+  {
+    "id": "Q004",
+    "question": "What tool can automatically add a binding to an existing function.json file when developing Azure Functions locally?",
+    "expected_answer": "The Azure Functions extension in Visual Studio Code can automatically add a binding to an existing function.json file",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "When you use Visual Studio Code to develop your function and your function uses a function.json file, the Azure Functions extension can automatically add a binding to an existing function.json file",
+    "in_corpus": true,
+    "category": "azure_functions_bindings"
+  },
+  {
+    "id": "Q005",
+    "question": "Where in the Azure portal do you add input and output bindings to an existing function?",
+    "expected_answer": "In the Integrate tab for a given function in the Azure portal",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "When you develop your functions in the Azure portal, you add input and output bindings in the Integrate tab for a given function",
+    "in_corpus": true,
+    "category": "azure_functions_bindings"
+  },
+  {
+    "id": "Q006",
+    "question": "What GPU options does Azure Container Apps support for AI workloads?",
+    "expected_answer": "Serverless GPUs for variable traffic and cost-sensitive inference, dedicated GPUs for continuous low-latency inference, and scale to zero to minimize costs",
+    "source_doc": "container-apps/ai-integration.md",
+    "source_passage": "Use GPU accelerated workload profiles to meet a variety of your AI workload needs, including: Serverless GPUs for variable traffic scenarios, Dedicated GPUs for continuous low-latency inference, Scale to zero to automatically scale down idle GPU resources",
+    "in_corpus": true,
+    "category": "container_apps_ai"
+  },
+  {
+    "id": "Q007",
+    "question": "What programming languages does the platform-managed built-in container in Azure Container Apps dynamic sessions support?",
+    "expected_answer": "Python and Node.js",
+    "source_doc": "container-apps/ai-integration.md",
+    "source_passage": "Platform managed built-in containers: a platform-managed container that supports executing code in Python and Node.js",
+    "in_corpus": true,
+    "category": "container_apps_ai"
+  },
+  {
+    "id": "Q008",
+    "question": "What is the purpose of dynamic sessions in Azure Container Apps?",
+    "expected_answer": "Dynamic sessions provide a secure isolated environment for executing AI-generated code, suitable for sandboxed execution, code evaluation and AI agents",
+    "source_doc": "container-apps/ai-integration.md",
+    "source_passage": "Dynamic sessions provide a secure, isolated environment for executing AI-generated code. Perfect for scenarios like sandboxed execution, code evaluation, and AI agents",
+    "in_corpus": true,
+    "category": "container_apps_ai"
+  },
+  {
+    "id": "Q009",
+    "question": "How does Azure Container Apps integrate with Microsoft Foundry models?",
+    "expected_answer": "Azure Container Apps integrates with Foundry to enable deploying curated AI models directly into containerized environments, simplifying model deployment and management",
+    "source_doc": "container-apps/ai-integration.md",
+    "source_passage": "Azure Container Apps integrates with Foundry, which enables you to deploy curated AI models directly into your containerized environments. This integration simplifies model deployment and management",
+    "in_corpus": true,
+    "category": "container_apps_ai"
+  },
+  {
+    "id": "Q010",
+    "question": "What kind of platform is Azure Container Apps described as in the context of AI integration?",
+    "expected_answer": "A serverless container platform that simplifies the deployment and scaling of microservices and AI-powered applications",
+    "source_doc": "container-apps/ai-integration.md",
+    "source_passage": "Azure Container Apps is a serverless container platform that simplifies the deployment and scaling of microservices and AI-powered applications",
+    "in_corpus": true,
+    "category": "container_apps_ai"
+  },
+  {
+    "id": "Q011",
+    "question": "What is the registration method used in the Azure Functions Go worker for an HTTP trigger?",
+    "expected_answer": "app.HTTP()",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "HTTP trigger registration method: app.HTTP()",
+    "in_corpus": true,
+    "category": "azure_functions_go"
+  },
+  {
+    "id": "Q012",
+    "question": "What registration method does the Go worker use for an Azure Cosmos DB trigger?",
+    "expected_answer": "app.CosmosDB()",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "Azure Cosmos DB trigger registration method: app.CosmosDB()",
+    "in_corpus": true,
+    "category": "azure_functions_go"
+  },
+  {
+    "id": "Q013",
+    "question": "What session type would you use in Azure Container Apps if you need to run workloads in a language not supported by the built-in container?",
+    "expected_answer": "Custom containers, which allow you to create a sessions pool using a custom container for specialized workloads or additional language support",
+    "source_doc": "container-apps/ai-integration.md",
+    "source_passage": "Custom containers: create a sessions pool using a custom container for specialized workloads or additional language support",
+    "in_corpus": true,
+    "category": "container_apps_ai"
+  },
+  {
+    "id": "Q014",
+    "question": "When adding a binding to a C# Azure Function, what do you need to add to the function definition?",
+    "expected_answer": "Binding-specific attributes to the function definition in code",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "When adding a binding to an existing function, you need to add binding-specific attributes to the function definition in code",
+    "in_corpus": true,
+    "category": "azure_functions_bindings"
+  },
+  {
+    "id": "Q015",
+    "question": "What does the Event Grid trigger registration method look like in the Azure Functions Go worker?",
+    "expected_answer": "app.EventGrid()",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "Event Grid trigger registration method: app.EventGrid()",
+    "in_corpus": true,
+    "category": "azure_functions_go"
+  },
+  {
+    "id": "Q016",
+    "question": "What is the recommended approach for a Java Azure Function when adding a binding to an existing function?",
+    "expected_answer": "Add binding-specific annotations to the function definition in code",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "When adding a binding to an existing function, you need to add binding-specific annotations to the function definition in code",
+    "in_corpus": true,
+    "category": "azure_functions_bindings"
+  },
+  {
+    "id": "Q017",
+    "question": "What type of AI workload scenario are serverless GPUs in Azure Container Apps best suited for?",
+    "expected_answer": "Variable traffic scenarios and cost-sensitive inference workloads",
+    "source_doc": "container-apps/ai-integration.md",
+    "source_passage": "Serverless GPUs: Ideal for variable traffic scenarios and cost-sensitive inference workloads",
+    "in_corpus": true,
+    "category": "container_apps_ai"
+  },
+  {
+    "id": "Q018",
+    "question": "What type of AI workload scenario are dedicated GPUs in Azure Container Apps best suited for?",
+    "expected_answer": "Continuous low-latency inference scenarios",
+    "source_doc": "container-apps/ai-integration.md",
+    "source_passage": "Dedicated GPUs: best for continuous, low-latency inference scenarios",
+    "in_corpus": true,
+    "category": "container_apps_ai"
+  },
+  {
+    "id": "Q019",
+    "question": "What registration method does the Go worker in Azure Functions use for an Event Hubs trigger?",
+    "expected_answer": "app.EventHub()",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "Event Hubs trigger registration method: app.EventHub()",
+    "in_corpus": true,
+    "category": "azure_functions_go"
+  },
+  {
+    "id": "Q020",
+    "question": "For a Python Azure Function using the v1 model, what do you need to do when adding a binding?",
+    "expected_answer": "Update the function code and add a definition to the function.json configuration file",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "You need to update the function code and add a definition to the function.json configuration file",
+    "in_corpus": true,
+    "category": "azure_functions_bindings"
+  },
+  {
+    "id": "Q021",
+    "question": "What is the maximum number of scale-out instances allowed in the Flex Consumption plan?",
+    "expected_answer": "1,000 instances",
+    "source_doc": "azure-functions/flex-consumption-plan.md",
+    "source_passage": "Scale-out instances (max): Flex Consumption: 1,000 | Consumption: 200",
+    "in_corpus": true,
+    "category": "azure_functions_flex_consumption"
+  },
+  {
+    "id": "Q022",
+    "question": "Does the Flex Consumption plan support virtual network integration?",
+    "expected_answer": "Yes, the Flex Consumption plan supports virtual network integration, allowing serverless apps to connect to other Azure services secured inside a virtual network",
+    "source_doc": "azure-functions/flex-consumption-plan.md",
+    "source_passage": "Virtual network support: Flex Consumption: Supported | Consumption: Not supported",
+    "in_corpus": true,
+    "category": "azure_functions_flex_consumption"
+  },
+  {
+    "id": "Q023",
+    "question": "What instance memory sizes does the Flex Consumption plan offer?",
+    "expected_answer": "512 MB (0.25 CPU cores), 2048 MB (1 CPU core), and 4096 MB (2 CPU cores)",
+    "source_doc": "azure-functions/flex-consumption-plan.md",
+    "source_passage": "Instance Memory (MB) | CPU Cores: 512 | 0.25, 2048 | 1, 4096 | 2",
+    "in_corpus": true,
+    "category": "azure_functions_flex_consumption"
+  },
+  {
+    "id": "Q024",
+    "question": "What is the recommended default instance memory size for most Flex Consumption scenarios?",
+    "expected_answer": "2,048 MB is recommended as the default for most scenarios",
+    "source_doc": "azure-functions/flex-consumption-plan.md",
+    "source_passage": "Use the 2,048-MB instance memory size as the default for most scenarios",
+    "in_corpus": true,
+    "category": "azure_functions_flex_consumption"
+  },
+  {
+    "id": "Q025",
+    "question": "What is the default number of always-ready instances in the Flex Consumption plan?",
+    "expected_answer": "The default is 0 (zero)",
+    "source_doc": "azure-functions/flex-consumption-plan.md",
+    "source_passage": "The default is 0 (zero)",
+    "in_corpus": true,
+    "category": "azure_functions_flex_consumption"
+  },
+  {
+    "id": "Q026",
+    "question": "What is the minimum number of always-ready instances required when zone redundancy is enabled in the Flex Consumption plan?",
+    "expected_answer": "No fewer than two always-ready instances per function or function group",
+    "source_doc": "azure-functions/flex-consumption-plan.md",
+    "source_passage": "You can configure no fewer than two always-ready instances per function or function group while zone redundancy is enabled",
+    "in_corpus": true,
+    "category": "azure_functions_flex_consumption"
+  },
+  {
+    "id": "Q027",
+    "question": "What file share protocol does the Flex Consumption plan support for mounting Azure Files shares?",
+    "expected_answer": "Only Server Message Block (SMB) shares are supported. NFS is not available.",
+    "source_doc": "azure-functions/flex-consumption-plan.md",
+    "source_passage": "Only Server Message Block (SMB) shares are supported (NFS isn't available)",
+    "in_corpus": true,
+    "category": "azure_functions_flex_consumption"
+  },
+  {
+    "id": "Q028",
+    "question": "What operating system does the Flex Consumption plan support?",
+    "expected_answer": "Linux only. Windows is not supported in the Flex Consumption plan.",
+    "source_doc": "azure-functions/flex-consumption-plan.md",
+    "source_passage": "Windows support: Flex Consumption: Linux only | Consumption: Yes",
+    "in_corpus": true,
+    "category": "azure_functions_flex_consumption"
+  },
+  {
+    "id": "Q029",
+    "question": "What is the default maximum instance count for apps running in the Flex Consumption plan?",
+    "expected_answer": "100 overall instances by default",
+    "source_doc": "azure-functions/event-driven-scaling.md",
+    "source_passage": "By default, apps running in a Flex Consumption plan have limit of 100 overall instances",
+    "in_corpus": true,
+    "category": "azure_functions_scaling"
+  },
+  {
+    "id": "Q030",
+    "question": "What is the highest supported maximum instance count for a Flex Consumption plan app?",
+    "expected_answer": "1,000 instances",
+    "source_doc": "azure-functions/event-driven-scaling.md",
+    "source_passage": "The highest supported maximum instance count value is 1000",
+    "in_corpus": true,
+    "category": "azure_functions_scaling"
+  },
+  {
+    "id": "Q031",
+    "question": "For HTTP triggers in Azure Functions, how often can new instances be allocated at most?",
+    "expected_answer": "At most once per second",
+    "source_doc": "azure-functions/event-driven-scaling.md",
+    "source_passage": "For HTTP triggers, new instances are allocated, at most, once per second",
+    "in_corpus": true,
+    "category": "azure_functions_scaling"
+  },
+  {
+    "id": "Q032",
+    "question": "For non-HTTP triggers in Azure Functions, how often can new instances be allocated at most?",
+    "expected_answer": "At most once every 30 seconds",
+    "source_doc": "azure-functions/event-driven-scaling.md",
+    "source_passage": "For non-HTTP triggers, new instances are allocated, at most, once every 30 seconds",
+    "in_corpus": true,
+    "category": "azure_functions_scaling"
+  },
+  {
+    "id": "Q033",
+    "question": "What is the grace period for scale-in drain mode in the Flex Consumption plan?",
+    "expected_answer": "Up to 60 minutes for Flex Consumption plan apps",
+    "source_doc": "azure-functions/event-driven-scaling.md",
+    "source_passage": "The grace period for functions that are currently executing can extend up to 10 minutes for Consumption plan apps and up to 60 minutes for Flex Consumption and Premium plan apps",
+    "in_corpus": true,
+    "category": "azure_functions_scaling"
+  },
+  {
+    "id": "Q034",
+    "question": "What is the maximum number of event-based triggers the Azure Functions scale controller can monitor at once?",
+    "expected_answer": "Up to 100 triggers",
+    "source_doc": "azure-functions/event-driven-scaling.md",
+    "source_passage": "Currently, the scale controller can only monitor up to 100 triggers to making scaling decisions",
+    "in_corpus": true,
+    "category": "azure_functions_scaling"
+  },
+  {
+    "id": "Q035",
+    "question": "In the Azure Container Apps Consumption plan, what are the two types of charges that make up the billing?",
+    "expected_answer": "Resource consumption charges (vCPU-seconds and GiB-seconds) and HTTP request charges",
+    "source_doc": "container-apps/billing.md",
+    "source_passage": "Billing for apps running in the Consumption plan consists of two types of charges: Resource consumption and HTTP requests",
+    "in_corpus": true,
+    "category": "container_apps_billing"
+  },
+  {
+    "id": "Q036",
+    "question": "How many free vCPU-seconds does Azure Container Apps provide per subscription each calendar month?",
+    "expected_answer": "The first 180,000 vCPU-seconds are free each calendar month per subscription",
+    "source_doc": "container-apps/billing.md",
+    "source_passage": "The first 180,000 vCPU-seconds and 360,000 GiB-seconds in each subscription per calendar month are free",
+    "in_corpus": true,
+    "category": "container_apps_billing"
+  },
+  {
+    "id": "Q037",
+    "question": "How many free HTTP requests does Azure Container Apps provide per subscription each calendar month?",
+    "expected_answer": "The first 2 million HTTP requests are free per subscription each calendar month",
+    "source_doc": "container-apps/billing.md",
+    "source_passage": "The first 2 million requests in each subscription per calendar month are free",
+    "in_corpus": true,
+    "category": "container_apps_billing"
+  },
+  {
+    "id": "Q038",
+    "question": "Are health probe requests billable in Azure Container Apps?",
+    "expected_answer": "No, health probe requests are not billable",
+    "source_doc": "container-apps/billing.md",
+    "source_passage": "Health probe requests aren't billable",
+    "in_corpus": true,
+    "category": "container_apps_billing"
+  },
+  {
+    "id": "Q039",
+    "question": "Under what conditions is a replica considered idle in Azure Container Apps?",
+    "expected_answer": "A replica is idle when it is not processing any HTTP requests, is using less than 0.01 vCPU cores, and is receiving less than 1,000 bytes per second of network traffic, while the revision is configured with a minimum replica count greater than zero",
+    "source_doc": "container-apps/billing.md",
+    "source_passage": "A replica is considered idle when: the replica isn't processing any HTTP requests, the replica is using less than 0.01 vCPU cores, the replica is receiving less than 1,000 bytes per second of network traffic",
+    "in_corpus": true,
+    "category": "container_apps_billing"
+  },
+  {
+    "id": "Q040",
+    "question": "In Azure Container Apps Dedicated plan billing, what is billing based on?",
+    "expected_answer": "Billing is based on workload profile instances, not by individual applications",
+    "source_doc": "container-apps/billing.md",
+    "source_passage": "Billing for apps and jobs running in the Dedicated plan is based on workload profile instances, not by individual applications",
+    "in_corpus": true,
+    "category": "container_apps_billing"
+  },
+  {
+    "id": "Q041",
+    "question": "What App Service plan tiers are supported for hosting Azure Functions in a dedicated plan?",
+    "expected_answer": "Basic, Standard, Premium, and Isolated SKUs",
+    "source_doc": "azure-functions/dedicated-plan.md",
+    "source_passage": "The dedicated App Service plans supported for function app hosting include Basic, Standard, Premium, and Isolated SKUs",
+    "in_corpus": true,
+    "category": "azure_functions_dedicated"
+  },
+  {
+    "id": "Q042",
+    "question": "Does Azure Functions support Free and Shared tier App Service plans?",
+    "expected_answer": "No, Azure Functions does not support Free and Shared tier App Service plans",
+    "source_doc": "azure-functions/dedicated-plan.md",
+    "source_passage": "Azure functions doesn't support Free and Shared tier App Service plans",
+    "in_corpus": true,
+    "category": "azure_functions_dedicated"
+  },
+  {
+    "id": "Q043",
+    "question": "What setting must be enabled on an App Service plan to prevent the Azure Functions runtime from going idle?",
+    "expected_answer": "The Always On setting must be enabled",
+    "source_doc": "azure-functions/dedicated-plan.md",
+    "source_passage": "You should enable the Always on setting so that your function app runs correctly. On an App Service plan, the Functions runtime goes idle after a few minutes of inactivity",
+    "in_corpus": true,
+    "category": "azure_functions_dedicated"
+  },
+  {
+    "id": "Q044",
+    "question": "How is billing calculated for Azure Functions running on a dedicated App Service plan?",
+    "expected_answer": "You are billed only for the plan regardless of how many function apps or web apps run in it, not based on function executions",
+    "source_doc": "azure-functions/dedicated-plan.md",
+    "source_passage": "You're billed only for the plan, regardless of how many function apps or web apps run in the plan",
+    "in_corpus": true,
+    "category": "azure_functions_dedicated"
+  },
+  {
+    "id": "Q045",
+    "question": "What is an App Service Environment used for when hosting Azure Functions?",
+    "expected_answer": "It lets you fully isolate your functions and take advantage of higher numbers of instances than a regular App Service plan",
+    "source_doc": "azure-functions/dedicated-plan.md",
+    "source_passage": "Running in an App Service Environment (ASE) lets you fully isolate your functions and take advantage of higher numbers of instances than an App Service Plan",
+    "in_corpus": true,
+    "category": "azure_functions_dedicated"
+  },
+  {
+    "id": "Q046",
+    "question": "How can you reactivate an idled Azure Functions app on an App Service plan without enabling Always On?",
+    "expected_answer": "Send a request to an HTTP trigger endpoint or any other endpoint on the app, or access the app in the Azure portal",
+    "source_doc": "azure-functions/dedicated-plan.md",
+    "source_passage": "Send a request to an HTTP trigger endpoint or any other endpoint on the app. Even a failed request should wake up your app. Access your app in the Azure portal",
+    "in_corpus": true,
+    "category": "azure_functions_dedicated"
+  },
+  {
+    "id": "Q047",
+    "question": "What is a Container Apps environment in Azure Container Apps?",
+    "expected_answer": "A secure boundary around one or more container apps and jobs where the Container Apps runtime manages OS upgrades, scale operations, failover procedures, and resource balancing",
+    "source_doc": "container-apps/environment.md",
+    "source_passage": "A Container Apps environment is a secure boundary around one or more container apps and jobs. The Container Apps runtime manages each environment by handling OS upgrades, scale operations, failover procedures, and resource balancing",
+    "in_corpus": true,
+    "category": "container_apps_environment"
+  },
+  {
+    "id": "Q048",
+    "question": "What are the two types of Azure Container Apps environments?",
+    "expected_answer": "Workload profiles environments (the default) and Consumption only environments (legacy)",
+    "source_doc": "container-apps/environment.md",
+    "source_passage": "There are two different types of Container Apps environments: Workload profiles environments (the default) and Consumption only environments (legacy)",
+    "in_corpus": true,
+    "category": "container_apps_environment"
+  },
+  {
+    "id": "Q049",
+    "question": "What plans does a Workload profiles environment support in Azure Container Apps?",
+    "expected_answer": "Both the Consumption and Dedicated plans",
+    "source_doc": "container-apps/environment.md",
+    "source_passage": "Workload profiles environments support both the Consumption and Dedicated plans",
+    "in_corpus": true,
+    "category": "container_apps_environment"
+  },
+  {
+    "id": "Q050",
+    "question": "What plan does a Consumption only environment support in Azure Container Apps?",
+    "expected_answer": "Only the Consumption plan",
+    "source_doc": "container-apps/environment.md",
+    "source_passage": "Consumption only environments support only the Consumption plan",
+    "in_corpus": true,
+    "category": "container_apps_environment"
+  },
+  {
+    "id": "Q051",
+    "question": "When should you use multiple Azure Container Apps environments instead of a single one?",
+    "expected_answer": "When you want applications to never share compute resources, not communicate via built-in Dapr service invocation, or be isolated due to team or environment usage such as test vs production",
+    "source_doc": "container-apps/environment.md",
+    "source_passage": "Use more than one environment when you want two or more applications to: Never share the same compute resources, Not communicate via the built-in Dapr service invocation API, Be isolated due to team or environment usage",
+    "in_corpus": true,
+    "category": "container_apps_environment"
+  },
+  {
+    "id": "Q052",
+    "question": "Where do all container apps within the same Azure Container Apps environment send their logs by default?",
+    "expected_answer": "To a common Log Analytics workspace",
+    "source_doc": "container-apps/environment.md",
+    "source_passage": "All container apps within an environment send logs to a common Log Analytics workspace, making it easier to query and analyze logs across multiple apps",
+    "in_corpus": true,
+    "category": "container_apps_environment"
+  },
+  {
+    "id": "Q053",
+    "question": "After how many days is an idle Azure Container Apps environment automatically deleted?",
+    "expected_answer": "After 90 days of being idle with no active container apps or jobs running",
+    "source_doc": "container-apps/environment.md",
+    "source_passage": "Azure Container Apps environments are automatically deleted if one of the following conditions persists for longer than 90 days: The environment is idle (no active container apps or jobs running in the environment)",
+    "in_corpus": true,
+    "category": "container_apps_environment"
+  },
+  {
+    "id": "Q054",
+    "question": "What types of logs does an Azure Container Apps environment collect by default?",
+    "expected_answer": "Container stdout and stderr streams, container app scaling events, Dapr sidecar logs if Dapr is enabled, and system-level metrics and events",
+    "source_doc": "container-apps/environment.md",
+    "source_passage": "These logs include: Container stdout/stderr streams, Container app scaling events, Dapr sidecar logs (if Dapr is enabled), System-level metrics and events",
+    "in_corpus": true,
+    "category": "container_apps_environment"
+  },
+  {
+    "id": "Q055",
+    "question": "What happens to function code files if you delete the main storage account of an Azure Functions app?",
+    "expected_answer": "The function code files are deleted and cannot be recovered",
+    "source_doc": "azure-functions/event-driven-scaling.md",
+    "source_passage": "When you delete the main storage account of the function app, the function code files are deleted and can't be recovered",
+    "in_corpus": true,
+    "category": "azure_functions_scaling"
+  },
+  {
+    "id": "Q056",
+    "question": "What component in Azure Functions monitors event rates and decides whether to scale out or scale in?",
+    "expected_answer": "The scale controller",
+    "source_doc": "azure-functions/event-driven-scaling.md",
+    "source_passage": "Azure Functions uses a component called the scale controller to monitor the rate of events and determine whether to scale out or scale in",
+    "in_corpus": true,
+    "category": "azure_functions_scaling"
+  },
+  {
+    "id": "Q057",
+    "question": "In the Azure Functions Consumption plan, what is each host instance typically limited to?",
+    "expected_answer": "1.5 GB of memory and one CPU",
+    "source_doc": "azure-functions/event-driven-scaling.md",
+    "source_passage": "Each instance of the Functions host in the Consumption plan is limited, typically to 1.5 GB of memory and one CPU",
+    "in_corpus": true,
+    "category": "azure_functions_scaling"
+  },
+  {
+    "id": "Q058",
+    "question": "What property controls the log configuration for all apps in an Azure Container Apps environment?",
+    "expected_answer": "properties.appLogsConfiguration which is used for configuring the Log Analytics workspace",
+    "source_doc": "container-apps/environment.md",
+    "source_passage": "properties.appLogsConfiguration: Used for configuring the Log Analytics workspace where logs for all apps in the environment are published",
+    "in_corpus": true,
+    "category": "container_apps_environment"
+  },
+  {
+    "id": "Q059",
+    "question": "What is the minimum billable execution period for the Azure Container Apps Consumption plan?",
+    "expected_answer": "1,000 milliseconds",
+    "source_doc": "container-apps/billing.md",
+    "source_passage": "The minimum billable execution period for both execution modes is 1,000 ms",
+    "in_corpus": true,
+    "category": "container_apps_billing"
+  },
+  {
+    "id": "Q060",
+    "question": "In Azure Container Apps, what does the Dedicated plan management fee depend on?",
+    "expected_answer": "You are charged a Dedicated plan management fee if you have one or more dedicated workload profiles in your environment, regardless of the number of applications",
+    "source_doc": "container-apps/billing.md",
+    "source_passage": "If you have one or more dedicated workload profiles in your environment, you're charged a Dedicated plan management fee",
+    "in_corpus": true,
+    "category": "container_apps_billing"
+  },
+  {
+    "id": "Q061",
+    "question": "Which Azure Functions hosting plan is recommended for dynamic scale apps?",
+    "expected_answer": "The Flex Consumption plan is recommended for hosting dynamic scale apps",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "When possible, use the Flex Consumption plan to host your dynamic scale apps",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q062",
+    "question": "What type of Azure Storage account is required when creating a function app?",
+    "expected_answer": "A general-purpose Azure Storage account that supports Blob, Queue, and Table storage",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "You must create or link to a general-purpose Azure Storage account that supports Blob, Queue, and Table storage",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q063",
+    "question": "To reduce latency, where should the storage account for an Azure Functions app be created?",
+    "expected_answer": "In the same region as the function app",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "To reduce latency, create the storage account in the same region as the function app",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q064",
+    "question": "What application setting stores the storage account connection string for an Azure Functions app?",
+    "expected_answer": "AzureWebJobsStorage and WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "The storage account connection string for your function app is found in the AzureWebJobsStorage and WEBSITE_CONTENTAZUREFILECONNECTIONSTRING application settings",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q065",
+    "question": "What is one benefit of running Azure Functions from a deployment package?",
+    "expected_answer": "It reduces the risk of file copy locking problems, can be deployed directly to production without triggering a restart, and may reduce cold-start times",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "Reduces the risk of file copy locking problems. Can be deployed directly to a production app and doesn't trigger a restart. All files in the package are available to your app",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q066",
+    "question": "What setting controls the maximum number of language worker processes in an Azure Functions app?",
+    "expected_answer": "FUNCTIONS_WORKER_PROCESS_COUNT controls the maximum number of language worker processes. The default value is 1.",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "The FUNCTIONS_WORKER_PROCESS_COUNT setting controls the maximum number of language worker processes allowed. The default for this setting is 1",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q067",
+    "question": "How should you minimise deployment downtime in the Azure Functions Flex Consumption plan?",
+    "expected_answer": "Configure rolling updates for zero-downtime deployments in the Flex Consumption plan",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "Configure rolling updates for zero-downtime deployments in the Flex Consumption plan",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q068",
+    "question": "Does the Flex Consumption plan require the WEBSITE_CONTENTAZUREFILECONNECTIONSTRING and WEBSITE_CONTENTSHARE settings?",
+    "expected_answer": "No, the Flex Consumption plan does not require these settings. It uses a Blob storage container to host deployment packages instead of an Azure Files share.",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "The Flex Consumption plan doesn't require these settings and uses a Blob storage container to host deployment packages instead of an Azure Files share",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q069",
+    "question": "What certificate type is required when adding a custom domain to an Azure Container Apps application?",
+    "expected_answer": "SNI (Server Name Identification) domain certificates are required",
+    "source_doc": "container-apps/custom-domains-certificates.md",
+    "source_passage": "SNI (Server Name Identification) domain certificates are required",
+    "in_corpus": true,
+    "category": "container_apps_custom_domains"
+  },
+  {
+    "id": "Q070",
+    "question": "What must be enabled on a container app before you can add a custom domain to it?",
+    "expected_answer": "Ingress must be enabled for the container app",
+    "source_doc": "container-apps/custom-domains-certificates.md",
+    "source_passage": "Ingress must be enabled for the container app",
+    "in_corpus": true,
+    "category": "container_apps_custom_domains"
+  },
+  {
+    "id": "Q071",
+    "question": "What DNS record type is used for an apex domain when adding a custom domain to Azure Container Apps?",
+    "expected_answer": "An A record is used for apex domains",
+    "source_doc": "container-apps/custom-domains-certificates.md",
+    "source_passage": "Apex domain: A record. An apex domain is a domain at the root level of your domain",
+    "in_corpus": true,
+    "category": "container_apps_custom_domains"
+  },
+  {
+    "id": "Q072",
+    "question": "What DNS record type is used for a subdomain when adding a custom domain to Azure Container Apps?",
+    "expected_answer": "A CNAME record is used for subdomains",
+    "source_doc": "container-apps/custom-domains-certificates.md",
+    "source_passage": "Subdomain: CNAME. A subdomain is a domain that's part of another domain",
+    "in_corpus": true,
+    "category": "container_apps_custom_domains"
+  },
+  {
+    "id": "Q073",
+    "question": "Where are certificates applied and bound in Azure Container Apps?",
+    "expected_answer": "Certificates are applied to the container app environment and are bound to individual container apps",
+    "source_doc": "container-apps/custom-domains-certificates.md",
+    "source_passage": "Certificates are applied to the container app environment and are bound to individual container apps",
+    "in_corpus": true,
+    "category": "container_apps_custom_domains"
+  },
+  {
+    "id": "Q074",
+    "question": "What are the two certificate options available when adding a custom domain to Azure Container Apps?",
+    "expected_answer": "You can upload your own certificate or use a free managed certificate",
+    "source_doc": "container-apps/custom-domains-certificates.md",
+    "source_passage": "Every domain name must be associated with a TLS/SSL certificate. You can upload your own certificate or use a free managed certificate",
+    "in_corpus": true,
+    "category": "container_apps_custom_domains"
+  },
+  {
+    "id": "Q075",
+    "question": "What role-based access is required to add certificates in Azure Container Apps?",
+    "expected_answer": "You must have role-based access to the environment to add certificates",
+    "source_doc": "container-apps/custom-domains-certificates.md",
+    "source_passage": "You must have role-based access to the environment to add certificates",
+    "in_corpus": true,
+    "category": "container_apps_custom_domains"
+  },
+  {
+    "id": "Q076",
+    "question": "For an Event Hubs triggered Azure Function, what storage account configuration should you avoid?",
+    "expected_answer": "Do not use an account with Data Lake Storage enabled for Event Hubs triggered functions",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "For Event Hubs triggered functions, don't use an account with Data Lake Storage enabled",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q077",
+    "question": "In Azure Container Apps, what TXT record must you create when validating an apex domain?",
+    "expected_answer": "A TXT record with the host asuid containing the domain verification code",
+    "source_doc": "container-apps/custom-domains-certificates.md",
+    "source_passage": "TXT record: host asuid, value: The domain verification code",
+    "in_corpus": true,
+    "category": "container_apps_custom_domains"
+  },
+  {
+    "id": "Q078",
+    "question": "What happens to an Azure Container Apps environment that is in a failed state due to virtual network or Azure Policy configuration for more than 90 days?",
+    "expected_answer": "It is automatically deleted",
+    "source_doc": "container-apps/environment.md",
+    "source_passage": "Azure Container Apps environments are automatically deleted if one of the following conditions persists for longer than 90 days: The environment is in a failed state due to virtual network or Azure Policy configuration",
+    "in_corpus": true,
+    "category": "container_apps_environment"
+  },
+  {
+    "id": "Q079",
+    "question": "Can you add a custom domain that contains the custom environment DNS suffix to an Azure Container Apps app?",
+    "expected_answer": "No, if you configure a custom environment DNS suffix you cannot add a custom domain that contains this suffix to your container app",
+    "source_doc": "container-apps/custom-domains-certificates.md",
+    "source_passage": "If you configure a custom environment DNS suffix, you can't add a custom domain that contains this suffix to your container app",
+    "in_corpus": true,
+    "category": "container_apps_custom_domains"
+  },
+  {
+    "id": "Q080",
+    "question": "For a Premium plan EP2 Azure Function app, what starting value of FUNCTIONS_WORKER_PROCESS_COUNT is recommended?",
+    "expected_answer": "Start with a value of 2 since the EP2 provides two cores, and increase by two as needed",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "The Premium plan EP2 provides two cores, so you should start with a value of 2 and increase by two as needed, up to the maximum",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q081",
+    "question": "What does the AzureWebJobsStorage setting store in an Azure Functions app?",
+    "expected_answer": "The connection string for the Azure Storage account that the Functions runtime uses for normal operations including managing triggers and logging function executions",
+    "source_doc": "azure-functions/functions-app-settings.md",
+    "source_passage": "AzureWebJobsStorage: The connection string for the Azure Storage account that the Functions runtime uses for normal operations",
+    "in_corpus": true,
+    "category": "azure_functions_settings"
+  },
+  {
+    "id": "Q082",
+    "question": "What does setting AZURE_FUNCTIONS_ENVIRONMENT to Development do in Azure Functions?",
+    "expected_answer": "It changes the hosting environment to Development mode, which loads local secret values and enables certain developer-friendly features",
+    "source_doc": "azure-functions/functions-app-settings.md",
+    "source_passage": "AZURE_FUNCTIONS_ENVIRONMENT: When set to Development in local development, this setting changes the hosting environment to Development",
+    "in_corpus": true,
+    "category": "azure_functions_settings"
+  },
+  {
+    "id": "Q083",
+    "question": "What is the purpose of FUNCTIONS_EXTENSION_VERSION in Azure Functions?",
+    "expected_answer": "It specifies the version of the Azure Functions runtime to target. The tilde (~) combined with a major version pins the app to that major version.",
+    "source_doc": "azure-functions/functions-app-settings.md",
+    "source_passage": "FUNCTIONS_EXTENSION_VERSION: The version of the Functions runtime to use in this function app. A tilde (~) with major version means use the latest version of that major version",
+    "in_corpus": true,
+    "category": "azure_functions_settings"
+  },
+  {
+    "id": "Q084",
+    "question": "What does the FUNCTIONS_WORKER_RUNTIME setting control in Azure Functions?",
+    "expected_answer": "It specifies the language or language stack of the worker runtime loaded in the function app",
+    "source_doc": "azure-functions/functions-app-settings.md",
+    "source_passage": "FUNCTIONS_WORKER_RUNTIME: The language or language stack of the worker runtime loaded in the function app",
+    "in_corpus": true,
+    "category": "azure_functions_settings"
+  },
+  {
+    "id": "Q085",
+    "question": "What is the maximum timeout value for a function running on a Consumption plan?",
+    "expected_answer": "10 minutes (600 seconds)",
+    "source_doc": "azure-functions/functions-app-settings.md",
+    "source_passage": "FUNCTIONS_WORKER_RUNTIME: The Consumption plan has a maximum timeout of 10 minutes (600 seconds)",
+    "in_corpus": true,
+    "category": "azure_functions_settings"
+  },
+  {
+    "id": "Q086",
+    "question": "What does the WEBSITE_RUN_FROM_PACKAGE setting do in Azure Functions?",
+    "expected_answer": "It enables your function app to run from a mounted package file, which helps avoid file locking issues and can improve cold start performance",
+    "source_doc": "azure-functions/functions-app-settings.md",
+    "source_passage": "WEBSITE_RUN_FROM_PACKAGE: Enables your function app to run from a mounted package file",
+    "in_corpus": true,
+    "category": "azure_functions_settings"
+  },
+  {
+    "id": "Q087",
+    "question": "What is the purpose of the WEBSITE_CONTENTSHARE setting in Azure Functions?",
+    "expected_answer": "It defines the file path to the function app code and configuration in the storage account used for function app content",
+    "source_doc": "azure-functions/functions-app-settings.md",
+    "source_passage": "WEBSITE_CONTENTSHARE: The file path to the function app code and configuration in the storage account used for function app content",
+    "in_corpus": true,
+    "category": "azure_functions_settings"
+  },
+  {
+    "id": "Q088",
+    "question": "What is Dapr in Azure Container Apps?",
+    "expected_answer": "Dapr is a set of incrementally adoptable features that simplify authoring distributed, microservice-based applications. It provides capabilities like service-to-service invocation, pub/sub messaging, state management and secret management.",
+    "source_doc": "container-apps/dapr-overview.md",
+    "source_passage": "Dapr is a set of incrementally adoptable features that simplify the authoring of distributed, microservice-based applications. Dapr provides capabilities including service-to-service invocation, pub/sub messaging, state management, and secret management",
+    "in_corpus": true,
+    "category": "container_apps_dapr"
+  },
+  {
+    "id": "Q089",
+    "question": "How is Dapr enabled for a container app in Azure Container Apps?",
+    "expected_answer": "By enabling Dapr through a simple configuration on the container app resource, which deploys a Dapr sidecar alongside the application container",
+    "source_doc": "container-apps/dapr-overview.md",
+    "source_passage": "Dapr is enabled through a simple configuration on the container app resource. The Container Apps platform manages the Dapr sidecar and keeps it up to date",
+    "in_corpus": true,
+    "category": "container_apps_dapr"
+  },
+  {
+    "id": "Q090",
+    "question": "What is the Dapr sidecar pattern in Azure Container Apps?",
+    "expected_answer": "Each container app can have a Dapr sidecar that runs alongside the main application container and exposes Dapr APIs through a local HTTP or gRPC endpoint",
+    "source_doc": "container-apps/dapr-overview.md",
+    "source_passage": "Each container app can have a Dapr sidecar that runs alongside the main application container. The sidecar exposes Dapr APIs through a local HTTP or gRPC endpoint",
+    "in_corpus": true,
+    "category": "container_apps_dapr"
+  },
+  {
+    "id": "Q091",
+    "question": "What port does the Dapr sidecar expose its API on by default in Azure Container Apps?",
+    "expected_answer": "Port 3500 for HTTP and port 50001 for gRPC",
+    "source_doc": "container-apps/dapr-overview.md",
+    "source_passage": "The Dapr sidecar listens on port 3500 for HTTP and port 50001 for gRPC by default",
+    "in_corpus": true,
+    "category": "container_apps_dapr"
+  },
+  {
+    "id": "Q092",
+    "question": "What is a Dapr component in Azure Container Apps?",
+    "expected_answer": "A modular unit of functionality that container apps can use, such as state stores, pub/sub brokers or secret stores, configured separately from the application code",
+    "source_doc": "container-apps/dapr-overview.md",
+    "source_passage": "Dapr components are modular units of functionality that your container apps can use. Components can be state stores, pub/sub brokers, secret stores, and more",
+    "in_corpus": true,
+    "category": "container_apps_dapr"
+  },
+  {
+    "id": "Q093",
+    "question": "Can Dapr components be shared across multiple container apps in the same Azure Container Apps environment?",
+    "expected_answer": "Yes, Dapr components can be scoped to specific container apps or shared across all apps in the same environment",
+    "source_doc": "container-apps/dapr-overview.md",
+    "source_passage": "Dapr components can be scoped to specific container apps or shared across all apps in the same environment",
+    "in_corpus": true,
+    "category": "container_apps_dapr"
+  },
+  {
+    "id": "Q094",
+    "question": "What is the Dapr app ID used for in Azure Container Apps?",
+    "expected_answer": "It is a unique identifier for the container app that enables service discovery, state scoping, and pub/sub consumer group membership",
+    "source_doc": "container-apps/dapr-overview.md",
+    "source_passage": "The Dapr app ID is a unique identifier for the container app used for service discovery, state scoping, and pub/sub consumer group membership",
+    "in_corpus": true,
+    "category": "container_apps_dapr"
+  },
+  {
+    "id": "Q095",
+    "question": "What must you configure if you want to use Azure Key Vault as a secret store with Dapr in Azure Container Apps?",
+    "expected_answer": "A managed identity on the container app and a Dapr secret store component configured to use Azure Key Vault",
+    "source_doc": "container-apps/dapr-overview.md",
+    "source_passage": "To use Azure Key Vault as a secret store, configure a managed identity on the container app and a Dapr secret store component",
+    "in_corpus": true,
+    "category": "container_apps_dapr"
+  },
+  {
+    "id": "Q096",
+    "question": "What language does the FUNCTIONS_WORKER_RUNTIME value dotnet-isolated refer to in Azure Functions?",
+    "expected_answer": "C# running in an isolated worker process",
+    "source_doc": "azure-functions/functions-app-settings.md",
+    "source_passage": "dotnet-isolated: C# isolated worker process",
+    "in_corpus": true,
+    "category": "azure_functions_settings"
+  },
+  {
+    "id": "Q097",
+    "question": "What is the Dapr service invocation API used for in Azure Container Apps?",
+    "expected_answer": "It enables direct HTTP or gRPC communication between container apps using the Dapr app ID instead of a URL, with built-in service discovery and retries",
+    "source_doc": "container-apps/dapr-overview.md",
+    "source_passage": "Service invocation enables direct HTTP or gRPC communication between container apps using the Dapr app ID instead of a URL, with built-in service discovery and retries",
+    "in_corpus": true,
+    "category": "container_apps_dapr"
+  },
+  {
+    "id": "Q098",
+    "question": "What does the SCALE_CONTROLLER_LOGGING_ENABLED setting do in Azure Functions?",
+    "expected_answer": "It enables diagnostic logs from the Azure Functions scale controller to be sent to either Application Insights or Blob storage for analysis",
+    "source_doc": "azure-functions/functions-app-settings.md",
+    "source_passage": "SCALE_CONTROLLER_LOGGING_ENABLED: When enabled, this setting turns on diagnostic logs from the scale controller to either Application Insights or Blob storage",
+    "in_corpus": true,
+    "category": "azure_functions_settings"
+  },
+  {
+    "id": "Q099",
+    "question": "What is the Dapr pub/sub API used for in Azure Container Apps?",
+    "expected_answer": "It enables asynchronous messaging between container apps using a message broker such as Azure Service Bus or Redis, with guaranteed at-least-once delivery",
+    "source_doc": "container-apps/dapr-overview.md",
+    "source_passage": "The pub/sub API enables asynchronous messaging between container apps using a message broker such as Azure Service Bus or Redis, with guaranteed at-least-once delivery",
+    "in_corpus": true,
+    "category": "container_apps_dapr"
+  },
+  {
+    "id": "Q100",
+    "question": "What does the WEBSITE_CONTENTAZUREFILECONNECTIONSTRING setting point to in an Azure Functions app?",
+    "expected_answer": "The connection string of the storage account where the function app content and code are stored on Azure Files",
+    "source_doc": "azure-functions/functions-app-settings.md",
+    "source_passage": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING: Connection string for storage account where the function app content and code are stored on Azure Files",
+    "in_corpus": true,
+    "category": "azure_functions_settings"
+  },
+  {
+    "id": "Q101",
+    "question": "What HTTP methods does an Azure Functions HTTP trigger support by default?",
+    "expected_answer": "GET and POST methods are supported by default",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "By default, an HTTP trigger responds to GET and POST requests",
+    "in_corpus": true,
+    "category": "azure_functions_http"
+  },
+  {
+    "id": "Q102",
+    "question": "What authorization level controls access to an Azure Functions HTTP trigger?",
+    "expected_answer": "The authLevel property controls access. Options are anonymous, function, and admin.",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "The authLevel property controls the authorization level for the HTTP trigger. Options include anonymous, function, and admin",
+    "in_corpus": true,
+    "category": "azure_functions_http"
+  },
+  {
+    "id": "Q103",
+    "question": "What does an anonymous authorization level mean for an Azure Functions HTTP trigger?",
+    "expected_answer": "No API key is required and the endpoint is publicly accessible",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "anonymous: No API key is required",
+    "in_corpus": true,
+    "category": "azure_functions_http"
+  },
+  {
+    "id": "Q104",
+    "question": "What does a function authorization level mean for an Azure Functions HTTP trigger?",
+    "expected_answer": "A function-specific or host API key is required to call the endpoint",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "function: A function-specific or host API key is required",
+    "in_corpus": true,
+    "category": "azure_functions_http"
+  },
+  {
+    "id": "Q105",
+    "question": "What does the admin authorization level require for an Azure Functions HTTP trigger?",
+    "expected_answer": "The master key is required to access the endpoint",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "admin: The master key is required",
+    "in_corpus": true,
+    "category": "azure_functions_http"
+  },
+  {
+    "id": "Q106",
+    "question": "How can you pass an API key to an Azure Functions HTTP trigger?",
+    "expected_answer": "Either as a query string parameter named code or in an x-functions-key HTTP header",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "You can pass the API key as a query string parameter named code or in an x-functions-key HTTP header",
+    "in_corpus": true,
+    "category": "azure_functions_http"
+  },
+  {
+    "id": "Q107",
+    "question": "What queue storage trigger setting controls the maximum number of queue messages retrieved at once?",
+    "expected_answer": "The batchSize setting controls how many queue messages are retrieved at once. The default is 16.",
+    "source_doc": "azure-functions/functions-create-storage-queue-triggered-function.md",
+    "source_passage": "batchSize: The maximum number of queue messages to retrieve and process in parallel. The default is 16.",
+    "in_corpus": true,
+    "category": "azure_functions_queue"
+  },
+  {
+    "id": "Q108",
+    "question": "What happens to an Azure Functions queue message that fails processing five times?",
+    "expected_answer": "It is moved to a poison message queue",
+    "source_doc": "azure-functions/functions-create-storage-queue-triggered-function.md",
+    "source_passage": "If a queue message fails to process successfully five times, it is moved to a poison message queue",
+    "in_corpus": true,
+    "category": "azure_functions_queue"
+  },
+  {
+    "id": "Q109",
+    "question": "What is the name of the poison queue created automatically for a queue named myqueue in Azure Functions?",
+    "expected_answer": "myqueue-poison",
+    "source_doc": "azure-functions/functions-create-storage-queue-triggered-function.md",
+    "source_passage": "If the original queue is named myqueue, the poison queue is named myqueue-poison",
+    "in_corpus": true,
+    "category": "azure_functions_queue"
+  },
+  {
+    "id": "Q110",
+    "question": "What does the maxPollingInterval setting control in Azure Functions queue triggers?",
+    "expected_answer": "It controls the maximum interval between polls when the queue is empty. The default is 60 seconds.",
+    "source_doc": "azure-functions/functions-create-storage-queue-triggered-function.md",
+    "source_passage": "maxPollingInterval: The maximum interval between polls when the queue is empty. Default is 60 seconds.",
+    "in_corpus": true,
+    "category": "azure_functions_queue"
+  },
+  {
+    "id": "Q111",
+    "question": "What is a container in Azure Container Apps?",
+    "expected_answer": "A container is the unit of deployment in Azure Container Apps. It packages your application code, runtime, libraries and settings into a portable image that runs consistently across environments.",
+    "source_doc": "container-apps/containers.md",
+    "source_passage": "A container is the unit of deployment in Azure Container Apps. It packages your application code, runtime, libraries, and settings into a portable image that runs consistently across environments",
+    "in_corpus": true,
+    "category": "container_apps_containers"
+  },
+  {
+    "id": "Q112",
+    "question": "What container registries can you use to pull images into Azure Container Apps?",
+    "expected_answer": "Azure Container Registry, Docker Hub, and any other publicly accessible container registry",
+    "source_doc": "container-apps/containers.md",
+    "source_passage": "You can pull container images from Azure Container Registry, Docker Hub, or any other publicly accessible container registry",
+    "in_corpus": true,
+    "category": "container_apps_containers"
+  },
+  {
+    "id": "Q113",
+    "question": "What happens to containers in a revision when a new revision is deployed in Azure Container Apps?",
+    "expected_answer": "Existing containers in the old revision continue running until traffic is shifted away or the old revision is deactivated",
+    "source_doc": "container-apps/containers.md",
+    "source_passage": "When you deploy a new revision, existing containers in the old revision continue running until traffic is shifted away from it or the revision is deactivated",
+    "in_corpus": true,
+    "category": "container_apps_containers"
+  },
+  {
+    "id": "Q114",
+    "question": "How do you connect two Azure Container Apps so they can communicate with each other?",
+    "expected_answer": "By using the built-in service discovery through the container app name as the hostname, or via Dapr service invocation using the Dapr app ID",
+    "source_doc": "container-apps/connect-apps.md",
+    "source_passage": "You can connect container apps using built-in service discovery through the container app name as hostname, or via Dapr service invocation using the Dapr app ID",
+    "in_corpus": true,
+    "category": "container_apps_networking"
+  },
+  {
+    "id": "Q115",
+    "question": "What ingress setting is needed for one Azure Container App to call another within the same environment?",
+    "expected_answer": "Internal ingress must be enabled on the target container app to allow other apps in the same environment to communicate with it",
+    "source_doc": "container-apps/connect-apps.md",
+    "source_passage": "To allow other apps in the same environment to communicate with your container app, enable internal ingress on the target container app",
+    "in_corpus": true,
+    "category": "container_apps_networking"
+  },
+  {
+    "id": "Q116",
+    "question": "What format is used as the hostname when one container app calls another within the same Azure Container Apps environment?",
+    "expected_answer": "The container app name is used directly as the hostname",
+    "source_doc": "container-apps/connect-apps.md",
+    "source_passage": "The container app name is used directly as the hostname when calling another app within the same environment",
+    "in_corpus": true,
+    "category": "container_apps_networking"
+  },
+  {
+    "id": "Q117",
+    "question": "What is a revision in Azure Container Apps?",
+    "expected_answer": "A revision is an immutable snapshot of a container app version. Revisions are created when you make revision-scope changes such as updating the container image or environment variables.",
+    "source_doc": "container-apps/containers.md",
+    "source_passage": "A revision is an immutable snapshot of a container app version. Revisions are created when you make revision-scope changes such as updating the container image or environment variables",
+    "in_corpus": true,
+    "category": "container_apps_containers"
+  },
+  {
+    "id": "Q118",
+    "question": "What is the maximum number of containers you can run in a single Azure Container Apps replica?",
+    "expected_answer": "Up to 10 containers per replica",
+    "source_doc": "container-apps/containers.md",
+    "source_passage": "You can run up to 10 containers in a single replica",
+    "in_corpus": true,
+    "category": "container_apps_containers"
+  },
+  {
+    "id": "Q119",
+    "question": "What is the route parameter name used by default in an Azure Functions HTTP trigger URL?",
+    "expected_answer": "The function name is used as the default route",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "By default, the function name is used as the route for the HTTP trigger URL",
+    "in_corpus": true,
+    "category": "azure_functions_http"
+  },
+  {
+    "id": "Q120",
+    "question": "What does the visibilityTimeout setting control in Azure Functions queue triggers?",
+    "expected_answer": "It specifies the time that must pass before a message that failed to process becomes visible again in the queue for retry",
+    "source_doc": "azure-functions/functions-create-storage-queue-triggered-function.md",
+    "source_passage": "visibilityTimeout: The time interval between retries when processing of a message fails",
+    "in_corpus": true,
+    "category": "azure_functions_queue"
+  },
+  {
+    "id": "Q121",
+    "question": "What is the minimum number of partitions required in an Event Hub for Azure Functions to scale out?",
+    "expected_answer": "At least two partitions are required for Azure Functions to scale out when processing Event Hubs messages",
+    "source_doc": "azure-functions/functions-bindings-event-hubs.md",
+    "source_passage": "At least two partitions are required for Azure Functions to scale out when processing Event Hubs messages",
+    "in_corpus": true,
+    "category": "azure_functions_eventhubs"
+  },
+  {
+    "id": "Q122",
+    "question": "What cardinality setting in an Event Hubs trigger makes the function receive messages as a batch?",
+    "expected_answer": "Setting cardinality to many makes the function receive messages as a batch array",
+    "source_doc": "azure-functions/functions-bindings-event-hubs.md",
+    "source_passage": "Set cardinality to many to receive messages as a batch array",
+    "in_corpus": true,
+    "category": "azure_functions_eventhubs"
+  },
+  {
+    "id": "Q123",
+    "question": "What does the maxEventBatchSize setting control in an Azure Functions Event Hubs trigger?",
+    "expected_answer": "It controls the maximum number of events included in a batch for the function to process at one time",
+    "source_doc": "azure-functions/functions-bindings-event-hubs.md",
+    "source_passage": "maxEventBatchSize: The maximum number of events included in a batch for the function to process at one time",
+    "in_corpus": true,
+    "category": "azure_functions_eventhubs"
+  },
+  {
+    "id": "Q124",
+    "question": "What connection setting is required for an Azure Functions Event Hubs trigger?",
+    "expected_answer": "A connection string to the Event Hubs namespace stored in an app setting",
+    "source_doc": "azure-functions/functions-bindings-event-hubs.md",
+    "source_passage": "A connection string to the Event Hubs namespace is required and stored in an app setting",
+    "in_corpus": true,
+    "category": "azure_functions_eventhubs"
+  },
+  {
+    "id": "Q125",
+    "question": "What is the Event Grid trigger used for in Azure Functions?",
+    "expected_answer": "It is used to execute a function in response to events delivered through Azure Event Grid, such as blob storage events, resource group events or custom events",
+    "source_doc": "azure-functions/functions-bindings-event-grid.md",
+    "source_passage": "The Event Grid trigger executes a function in response to events delivered through Azure Event Grid, such as blob storage events, resource group events, or custom events",
+    "in_corpus": true,
+    "category": "azure_functions_eventgrid"
+  },
+  {
+    "id": "Q126",
+    "question": "What validation process does Azure Event Grid perform when subscribing an Azure Function as an endpoint?",
+    "expected_answer": "Event Grid sends a subscription validation event to confirm the endpoint is valid. The function must respond with the validationCode from the event.",
+    "source_doc": "azure-functions/functions-bindings-event-grid.md",
+    "source_passage": "Event Grid sends a subscription validation event to confirm the endpoint is valid. The function must respond with the validationCode from the event",
+    "in_corpus": true,
+    "category": "azure_functions_eventgrid"
+  },
+  {
+    "id": "Q127",
+    "question": "What protocol does Azure Event Grid use to deliver events to an Azure Functions HTTP endpoint?",
+    "expected_answer": "HTTPS",
+    "source_doc": "azure-functions/functions-bindings-event-grid.md",
+    "source_passage": "Event Grid delivers events to Azure Functions HTTP endpoints using HTTPS",
+    "in_corpus": true,
+    "category": "azure_functions_eventgrid"
+  },
+  {
+    "id": "Q128",
+    "question": "What does enabling ingress on an Azure Container App do?",
+    "expected_answer": "It exposes the container app to external or internal traffic through a stable URL without needing to configure a load balancer or reverse proxy manually",
+    "source_doc": "container-apps/ingress.md",
+    "source_passage": "Enabling ingress exposes your container app to external or internal traffic through a stable URL without manually configuring a load balancer or reverse proxy",
+    "in_corpus": true,
+    "category": "container_apps_ingress"
+  },
+  {
+    "id": "Q129",
+    "question": "What are the two ingress traffic types available in Azure Container Apps?",
+    "expected_answer": "External ingress which accepts traffic from the public internet, and internal ingress which only accepts traffic from within the same environment",
+    "source_doc": "container-apps/ingress.md",
+    "source_passage": "External: Accepts traffic from the public internet. Internal: Only accepts traffic from within the same Container Apps environment",
+    "in_corpus": true,
+    "category": "container_apps_ingress"
+  },
+  {
+    "id": "Q130",
+    "question": "What is the target port setting in Azure Container Apps ingress?",
+    "expected_answer": "The target port is the port on which the container is listening for incoming traffic",
+    "source_doc": "container-apps/ingress.md",
+    "source_passage": "The target port is the port on which your container is listening for incoming traffic",
+    "in_corpus": true,
+    "category": "container_apps_ingress"
+  },
+  {
+    "id": "Q131",
+    "question": "What transport protocols does Azure Container Apps ingress support?",
+    "expected_answer": "HTTP/1.1, HTTP/2, and gRPC",
+    "source_doc": "container-apps/ingress.md",
+    "source_passage": "Azure Container Apps ingress supports HTTP/1.1, HTTP/2, and gRPC",
+    "in_corpus": true,
+    "category": "container_apps_ingress"
+  },
+  {
+    "id": "Q132",
+    "question": "What is a managed identity in Azure Container Apps?",
+    "expected_answer": "A managed identity is an automatically managed identity in Azure Active Directory that allows a container app to authenticate to Azure services without storing credentials in code or configuration",
+    "source_doc": "container-apps/managed-identity.md",
+    "source_passage": "A managed identity is an automatically managed identity in Azure Active Directory that allows your container app to authenticate to Azure services without storing credentials in code or configuration",
+    "in_corpus": true,
+    "category": "container_apps_identity"
+  },
+  {
+    "id": "Q133",
+    "question": "What are the two types of managed identities available in Azure Container Apps?",
+    "expected_answer": "System-assigned managed identity and user-assigned managed identity",
+    "source_doc": "container-apps/managed-identity.md",
+    "source_passage": "There are two types of managed identities: System-assigned managed identity and User-assigned managed identity",
+    "in_corpus": true,
+    "category": "container_apps_identity"
+  },
+  {
+    "id": "Q134",
+    "question": "What happens to a system-assigned managed identity when the container app is deleted?",
+    "expected_answer": "It is automatically deleted when the container app is deleted",
+    "source_doc": "container-apps/managed-identity.md",
+    "source_passage": "A system-assigned managed identity is tied to the container app and is automatically deleted when the container app is deleted",
+    "in_corpus": true,
+    "category": "container_apps_identity"
+  },
+  {
+    "id": "Q135",
+    "question": "Can a user-assigned managed identity be shared across multiple Azure Container Apps?",
+    "expected_answer": "Yes, a user-assigned managed identity can be shared and assigned to multiple container apps",
+    "source_doc": "container-apps/managed-identity.md",
+    "source_passage": "A user-assigned managed identity can be shared and assigned to multiple container apps",
+    "in_corpus": true,
+    "category": "container_apps_identity"
+  },
+  {
+    "id": "Q136",
+    "question": "What common Azure service can a container app authenticate to using managed identity without storing credentials?",
+    "expected_answer": "Azure Container Registry, allowing the container app to pull images without storing registry credentials",
+    "source_doc": "container-apps/managed-identity.md",
+    "source_passage": "You can use managed identity to authenticate to Azure Container Registry and pull images without storing registry credentials",
+    "in_corpus": true,
+    "category": "container_apps_identity"
+  },
+  {
+    "id": "Q137",
+    "question": "What does the initialBatchSizeOverride setting do in an Azure Functions Event Hubs trigger?",
+    "expected_answer": "It sets the number of events to retrieve per partition on startup before steady-state batch sizes take effect",
+    "source_doc": "azure-functions/functions-bindings-event-hubs.md",
+    "source_passage": "initialBatchSizeOverride: Sets the number of events to retrieve per partition on startup before steady-state batch sizes take effect",
+    "in_corpus": true,
+    "category": "azure_functions_eventhubs"
+  },
+  {
+    "id": "Q138",
+    "question": "What does the allowInsecure setting do in Azure Container Apps ingress?",
+    "expected_answer": "It allows HTTP traffic in addition to HTTPS when enabled. By default only HTTPS traffic is accepted.",
+    "source_doc": "container-apps/ingress.md",
+    "source_passage": "allowInsecure: When enabled, allows HTTP traffic in addition to HTTPS. By default only HTTPS traffic is accepted",
+    "in_corpus": true,
+    "category": "container_apps_ingress"
+  },
+  {
+    "id": "Q139",
+    "question": "How can you verify that managed identity is working correctly in an Azure Container Apps deployment?",
+    "expected_answer": "By checking that the container app can successfully access the target Azure service without any credential errors in the logs",
+    "source_doc": "container-apps/managed-identity.md",
+    "source_passage": "Verify managed identity is working by checking that the container app can successfully access the target Azure service without credential errors in the logs",
+    "in_corpus": true,
+    "category": "container_apps_identity"
+  },
+  {
+    "id": "Q140",
+    "question": "What is the purpose of the consumer group setting in an Azure Functions Event Hubs trigger?",
+    "expected_answer": "It specifies the Event Hubs consumer group that the function uses to subscribe to the event stream, allowing multiple functions to read from the same hub independently",
+    "source_doc": "azure-functions/functions-bindings-event-hubs.md",
+    "source_passage": "consumerGroup: The Event Hubs consumer group used to subscribe to the event stream. Multiple functions can read from the same hub independently using different consumer groups",
+    "in_corpus": true,
+    "category": "azure_functions_eventhubs"
+  },
+  {
+    "id": "Q141",
+    "question": "What is the default consistency level in Azure Cosmos DB?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "cosmos_db"
+  },
+  {
+    "id": "Q142",
+    "question": "How does Azure Cosmos DB handle automatic failover across regions?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "cosmos_db"
+  },
+  {
+    "id": "Q143",
+    "question": "What is a partition key in Azure Cosmos DB and why is it important?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "cosmos_db"
+  },
+  {
+    "id": "Q144",
+    "question": "What is the maximum document size supported by Azure Cosmos DB?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "cosmos_db"
+  },
+  {
+    "id": "Q145",
+    "question": "What are Request Units in Azure Cosmos DB?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "cosmos_db"
+  },
+  {
+    "id": "Q146",
+    "question": "What APIs does Azure Cosmos DB support for data access?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "cosmos_db"
+  },
+  {
+    "id": "Q147",
+    "question": "How does the change feed feature work in Azure Cosmos DB?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "cosmos_db"
+  },
+  {
+    "id": "Q148",
+    "question": "What is the difference between provisioned throughput and serverless mode in Azure Cosmos DB?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "cosmos_db"
+  },
+  {
+    "id": "Q149",
+    "question": "How do you perform a cross-partition query in Azure Cosmos DB?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "cosmos_db"
+  },
+  {
+    "id": "Q150",
+    "question": "What is the TTL feature in Azure Cosmos DB used for?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "cosmos_db"
+  },
+  {
+    "id": "Q151",
+    "question": "What consistency levels are available in Azure Cosmos DB?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "cosmos_db"
+  },
+  {
+    "id": "Q152",
+    "question": "How does Azure Cosmos DB support multi-region writes?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "cosmos_db"
+  },
+  {
+    "id": "Q153",
+    "question": "What is the Azure Cosmos DB emulator used for?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "cosmos_db"
+  },
+  {
+    "id": "Q154",
+    "question": "How does Azure Cosmos DB index data by default?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "cosmos_db"
+  },
+  {
+    "id": "Q155",
+    "question": "What is the difference between a database and a container in Azure Cosmos DB?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "cosmos_db"
+  },
+  {
+    "id": "Q156",
+    "question": "What is a Kubernetes pod?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "kubernetes"
+  },
+  {
+    "id": "Q157",
+    "question": "What is the difference between a Deployment and a StatefulSet in Kubernetes?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "kubernetes"
+  },
+  {
+    "id": "Q158",
+    "question": "How does the Kubernetes Horizontal Pod Autoscaler work?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "kubernetes"
+  },
+  {
+    "id": "Q159",
+    "question": "What is a Kubernetes ConfigMap used for?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "kubernetes"
+  },
+  {
+    "id": "Q160",
+    "question": "What is the role of etcd in a Kubernetes cluster?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "kubernetes"
+  },
+  {
+    "id": "Q161",
+    "question": "What is a Kubernetes namespace and when would you use one?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "kubernetes"
+  },
+  {
+    "id": "Q162",
+    "question": "How does Kubernetes handle rolling updates for a Deployment?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "kubernetes"
+  },
+  {
+    "id": "Q163",
+    "question": "What is a Kubernetes Service and what types are available?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "kubernetes"
+  },
+  {
+    "id": "Q164",
+    "question": "What does the kubectl apply command do in Kubernetes?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "kubernetes"
+  },
+  {
+    "id": "Q165",
+    "question": "What is a Kubernetes Ingress resource used for?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "kubernetes"
+  },
+  {
+    "id": "Q166",
+    "question": "How does Azure Kubernetes Service manage node upgrades?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "kubernetes"
+  },
+  {
+    "id": "Q167",
+    "question": "What is a DaemonSet in Kubernetes?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "kubernetes"
+  },
+  {
+    "id": "Q168",
+    "question": "What is the purpose of a Kubernetes liveness probe?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "kubernetes"
+  },
+  {
+    "id": "Q169",
+    "question": "What is the maximum number of nodes in an AKS node pool?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "kubernetes"
+  },
+  {
+    "id": "Q170",
+    "question": "What is a Kubernetes Secret and how is it different from a ConfigMap?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "kubernetes"
+  },
+  {
+    "id": "Q171",
+    "question": "What is the maximum execution timeout for an AWS Lambda function?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "aws_lambda"
+  },
+  {
+    "id": "Q172",
+    "question": "What is the maximum memory size you can allocate to an AWS Lambda function?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "aws_lambda"
+  },
+  {
+    "id": "Q173",
+    "question": "What is a Lambda Layer in AWS and what is it used for?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "aws_lambda"
+  },
+  {
+    "id": "Q174",
+    "question": "How does AWS Lambda handle cold starts?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "aws_lambda"
+  },
+  {
+    "id": "Q175",
+    "question": "What is the difference between synchronous and asynchronous invocation in AWS Lambda?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "aws_lambda"
+  },
+  {
+    "id": "Q176",
+    "question": "What is an AWS Lambda Alias used for?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "aws_lambda"
+  },
+  {
+    "id": "Q177",
+    "question": "What is the default concurrency limit for AWS Lambda functions per region?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "aws_lambda"
+  },
+  {
+    "id": "Q178",
+    "question": "What is Provisioned Concurrency in AWS Lambda?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "aws_lambda"
+  },
+  {
+    "id": "Q179",
+    "question": "What event sources can trigger an AWS Lambda function?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "aws_lambda"
+  },
+  {
+    "id": "Q180",
+    "question": "How does AWS Lambda pricing work?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "aws_lambda"
+  },
+  {
+    "id": "Q181",
+    "question": "What is the AWS Lambda deployment package size limit?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "aws_lambda"
+  },
+  {
+    "id": "Q182",
+    "question": "What is a dead letter queue in AWS Lambda?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "aws_lambda"
+  },
+  {
+    "id": "Q183",
+    "question": "How does AWS Lambda integrate with Amazon API Gateway?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "aws_lambda"
+  },
+  {
+    "id": "Q184",
+    "question": "What is the AWS Lambda execution environment lifecycle?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "aws_lambda"
+  },
+  {
+    "id": "Q185",
+    "question": "How do you pass environment variables to an AWS Lambda function?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "aws_lambda"
+  },
+  {
+    "id": "Q186",
+    "question": "What is the difference between a list and a tuple in Python?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "python"
+  },
+  {
+    "id": "Q187",
+    "question": "How does Python handle memory management and garbage collection?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "python"
+  },
+  {
+    "id": "Q188",
+    "question": "What is a Python decorator and how do you create one?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "python"
+  },
+  {
+    "id": "Q189",
+    "question": "What is the difference between deepcopy and copy in Python?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "python"
+  },
+  {
+    "id": "Q190",
+    "question": "How does the Python GIL affect multithreaded programs?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "python"
+  },
+  {
+    "id": "Q191",
+    "question": "What is the difference between async and sync functions in Python?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "python"
+  },
+  {
+    "id": "Q192",
+    "question": "How do you handle exceptions in Python using try except finally?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "python"
+  },
+  {
+    "id": "Q193",
+    "question": "What is a Python generator and how is it different from a regular function?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "python"
+  },
+  {
+    "id": "Q194",
+    "question": "What is the purpose of the __init__.py file in a Python package?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "python"
+  },
+  {
+    "id": "Q195",
+    "question": "What is the difference between is and == in Python?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "python"
+  },
+  {
+    "id": "Q196",
+    "question": "How does Python implement object-oriented inheritance?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "python"
+  },
+  {
+    "id": "Q197",
+    "question": "What is list comprehension in Python and when should you use it?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "python"
+  },
+  {
+    "id": "Q198",
+    "question": "What is the purpose of virtual environments in Python?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "python"
+  },
+  {
+    "id": "Q199",
+    "question": "How does Python handle multiple inheritance and what is MRO?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "python"
+  },
+  {
+    "id": "Q200",
+    "question": "What is the difference between multiprocessing and multithreading in Python?",
+    "expected_answer": null,
+    "source_doc": null,
+    "source_passage": null,
+    "in_corpus": false,
+    "category": "python"
+  }
+]

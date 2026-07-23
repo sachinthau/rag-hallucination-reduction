@@ -1,0 +1,182 @@
+[
+  {
+    "id": "Q061",
+    "question": "Which Azure Functions hosting plan is recommended for dynamic scale apps?",
+    "expected_answer": "The Flex Consumption plan is recommended for hosting dynamic scale apps",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "When possible, use the Flex Consumption plan to host your dynamic scale apps",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q062",
+    "question": "What type of Azure Storage account is required when creating a function app?",
+    "expected_answer": "A general-purpose Azure Storage account that supports Blob, Queue, and Table storage",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "You must create or link to a general-purpose Azure Storage account that supports Blob, Queue, and Table storage",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q063",
+    "question": "To reduce latency, where should the storage account for an Azure Functions app be created?",
+    "expected_answer": "In the same region as the function app",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "To reduce latency, create the storage account in the same region as the function app",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q064",
+    "question": "What application setting stores the storage account connection string for an Azure Functions app?",
+    "expected_answer": "AzureWebJobsStorage and WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "The storage account connection string for your function app is found in the AzureWebJobsStorage and WEBSITE_CONTENTAZUREFILECONNECTIONSTRING application settings",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q065",
+    "question": "What is one benefit of running Azure Functions from a deployment package?",
+    "expected_answer": "It reduces the risk of file copy locking problems, can be deployed directly to production without triggering a restart, and may reduce cold-start times",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "Reduces the risk of file copy locking problems. Can be deployed directly to a production app and doesn't trigger a restart. All files in the package are available to your app",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q066",
+    "question": "What setting controls the maximum number of language worker processes in an Azure Functions app?",
+    "expected_answer": "FUNCTIONS_WORKER_PROCESS_COUNT controls the maximum number of language worker processes. The default value is 1.",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "The FUNCTIONS_WORKER_PROCESS_COUNT setting controls the maximum number of language worker processes allowed. The default for this setting is 1",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q067",
+    "question": "How should you minimise deployment downtime in the Azure Functions Flex Consumption plan?",
+    "expected_answer": "Configure rolling updates for zero-downtime deployments in the Flex Consumption plan",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "Configure rolling updates for zero-downtime deployments in the Flex Consumption plan",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q068",
+    "question": "Does the Flex Consumption plan require the WEBSITE_CONTENTAZUREFILECONNECTIONSTRING and WEBSITE_CONTENTSHARE settings?",
+    "expected_answer": "No, the Flex Consumption plan does not require these settings. It uses a Blob storage container to host deployment packages instead of an Azure Files share.",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "The Flex Consumption plan doesn't require these settings and uses a Blob storage container to host deployment packages instead of an Azure Files share",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q069",
+    "question": "What certificate type is required when adding a custom domain to an Azure Container Apps application?",
+    "expected_answer": "SNI (Server Name Identification) domain certificates are required",
+    "source_doc": "container-apps/custom-domains-certificates.md",
+    "source_passage": "SNI (Server Name Identification) domain certificates are required",
+    "in_corpus": true,
+    "category": "container_apps_custom_domains"
+  },
+  {
+    "id": "Q070",
+    "question": "What must be enabled on a container app before you can add a custom domain to it?",
+    "expected_answer": "Ingress must be enabled for the container app",
+    "source_doc": "container-apps/custom-domains-certificates.md",
+    "source_passage": "Ingress must be enabled for the container app",
+    "in_corpus": true,
+    "category": "container_apps_custom_domains"
+  },
+  {
+    "id": "Q071",
+    "question": "What DNS record type is used for an apex domain when adding a custom domain to Azure Container Apps?",
+    "expected_answer": "An A record is used for apex domains",
+    "source_doc": "container-apps/custom-domains-certificates.md",
+    "source_passage": "Apex domain: A record. An apex domain is a domain at the root level of your domain",
+    "in_corpus": true,
+    "category": "container_apps_custom_domains"
+  },
+  {
+    "id": "Q072",
+    "question": "What DNS record type is used for a subdomain when adding a custom domain to Azure Container Apps?",
+    "expected_answer": "A CNAME record is used for subdomains",
+    "source_doc": "container-apps/custom-domains-certificates.md",
+    "source_passage": "Subdomain: CNAME. A subdomain is a domain that's part of another domain",
+    "in_corpus": true,
+    "category": "container_apps_custom_domains"
+  },
+  {
+    "id": "Q073",
+    "question": "Where are certificates applied and bound in Azure Container Apps?",
+    "expected_answer": "Certificates are applied to the container app environment and are bound to individual container apps",
+    "source_doc": "container-apps/custom-domains-certificates.md",
+    "source_passage": "Certificates are applied to the container app environment and are bound to individual container apps",
+    "in_corpus": true,
+    "category": "container_apps_custom_domains"
+  },
+  {
+    "id": "Q074",
+    "question": "What are the two certificate options available when adding a custom domain to Azure Container Apps?",
+    "expected_answer": "You can upload your own certificate or use a free managed certificate",
+    "source_doc": "container-apps/custom-domains-certificates.md",
+    "source_passage": "Every domain name must be associated with a TLS/SSL certificate. You can upload your own certificate or use a free managed certificate",
+    "in_corpus": true,
+    "category": "container_apps_custom_domains"
+  },
+  {
+    "id": "Q075",
+    "question": "What role-based access is required to add certificates in Azure Container Apps?",
+    "expected_answer": "You must have role-based access to the environment to add certificates",
+    "source_doc": "container-apps/custom-domains-certificates.md",
+    "source_passage": "You must have role-based access to the environment to add certificates",
+    "in_corpus": true,
+    "category": "container_apps_custom_domains"
+  },
+  {
+    "id": "Q076",
+    "question": "For an Event Hubs triggered Azure Function, what storage account configuration should you avoid?",
+    "expected_answer": "Do not use an account with Data Lake Storage enabled for Event Hubs triggered functions",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "For Event Hubs triggered functions, don't use an account with Data Lake Storage enabled",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  },
+  {
+    "id": "Q077",
+    "question": "In Azure Container Apps, what TXT record must you create when validating an apex domain?",
+    "expected_answer": "A TXT record with the host asuid containing the domain verification code",
+    "source_doc": "container-apps/custom-domains-certificates.md",
+    "source_passage": "TXT record: host asuid, value: The domain verification code",
+    "in_corpus": true,
+    "category": "container_apps_custom_domains"
+  },
+  {
+    "id": "Q078",
+    "question": "What happens to an Azure Container Apps environment that is in a failed state due to virtual network or Azure Policy configuration for more than 90 days?",
+    "expected_answer": "It is automatically deleted",
+    "source_doc": "container-apps/environment.md",
+    "source_passage": "Azure Container Apps environments are automatically deleted if one of the following conditions persists for longer than 90 days: The environment is in a failed state due to virtual network or Azure Policy configuration",
+    "in_corpus": true,
+    "category": "container_apps_environment"
+  },
+  {
+    "id": "Q079",
+    "question": "Can you add a custom domain that contains the custom environment DNS suffix to an Azure Container Apps app?",
+    "expected_answer": "No, if you configure a custom environment DNS suffix you cannot add a custom domain that contains this suffix to your container app",
+    "source_doc": "container-apps/custom-domains-certificates.md",
+    "source_passage": "If you configure a custom environment DNS suffix, you can't add a custom domain that contains this suffix to your container app",
+    "in_corpus": true,
+    "category": "container_apps_custom_domains"
+  },
+  {
+    "id": "Q080",
+    "question": "For a Premium plan EP2 Azure Function app, what starting value of FUNCTIONS_WORKER_PROCESS_COUNT is recommended?",
+    "expected_answer": "Start with a value of 2 since the EP2 provides two cores, and increase by two as needed",
+    "source_doc": "azure-functions/functions-best-practices.md",
+    "source_passage": "The Premium plan EP2 provides two cores, so you should start with a value of 2 and increase by two as needed, up to the maximum",
+    "in_corpus": true,
+    "category": "azure_functions_best_practices"
+  }
+]

@@ -1,0 +1,182 @@
+[
+  {
+    "id": "Q001",
+    "question": "What do you need to add to an existing Azure Function to connect it to other Azure services using bindings?",
+    "expected_answer": "You need to add specific binding definitions in your function code or configuration file",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "If you want to connect your function to other services by using input or output bindings, you have to add specific binding definitions in your function",
+    "in_corpus": true,
+    "category": "azure_functions_bindings"
+  },
+  {
+    "id": "Q002",
+    "question": "How does the Go worker in Azure Functions handle output bindings like Queue Storage?",
+    "expected_answer": "Queue Storage output bindings are not yet supported in the Go worker. You need to use the Azure SDK for Go directly to interact with Queue Storage",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "Queue output bindings are not yet supported in the Go worker. Use the Azure SDK for Go to write to Queue Storage directly",
+    "in_corpus": true,
+    "category": "azure_functions_bindings"
+  },
+  {
+    "id": "Q003",
+    "question": "Which trigger types does the Azure Functions Go worker currently support?",
+    "expected_answer": "HTTP, Timer, Azure Cosmos DB, Azure Service Bus Queue, Azure Service Bus Topic, Event Hubs, Event Grid, and Blob Storage",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "The Go worker currently supports the following trigger types: HTTP, Timer, Azure Cosmos DB, Azure Service Bus Queue, Azure Service Bus Topic, Event Hubs, Event Grid, Blob Storage",
+    "in_corpus": true,
+    "category": "azure_functions_bindings"
+  },
+  {
+    "id": "Q004",
+    "question": "What tool can automatically add a binding to an existing function.json file when developing Azure Functions locally?",
+    "expected_answer": "The Azure Functions extension in Visual Studio Code can automatically add a binding to an existing function.json file",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "When you use Visual Studio Code to develop your function and your function uses a function.json file, the Azure Functions extension can automatically add a binding to an existing function.json file",
+    "in_corpus": true,
+    "category": "azure_functions_bindings"
+  },
+  {
+    "id": "Q005",
+    "question": "Where in the Azure portal do you add input and output bindings to an existing function?",
+    "expected_answer": "In the Integrate tab for a given function in the Azure portal",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "When you develop your functions in the Azure portal, you add input and output bindings in the Integrate tab for a given function",
+    "in_corpus": true,
+    "category": "azure_functions_bindings"
+  },
+  {
+    "id": "Q006",
+    "question": "What GPU options does Azure Container Apps support for AI workloads?",
+    "expected_answer": "Serverless GPUs for variable traffic and cost-sensitive inference, dedicated GPUs for continuous low-latency inference, and scale to zero to minimize costs",
+    "source_doc": "container-apps/ai-integration.md",
+    "source_passage": "Use GPU accelerated workload profiles to meet a variety of your AI workload needs, including: Serverless GPUs for variable traffic scenarios, Dedicated GPUs for continuous low-latency inference, Scale to zero to automatically scale down idle GPU resources",
+    "in_corpus": true,
+    "category": "container_apps_ai"
+  },
+  {
+    "id": "Q007",
+    "question": "What programming languages does the platform-managed built-in container in Azure Container Apps dynamic sessions support?",
+    "expected_answer": "Python and Node.js",
+    "source_doc": "container-apps/ai-integration.md",
+    "source_passage": "Platform managed built-in containers: a platform-managed container that supports executing code in Python and Node.js",
+    "in_corpus": true,
+    "category": "container_apps_ai"
+  },
+  {
+    "id": "Q008",
+    "question": "What is the purpose of dynamic sessions in Azure Container Apps?",
+    "expected_answer": "Dynamic sessions provide a secure isolated environment for executing AI-generated code, suitable for sandboxed execution, code evaluation and AI agents",
+    "source_doc": "container-apps/ai-integration.md",
+    "source_passage": "Dynamic sessions provide a secure, isolated environment for executing AI-generated code. Perfect for scenarios like sandboxed execution, code evaluation, and AI agents",
+    "in_corpus": true,
+    "category": "container_apps_ai"
+  },
+  {
+    "id": "Q009",
+    "question": "How does Azure Container Apps integrate with Microsoft Foundry models?",
+    "expected_answer": "Azure Container Apps integrates with Foundry to enable deploying curated AI models directly into containerized environments, simplifying model deployment and management",
+    "source_doc": "container-apps/ai-integration.md",
+    "source_passage": "Azure Container Apps integrates with Foundry, which enables you to deploy curated AI models directly into your containerized environments. This integration simplifies model deployment and management",
+    "in_corpus": true,
+    "category": "container_apps_ai"
+  },
+  {
+    "id": "Q010",
+    "question": "What kind of platform is Azure Container Apps described as in the context of AI integration?",
+    "expected_answer": "A serverless container platform that simplifies the deployment and scaling of microservices and AI-powered applications",
+    "source_doc": "container-apps/ai-integration.md",
+    "source_passage": "Azure Container Apps is a serverless container platform that simplifies the deployment and scaling of microservices and AI-powered applications",
+    "in_corpus": true,
+    "category": "container_apps_ai"
+  },
+  {
+    "id": "Q011",
+    "question": "What is the registration method used in the Azure Functions Go worker for an HTTP trigger?",
+    "expected_answer": "app.HTTP()",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "HTTP trigger registration method: app.HTTP()",
+    "in_corpus": true,
+    "category": "azure_functions_go"
+  },
+  {
+    "id": "Q012",
+    "question": "What registration method does the Go worker use for an Azure Cosmos DB trigger?",
+    "expected_answer": "app.CosmosDB()",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "Azure Cosmos DB trigger registration method: app.CosmosDB()",
+    "in_corpus": true,
+    "category": "azure_functions_go"
+  },
+  {
+    "id": "Q013",
+    "question": "What session type would you use in Azure Container Apps if you need to run workloads in a language not supported by the built-in container?",
+    "expected_answer": "Custom containers, which allow you to create a sessions pool using a custom container for specialized workloads or additional language support",
+    "source_doc": "container-apps/ai-integration.md",
+    "source_passage": "Custom containers: create a sessions pool using a custom container for specialized workloads or additional language support",
+    "in_corpus": true,
+    "category": "container_apps_ai"
+  },
+  {
+    "id": "Q014",
+    "question": "When adding a binding to a C# Azure Function, what do you need to add to the function definition?",
+    "expected_answer": "Binding-specific attributes to the function definition in code",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "When adding a binding to an existing function, you need to add binding-specific attributes to the function definition in code",
+    "in_corpus": true,
+    "category": "azure_functions_bindings"
+  },
+  {
+    "id": "Q015",
+    "question": "What does the Event Grid trigger registration method look like in the Azure Functions Go worker?",
+    "expected_answer": "app.EventGrid()",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "Event Grid trigger registration method: app.EventGrid()",
+    "in_corpus": true,
+    "category": "azure_functions_go"
+  },
+  {
+    "id": "Q016",
+    "question": "What is the recommended approach for a Java Azure Function when adding a binding to an existing function?",
+    "expected_answer": "Add binding-specific annotations to the function definition in code",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "When adding a binding to an existing function, you need to add binding-specific annotations to the function definition in code",
+    "in_corpus": true,
+    "category": "azure_functions_bindings"
+  },
+  {
+    "id": "Q017",
+    "question": "What type of AI workload scenario are serverless GPUs in Azure Container Apps best suited for?",
+    "expected_answer": "Variable traffic scenarios and cost-sensitive inference workloads",
+    "source_doc": "container-apps/ai-integration.md",
+    "source_passage": "Serverless GPUs: Ideal for variable traffic scenarios and cost-sensitive inference workloads",
+    "in_corpus": true,
+    "category": "container_apps_ai"
+  },
+  {
+    "id": "Q018",
+    "question": "What type of AI workload scenario are dedicated GPUs in Azure Container Apps best suited for?",
+    "expected_answer": "Continuous low-latency inference scenarios",
+    "source_doc": "container-apps/ai-integration.md",
+    "source_passage": "Dedicated GPUs: best for continuous, low-latency inference scenarios",
+    "in_corpus": true,
+    "category": "container_apps_ai"
+  },
+  {
+    "id": "Q019",
+    "question": "What registration method does the Go worker in Azure Functions use for an Event Hubs trigger?",
+    "expected_answer": "app.EventHub()",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "Event Hubs trigger registration method: app.EventHub()",
+    "in_corpus": true,
+    "category": "azure_functions_go"
+  },
+  {
+    "id": "Q020",
+    "question": "For a Python Azure Function using the v1 model, what do you need to do when adding a binding?",
+    "expected_answer": "Update the function code and add a definition to the function.json configuration file",
+    "source_doc": "azure-functions/add-bindings-existing-function.md",
+    "source_passage": "You need to update the function code and add a definition to the function.json configuration file",
+    "in_corpus": true,
+    "category": "azure_functions_bindings"
+  }
+]
