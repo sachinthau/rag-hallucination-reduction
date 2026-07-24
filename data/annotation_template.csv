@@ -1,0 +1,216 @@
+question_id,question,answer_preview,grv_score,grv_label,human_label,notes
+Q096,What language does the FUNCTIONS_WORKER_RUNTIME value dotnet-isolated refer to in Azure Functions?,I could not find relevant information in the available documents.,0.6097,grounded,,
+Q016,What is the recommended approach for a Java Azure Function when adding a binding to an existing function?,"For a Java Azure Function, when adding a binding to an existing function, you need to add binding-specific annotations to the function definition in code.",0.7121,grounded,,
+Q031,"For HTTP triggers in Azure Functions, how often can new instances be allocated at most?","For HTTP triggers in Azure Functions, new instances are allocated at most once per second.",0.6493,grounded,,
+Q159,What is a Kubernetes ConfigMap used for?,I could not find relevant information in the available documents.,0.6004,grounded,,
+Q129,What are the two ingress traffic types available in Azure Container Apps?,"The two ingress traffic types available in Azure Container Apps are:
+
+1. External ingress
+2. Internal ingress
+
+This is implied by the context mentioning enabling ingress with `--type external` and ref",0.5547,partially_grounded,,
+Q116,What format is used as the hostname when one container app calls another within the same Azure Container Apps environment?,"When one container app calls another within the same Azure Container Apps environment, the hostname format used is simply the short app name:
+
+```
+http://<APP_NAME>
+```
+
+This short app name is resolve",0.7587,grounded,,
+Q070,What must be enabled on a container app before you can add a custom domain to it?,Ingress must be enabled on the container app before you can add a custom domain to it.,0.6655,grounded,,
+Q171,What is the maximum execution timeout for an AWS Lambda function?,I could not find relevant information in the available documents.,0.6076,grounded,,
+Q175,What is the difference between synchronous and asynchronous invocation in AWS Lambda?,I could not find relevant information in the available documents.,0.6017,grounded,,
+Q046,How can you reactivate an idled Azure Functions app on an App Service plan without enabling Always On?,"You can reactivate an idled Azure Functions app on an App Service plan without enabling Always On by either:
+
+- Sending a request to an HTTP trigger endpoint or any other endpoint on the app. Even a f",0.6322,grounded,,
+Q067,How should you minimise deployment downtime in the Azure Functions Flex Consumption plan?,"To minimize deployment downtime in the Azure Functions Flex Consumption plan, you should configure rolling updates for zero-downtime deployments. This site update strategy allows you to apply code dep",0.744,grounded,,
+Q183,How does AWS Lambda integrate with Amazon API Gateway?,I could not find relevant information in the available documents.,0.6002,grounded,,
+Q166,How does Azure Kubernetes Service manage node upgrades?,I could not find relevant information in the available documents about how Azure Kubernetes Service manages node upgrades.,0.5616,partially_grounded,,
+Q079,Can you add a custom domain that contains the custom environment DNS suffix to an Azure Container Apps app?,"No, you cannot add a custom domain that contains the custom environment DNS suffix to an Azure Container Apps app.",0.7675,grounded,,
+Q187,How does Python handle memory management and garbage collection?,I could not find relevant information in the available documents.,0.5949,partially_grounded,,
+Q178,What is Provisioned Concurrency in AWS Lambda?,I could not find relevant information in the available documents.,0.6032,grounded,,
+Q057,"In the Azure Functions Consumption plan, what is each host instance typically limited to?","In the Azure Functions Consumption plan, each host instance is typically limited by a function execution timeout after a configurable period of time. The plan automatically scales by dynamically addin",0.7078,grounded,,
+Q153,What is the Azure Cosmos DB emulator used for?,I could not find relevant information in the available documents.,0.6016,grounded,,
+Q083,What is the purpose of FUNCTIONS_EXTENSION_VERSION in Azure Functions?,"The purpose of the `FUNCTIONS_EXTENSION_VERSION` setting in Azure Functions is to specify the major runtime version that your function app runs on. For example, a value of `~4` means the app runs on v",0.6213,grounded,,
+Q069,What certificate type is required when adding a custom domain to an Azure Container Apps application?,The certificate type required when adding a custom domain to an Azure Container Apps application is an SNI (Server Name Indication) domain certificate.,0.717,grounded,,
+Q125,What is the Event Grid trigger used for in Azure Functions?,The Event Grid trigger in Azure Functions is used to run a function in response to an event sent by an Event Grid source. It allows the function to respond when an Event Grid event is dispatched.,0.8373,grounded,,
+Q017,What type of AI workload scenario are serverless GPUs in Azure Container Apps best suited for?,Serverless GPUs in Azure Container Apps are best suited for real-time and batch inferencing AI workload scenarios. They are ideal for dynamic applications that use custom open-source models with fast ,0.6678,grounded,,
+Q149,How do you perform a cross-partition query in Azure Cosmos DB?,I could not find relevant information in the available documents.,0.6004,grounded,,
+Q094,What is the Dapr app ID used for in Azure Container Apps?,"The Dapr App ID in Azure Container Apps is the unique identifier that other apps use to invoke your service. It is used for service discovery, state encapsulation, and as the pub/sub consumer ID. If y",0.7872,grounded,,
+Q066,What setting controls the maximum number of language worker processes in an Azure Functions app?,The setting that controls the maximum number of language worker processes in an Azure Functions app is `FUNCTIONS_WORKER_PROCESS_COUNT`.,0.6827,grounded,,
+Q061,Which Azure Functions hosting plan is recommended for dynamic scale apps?,The recommended Azure Functions hosting plan for dynamic scale apps is the Flex Consumption plan.,0.802,grounded,,
+Q085,What is the maximum timeout value for a function running on a Consumption plan?,"The context does not specify an exact maximum timeout value for a function running on a Consumption plan. It only mentions that on a Consumption plan, a function execution times out after a configurab",0.6067,grounded,,
+Q068,Does the Flex Consumption plan require the WEBSITE_CONTENTAZUREFILECONNECTIONSTRING and WEBSITE_CONTENTSHARE settings?,"No, the Flex Consumption plan does not require the `WEBSITE_CONTENTAZUREFILECONNECTIONSTRING` and `WEBSITE_CONTENTSHARE` settings. Instead, it uses a Blob storage container to host deployment packages",0.7733,grounded,,
+Q126,What validation process does Azure Event Grid perform when subscribing an Azure Function as an endpoint?,"The context does not explicitly describe the detailed validation process that Azure Event Grid performs when subscribing an Azure Function as an endpoint. However, it mentions that the subscription va",0.6486,grounded,,
+Q133,What are the two types of managed identities available in Azure Container Apps?,"The two types of managed identities available in Azure Container Apps are:
+
+1. System-assigned managed identity
+2. User-assigned managed identity",0.805,grounded,,
+Q010,What kind of platform is Azure Container Apps described as in the context of AI integration?,"Azure Container Apps is described as a fully managed, serverless container platform that simplifies the deployment and scaling of microservices and AI-powered applications. It supports GPU workloads n",0.796,grounded,,
+Q019,What registration method does the Go worker in Azure Functions use for an Event Hubs trigger?,I could not find relevant information in the available documents.,0.594,partially_grounded,,
+Q056,What component in Azure Functions monitors event rates and decides whether to scale out or scale in?,The component in Azure Functions that monitors event rates and decides whether to scale out or scale in is called the *scale controller*.,0.6378,grounded,,
+Q076,"For an Event Hubs triggered Azure Function, what storage account configuration should you avoid?","For an Event Hubs triggered Azure Function, you should avoid using a storage account with Data Lake Storage enabled.",0.6442,grounded,,
+Q151,What consistency levels are available in Azure Cosmos DB?,I could not find relevant information in the available documents.,0.6005,grounded,,
+Q105,What does the admin authorization level require for an Azure Functions HTTP trigger?,The admin authorization level for an Azure Functions HTTP trigger requires providing the master key (`_master`) in the `x-functions-key` request header. This master key is a special host key that prov,0.6336,grounded,,
+Q136,What common Azure service can a container app authenticate to using managed identity without storing credentials?,A container app can authenticate to Azure Key Vault using managed identity without storing credentials.,0.7903,grounded,,
+Q138,What does the allowInsecure setting do in Azure Container Apps ingress?,"The `allowInsecure` setting in Azure Container Apps ingress controls whether HTTPS redirects are enforced. When `allowInsecure` is set to `false` (which is the default), it enforces HTTPS redirects, m",0.5217,partially_grounded,,
+Q165,What is a Kubernetes Ingress resource used for?,I could not find relevant information in the available documents.,0.609,grounded,,
+Q077,"In Azure Container Apps, what TXT record must you create when validating an apex domain?","When validating an apex domain in Azure Container Apps, you must create the following TXT record:
+
+| Record type | Host  | Value                  |
+|-------------|-------|------------------------|
+| T",0.6368,grounded,,
+Q080,"For a Premium plan EP2 Azure Function app, what starting value of FUNCTIONS_WORKER_PROCESS_COUNT is recommended?","For a Premium plan EP2 Azure Function app, the recommended starting value of FUNCTIONS_WORKER_PROCESS_COUNT is 2. This is because the EP2 plan provides two cores, so you should start with a value equa",0.699,grounded,,
+Q198,What is the purpose of virtual environments in Python?,I could not find relevant information in the available documents.,0.5997,partially_grounded,,
+Q039,Under what conditions is a replica considered idle in Azure Container Apps?,"A replica is considered idle in Azure Container Apps when all of the following conditions are true:
+
+- The replica is running in a revision that is currently eligible for idle charges (i.e., the revis",0.7671,grounded,,
+Q025,What is the default number of always-ready instances in the Flex Consumption plan?,The default number of always-ready instances in the Flex Consumption plan is 0 (zero).,0.6704,grounded,,
+Q123,What does the maxEventBatchSize setting control in an Azure Functions Event Hubs trigger?,I could not find relevant information in the available documents.,0.6009,grounded,,
+Q196,How does Python implement object-oriented inheritance?,I could not find relevant information in the available documents.,0.6009,grounded,,
+Q030,What is the highest supported maximum instance count for a Flex Consumption plan app?,The highest supported maximum instance count for a Flex Consumption plan app is 1000.,0.6989,grounded,,
+Q020,"For a Python Azure Function using the v1 model, what do you need to do when adding a binding?","For a Python Azure Function using the v1 model, you do not need to make any additional changes aside from setting up the output binding component. This means you primarily need to configure the bindin",0.7268,grounded,,
+Q144,What is the maximum document size supported by Azure Cosmos DB?,I could not find relevant information in the available documents.,0.6053,grounded,,
+Q087,What is the purpose of the WEBSITE_CONTENTSHARE setting in Azure Functions?,The `WEBSITE_CONTENTSHARE` setting in Azure Functions specifies the name of the file share that Functions uses to store the function app code and configuration files. This content is required by event,0.8195,grounded,,
+Q115,What ingress setting is needed for one Azure Container App to call another within the same environment?,The container app must have HTTP ingress enabled to allow one Azure Container App to call another within the same environment.,0.7292,grounded,,
+Q174,How does AWS Lambda handle cold starts?,I could not find relevant information in the available documents.,0.602,grounded,,
+Q006,What GPU options does Azure Container Apps support for AI workloads?,Azure Container Apps supports serverless GPU acceleration with Nvidia T4 and A100 GPU options for AI workloads. These GPUs enable compute-intensive machine learning and AI workloads in containerized e,0.7559,grounded,,
+Q127,What protocol does Azure Event Grid use to deliver events to an Azure Functions HTTP endpoint?,Azure Event Grid uses HTTP requests to deliver events to an Azure Functions HTTP endpoint.,0.6516,grounded,,
+Q118,What is the maximum number of containers you can run in a single Azure Container Apps replica?,I could not find relevant information in the available documents.,0.6108,grounded,,
+Q074,What are the two certificate options available when adding a custom domain to Azure Container Apps?,"The two certificate options available when adding a custom domain to Azure Container Apps are:
+
+1. Custom domain with a free certificate: A private certificate that's free of charge and easy to use fo",0.8412,grounded,,
+Q141,What is the default consistency level in Azure Cosmos DB?,I could not find relevant information in the available documents.,0.6051,grounded,,
+Q099,What is the Dapr pub/sub API used for in Azure Container Apps?,The Dapr pub/sub API in Azure Container Apps is used to enable publish and subscribe messaging patterns between microservices. It allows container apps to communicate asynchronously by publishing mess,0.6777,grounded,,
+Q173,What is a Lambda Layer in AWS and what is it used for?,I could not find relevant information in the available documents.,0.6026,grounded,,
+Q097,What is the Dapr service invocation API used for in Azure Container Apps?,"The Dapr service invocation API in Azure Container Apps is used to discover services and perform reliable, direct service-to-service calls with automatic mutual TLS (mTLS) authentication and encryptio",0.7166,grounded,,
+Q170,What is a Kubernetes Secret and how is it different from a ConfigMap?,I could not find relevant information in the available documents.,0.2997,ungrounded,,
+Q098,What does the SCALE_CONTROLLER_LOGGING_ENABLED setting do in Azure Functions?,The `SCALE_CONTROLLER_LOGGING_ENABLED` setting in Azure Functions controls logging from the Azure Functions scale controller. It enables the scale controller to emit logs to either Application Insight,0.8447,grounded,,
+Q032,"For non-HTTP triggers in Azure Functions, how often can new instances be allocated at most?","For non-HTTP triggers in Azure Functions, new instances are allocated at most once every 30 seconds.",0.6292,grounded,,
+Q013,What session type would you use in Azure Container Apps if you need to run workloads in a language not supported by the built-in container?,You would use a custom container session in Azure Container Apps if you need to run workloads in a language not supported by the built-in container. Custom container sessions allow you to create your ,0.5997,partially_grounded,,
+Q036,How many free vCPU-seconds does Azure Container Apps provide per subscription each calendar month?,"Azure Container Apps provides the first 180,000 vCPU-seconds free per subscription each calendar month.",0.6146,grounded,,
+Q120,What does the visibilityTimeout setting control in Azure Functions queue triggers?,I could not find relevant information in the available documents.,0.6088,grounded,,
+Q043,What setting must be enabled on an App Service plan to prevent the Azure Functions runtime from going idle?,The **Always on** setting must be enabled on an App Service plan to prevent the Azure Functions runtime from going idle.,0.6104,grounded,,
+Q190,How does the Python GIL affect multithreaded programs?,I could not find relevant information in the available documents.,0.6251,grounded,,
+Q091,What port does the Dapr sidecar expose its API on by default in Azure Container Apps?,"The Dapr sidecar exposes its API on port 3500 by default in Azure Container Apps. This is indicated by the service invocation URL format:
+
+```
+http://localhost:3500/v1.0/invoke/<DAPR_APP_ID>/method/<M",0.7261,grounded,,
+Q137,What does the initialBatchSizeOverride setting do in an Azure Functions Event Hubs trigger?,I could not find relevant information in the available documents.,0.608,grounded,,
+Q052,Where do all container apps within the same Azure Container Apps environment send their logs by default?,"By default, all container apps within the same Azure Container Apps environment send their logs to a common Log Analytics workspace.",0.7433,grounded,,
+Q128,What does enabling ingress on an Azure Container App do?,"Enabling ingress on an Azure Container App exposes the app to HTTP traffic coming from outside the container. The built-in HTTP ingress acts as an intermediary between your app and the end user, handl",0.8453,grounded,,
+Q163,What is a Kubernetes Service and what types are available?,I could not find relevant information in the available documents.,0.3007,ungrounded,,
+Q042,Does Azure Functions support Free and Shared tier App Service plans?,"No, Azure Functions does not support Free and Shared tier App Service plans. For a lower-cost hosting option, you should consider the Consumption plan or the Flex Consumption plan instead.",0.6658,grounded,,
+Q119,What is the route parameter name used by default in an Azure Functions HTTP trigger URL?,I could not find relevant information in the available documents.,0.6006,grounded,,
+Q114,How do you connect two Azure Container Apps so they can communicate with each other?,"To connect two Azure Container Apps so they can communicate with each other, you deploy both apps within the same Azure Container Apps environment. The platform provides built-in service discovery and",0.8613,grounded,,
+Q027,What file share protocol does the Flex Consumption plan support for mounting Azure Files shares?,The Flex Consumption plan supports only the SMB (Server Message Block) protocol for mounting Azure Files shares.,0.677,grounded,,
+Q140,What is the purpose of the consumer group setting in an Azure Functions Event Hubs trigger?,I could not find relevant information in the available documents.,0.3084,ungrounded,,
+Q101,What HTTP methods does an Azure Functions HTTP trigger support by default?,I could not find relevant information in the available documents.,0.595,partially_grounded,,
+Q112,What container registries can you use to pull images into Azure Container Apps?,"You can use the following container registries to pull images into Azure Container Apps:
+
+1. Azure Container Registry (ACR)  
+2. Private container registries (such as Docker Hub) by providing credenti",0.8044,grounded,,
+Q003,Which trigger types does the Azure Functions Go worker currently support?,"The Azure Functions Go worker currently supports the following trigger types:
+
+- HTTP trigger (`app.HTTP()`)
+- Timer trigger (`app.Timer()`)
+- Azure Cosmos DB trigger (`app.CosmosDB()`)
+- Azure Servic",0.5547,partially_grounded,,
+Q078,What happens to an Azure Container Apps environment that is in a failed state due to virtual network or Azure Policy configuration for more than 90 days?,An Azure Container Apps environment that is in a failed state due to virtual network or Azure Policy configuration for more than 90 days is automatically deleted.,0.7069,grounded,,
+Q047,What is a Container Apps environment in Azure Container Apps?,"A Container Apps environment in Azure Container Apps is a secure boundary around one or more container apps and jobs. The Container Apps runtime manages each environment by handling OS upgrades, scale",0.7951,grounded,,
+Q188,What is a Python decorator and how do you create one?,I could not find relevant information in the available documents.,0.3127,ungrounded,,
+Q192,How do you handle exceptions in Python using try except finally?,I could not find relevant information in the available documents about how to handle exceptions in Python using try except finally.,0.6173,grounded,,
+Q086,What does the WEBSITE_RUN_FROM_PACKAGE setting do in Azure Functions?,The `WEBSITE_RUN_FROM_PACKAGE` setting in Azure Functions enables your function app to run directly from a deployment package file. This package can be either locally mounted or deployed to an externa,0.6767,grounded,,
+Q162,How does Kubernetes handle rolling updates for a Deployment?,I could not find relevant information in the available documents.,0.6018,grounded,,
+Q037,How many free HTTP requests does Azure Container Apps provide per subscription each calendar month?,Azure Container Apps provides the first 2 million HTTP requests free per subscription each calendar month.,0.6098,grounded,,
+Q191,What is the difference between async and sync functions in Python?,I could not find relevant information in the available documents.,0.2903,ungrounded,,
+Q062,What type of Azure Storage account is required when creating a function app?,"When creating a function app, you must create or link to a general-purpose Azure Storage account that supports Blob, Queue, and Table storage. The storage account should be of a type supported by Azur",0.7567,grounded,,
+Q023,What instance memory sizes does the Flex Consumption plan offer?,"The Flex Consumption plan currently offers the following instance memory size options:
+
+- 512 MB
+- 2,048 MB (default for most scenarios)
+- 4,096 MB",0.78,grounded,,
+Q142,How does Azure Cosmos DB handle automatic failover across regions?,I could not find relevant information in the available documents.,0.6007,grounded,,
+Q102,What authorization level controls access to an Azure Functions HTTP trigger?,"The authorization level that controls access to an Azure Functions HTTP trigger depends on the type of access key used:
+
+- **Function** key: Allows access only to a specific function endpoint. The HTT",0.4501,partially_grounded,,
+Q034,What is the maximum number of event-based triggers the Azure Functions scale controller can monitor at once?,"The scale controller can monitor up to 100 event-based triggers at once to make scaling decisions. When an app has more than 100 event-based triggers, scaling decisions are based only on the first 100",0.6741,grounded,,
+Q012,What registration method does the Go worker use for an Azure Cosmos DB trigger?,The Go worker uses the registration method `app.CosmosDB()` for an Azure Cosmos DB trigger.,0.5791,partially_grounded,,
+Q195,What is the difference between is and == in Python?,I could not find relevant information in the available documents.,0.5997,partially_grounded,,
+Q160,What is the role of etcd in a Kubernetes cluster?,I could not find relevant information in the available documents.,0.6035,grounded,,
+Q007,What programming languages does the platform-managed built-in container in Azure Container Apps dynamic sessions support?,"The platform-managed built-in container in Azure Container Apps dynamic sessions supports all major language runtimes available in Azure Functions, including C#, JavaScript / TypeScript (Node.js), Pyt",0.7381,grounded,,
+Q028,What operating system does the Flex Consumption plan support?,The Flex Consumption plan supports Linux only.,0.6968,grounded,,
+Q121,What is the minimum number of partitions required in an Event Hub for Azure Functions to scale out?,I could not find relevant information in the available documents.,0.6026,grounded,,
+Q005,Where in the Azure portal do you add input and output bindings to an existing function?,"In the Azure portal, you add input and output bindings to an existing function in the **Integrate** tab for that given function.",0.6682,grounded,,
+Q033,What is the grace period for scale-in drain mode in the Flex Consumption plan?,The grace period for scale-in drain mode in the Flex Consumption plan is up to 60 minutes.,0.6401,grounded,,
+Q143,What is a partition key in Azure Cosmos DB and why is it important?,A partition key in Azure Cosmos DB is a property that defines how data is logically partitioned within a collection (or container). When creating a collection with the `CreateIfNotExists` option set t,0.6305,grounded,,
+Q146,What APIs does Azure Cosmos DB support for data access?,"Azure Cosmos DB supports data access through the following APIs:
+
+- SQL API (supported by Azure Cosmos DB bindings)
+- Azure Cosmos DB for MongoDB
+- Azure Cosmos DB for Apache Cassandra
+- Azure Cosmos ",0.7449,grounded,,
+Q110,What does the maxPollingInterval setting control in Azure Functions queue triggers?,I could not find relevant information about the maxPollingInterval setting in Azure Functions queue triggers in the available documents.,0.6093,grounded,,
+Q145,What are Request Units in Azure Cosmos DB?,I could not find relevant information about what Request Units in Azure Cosmos DB are in the available documents.,0.6145,grounded,,
+Q011,What is the registration method used in the Azure Functions Go worker for an HTTP trigger?,The registration method used in the Azure Functions Go worker for an HTTP trigger is `app.HTTP()`.,0.6095,grounded,,
+Q063,"To reduce latency, where should the storage account for an Azure Functions app be created?","To reduce latency, the storage account should be created in the same region as the function app.",0.6964,grounded,,
+Q113,What happens to containers in a revision when a new revision is deployed in Azure Container Apps?,"When a new revision is deployed in Azure Container Apps, the containers in the previous revision may be shut down if that revision is deactivated. During deactivation, the containers in the revision a",0.7549,grounded,,
+Q147,How does the change feed feature work in Azure Cosmos DB?,The change feed feature in Azure Cosmos DB works by publishing inserts and updates across partitions. It listens for new and updated items in the database but does not publish deletions. The Azure Cos,0.7397,grounded,,
+Q167,What is a DaemonSet in Kubernetes?,I could not find relevant information in the available documents.,0.3054,ungrounded,,
+Q001,What do you need to add to an existing Azure Function to connect it to other Azure services using bindings?,"To connect an existing Azure Function to other Azure services using bindings, you need to add specific binding definitions to your function. This involves updating the function code to include input o",0.9296,grounded,,
+Q199,How does Python handle multiple inheritance and what is MRO?,I could not find relevant information in the available documents.,0.6007,grounded,,
+Q154,How does Azure Cosmos DB index data by default?,I could not find relevant information in the available documents.,0.6019,grounded,,
+Q071,What DNS record type is used for an apex domain when adding a custom domain to Azure Container Apps?,The DNS record type used for an apex domain when adding a custom domain to Azure Container Apps is an **A record**.,0.6742,grounded,,
+Q124,What connection setting is required for an Azure Functions Event Hubs trigger?,"The connection setting required for an Azure Functions Event Hubs trigger is the `connection` property, which references an environment configuration containing the name of an application setting with",0.9509,grounded,,
+Q065,What is one benefit of running Azure Functions from a deployment package?,One benefit of running Azure Functions from a deployment package is that it reduces the risk of file copy locking problems.,0.6163,grounded,,
+Q045,What is an App Service Environment used for when hosting Azure Functions?,"An App Service Environment (ASE) is used for running Azure Functions in a fully isolated environment, allowing you to take advantage of higher numbers of instances than an App Service Plan. It provide",0.6984,grounded,,
+Q164,What does the kubectl apply command do in Kubernetes?,I could not find relevant information in the available documents.,0.6033,grounded,,
+Q029,What is the default maximum instance count for apps running in the Flex Consumption plan?,The default maximum instance count for apps running in the Flex Consumption plan is 100 overall instances.,0.8038,grounded,,
+Q041,What App Service plan tiers are supported for hosting Azure Functions in a dedicated plan?,"The dedicated App Service plan tiers supported for hosting Azure Functions include Basic, Standard, Premium, and Isolated SKUs. Azure Functions does not support Free and Shared tier App Service plans.",0.776,grounded,,
+Q109,What is the name of the poison queue created automatically for a queue named myqueue in Azure Functions?,I could not find relevant information in the available documents.,0.6005,grounded,,
+Q156,What is a Kubernetes pod?,A Kubernetes pod is an underlying unit on which your application runs in a Kubernetes cluster. The Kubernetes API provides information about these pods and their logs. Pods can be part of different ty,0.5761,partially_grounded,,
+Q157,What is the difference between a Deployment and a StatefulSet in Kubernetes?,I could not find relevant information in the available documents.,0.3125,ungrounded,,
+Q026,What is the minimum number of always-ready instances required when zone redundancy is enabled in the Flex Consumption plan?,The minimum number of always-ready instances required per function or function group when zone redundancy is enabled in the Flex Consumption plan is two.,0.6571,grounded,,
+Q024,What is the recommended default instance memory size for most Flex Consumption scenarios?,"The recommended default instance memory size for most Flex Consumption scenarios is 2,048 MB.",0.7094,grounded,,
+Q185,How do you pass environment variables to an AWS Lambda function?,I could not find relevant information in the available documents.,0.6476,grounded,,
+Q148,What is the difference between provisioned throughput and serverless mode in Azure Cosmos DB?,I could not find relevant information in the available documents.,0.6014,grounded,,
+Q082,What does setting AZURE_FUNCTIONS_ENVIRONMENT to Development do in Azure Functions?,Setting `AZURE_FUNCTIONS_ENVIRONMENT` to `Development` in Azure Functions configures the runtime to a development environment that supports more verbose logging and other reduced performance optimizat,0.6372,grounded,,
+Q040,"In Azure Container Apps Dedicated plan billing, what is billing based on?","In Azure Container Apps Dedicated plan billing, you are billed based on the instances allocated to each workload profile, not by individual applications.",0.605,grounded,,
+Q169,What is the maximum number of nodes in an AKS node pool?,I could not find relevant information in the available documents about the maximum number of nodes in an AKS node pool.,0.6005,grounded,,
+Q048,What are the two types of Azure Container Apps environments?,"The two types of Azure Container Apps environments are:
+
+1. Workload profiles environments (the default) - These support both the Consumption and Dedicated plans.
+2. Consumption only environments (leg",0.7723,grounded,,
+Q095,What must you configure if you want to use Azure Key Vault as a secret store with Dapr in Azure Container Apps?,"To use Azure Key Vault as a secret store with Dapr in Azure Container Apps, you must configure the following:
+
+1. **Create an Azure Key Vault** (if you don't have one):
+
+```azurecli
+az keyvault create",0.7744,grounded,,
+Q155,What is the difference between a database and a container in Azure Cosmos DB?,I could not find relevant information in the available documents.,0.6058,grounded,,
+Q044,How is billing calculated for Azure Functions running on a dedicated App Service plan?,"Billing for Azure Functions running on a dedicated App Service plan is calculated based on the App Service Plan itself. You pay for the plan as you would for other App Service resources, regardless of",0.681,grounded,,
+Q139,How can you verify that managed identity is working correctly in an Azure Container Apps deployment?,You can verify that managed identity is working correctly in an Azure Container Apps deployment by querying the Log Analytics workspace for console log messages from your container app. Follow these s,0.6394,grounded,,
+Q004,What tool can automatically add a binding to an existing function.json file when developing Azure Functions locally?,The Azure Functions extension in Visual Studio Code can automatically add a binding to an existing function.json file when developing Azure Functions locally.,0.7147,grounded,,
+Q106,How can you pass an API key to an Azure Functions HTTP trigger?,"You can pass an API key to an Azure Functions HTTP trigger either as a query parameter or in the request header:
+
+- As a query parameter using `?code=<HOST_KEY>` in the URL:
+```bash
+curl ""https://<FUN",0.6404,grounded,,
+Q054,What types of logs does an Azure Container Apps environment collect by default?,"By default, an Azure Container Apps environment collects the following types of logs:
+
+- Container `stdout`/`stderr` streams
+- Container app scaling events
+- Dapr sidecar logs (if Dapr is enabled)
+- S",0.7367,grounded,,
+Q134,What happens to a system-assigned managed identity when the container app is deleted?,I could not find relevant information in the available documents.,0.6064,grounded,,
+Q181,What is the AWS Lambda deployment package size limit?,I could not find relevant information in the available documents.,0.6008,grounded,,
+Q179,What event sources can trigger an AWS Lambda function?,I could not find relevant information in the available documents.,0.6094,grounded,,
+Q186,What is the difference between a list and a tuple in Python?,I could not find relevant information in the available documents.,0.2978,ungrounded,,
+Q050,What plan does a Consumption only environment support in Azure Container Apps?,A Consumption-only environment in Azure Container Apps supports the Consumption plan.,0.7906,grounded,,
+Q081,What does the AzureWebJobsStorage setting store in an Azure Functions app?,The AzureWebJobsStorage setting in an Azure Functions app stores the connection string for an Azure Storage account that the Functions runtime uses for normal operations. This storage account is used ,0.6077,grounded,,
+Q035,"In the Azure Container Apps Consumption plan, what are the two types of charges that make up the billing?","In the Azure Container Apps Consumption plan, the two types of charges that make up the billing are:
+
+1. Resource consumption charges: Based on the amount of resources allocated to your container app ",0.6114,grounded,,
+Q008,What is the purpose of dynamic sessions in Azure Container Apps?,I could not find relevant information in the available documents about the specific purpose of dynamic sessions in Azure Container Apps.,0.6422,grounded,,
+Q111,What is a container in Azure Container Apps?,"A container in Azure Container Apps is a packaged unit that wraps up your application and all its dependencies into a single, portable unit that can be run easily on any container platform. Azure Cont",0.8537,grounded,,
+Q092,What is a Dapr component in Azure Container Apps?,A Dapr component in Azure Container Apps is an environment-level resource that provides a pluggable abstraction model for connecting to supporting external services. These components can be shared acr,0.9058,grounded,,
+Q084,What does the FUNCTIONS_WORKER_RUNTIME setting control in Azure Functions?,"The FUNCTIONS_WORKER_RUNTIME setting controls the language or language stack of the worker runtime to load in the Azure Functions app. It specifies the language being used in the application, such as ",0.7346,grounded,,
