@@ -15,5 +15,12 @@ def query(question: str) -> dict:
     result["grv_label"] = grv_output["label"]
     result["grv_layer_scores"] = grv_output["layer_scores"]
     result["flagged"] = grv_output["score"] < 0.6
+
+    # Save individual layer scores as separate columns for analysis
+    layer_scores = grv_output["layer_scores"]
+    result["ragas_faithfulness"] = layer_scores.get("ragas_faithfulness", 0.0)
+    result["cross_encoder_score"] = layer_scores.get("cross_encoder", 0.0)
+    result["reranker_score"] = layer_scores.get("reranker", 0.0)
+
     log_result(result)
     return result

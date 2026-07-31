@@ -1,4 +1,7 @@
 # src/validator/layer_ragas.py
+import warnings
+import asyncio
+warnings.filterwarnings("ignore", category=RuntimeWarning)
 from ragas import evaluate
 from ragas.metrics import faithfulness
 from datasets import Dataset

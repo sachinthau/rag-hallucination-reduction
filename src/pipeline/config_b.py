@@ -39,7 +39,12 @@ def query(question: str) -> dict:
         "retrieved_chunks": [c.page_content for c in chunks],
         "latency_ms": latency_ms,
         "grv_score": None,
-        "grv_label": None
+        "grv_label": None,
+        "grv_layer_scores": None,
+        "flagged": None,
+        "ragas_faithfulness": None,
+        "cross_encoder_score": None,
+        "reranker_score": None,
     }
     log_result(result)
     return result
