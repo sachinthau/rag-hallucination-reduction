@@ -1,0 +1,245 @@
+{
+  "total_checked": 140,
+  "ok_count": 106,
+  "flagged_count": 34,
+  "issues": [
+    {
+      "id": "Q003",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.39 in ../data/corpus/azure-functions/add-bindings-existing-function.md (threshold 0.75)",
+      "question": "Which trigger types does the Azure Functions Go worker currently support?",
+      "recorded_passage": "The Go worker currently supports the following trigger types: HTTP, Timer, Azure Cosmos DB, Azure Service Bus Queue, Azure Service Bus Topic, Event Hu"
+    },
+    {
+      "id": "Q006",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.37 in ../data/corpus/container-apps/ai-integration.md (threshold 0.75)",
+      "question": "What GPU options does Azure Container Apps support for AI workloads?",
+      "recorded_passage": "Use GPU accelerated workload profiles to meet a variety of your AI workload needs, including: Serverless GPUs for variable traffic scenarios, Dedicate"
+    },
+    {
+      "id": "Q007",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.70 in ../data/corpus/container-apps/ai-integration.md (threshold 0.75)",
+      "question": "What programming languages does the platform-managed built-in container in Azure Container Apps dynamic sessions support?",
+      "recorded_passage": "Platform managed built-in containers: a platform-managed container that supports executing code in Python and Node.js"
+    },
+    {
+      "id": "Q011",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.68 in ../data/corpus/azure-functions/add-bindings-existing-function.md (threshold 0.75)",
+      "question": "What is the registration method used in the Azure Functions Go worker for an HTTP trigger?",
+      "recorded_passage": "HTTP trigger registration method: app.HTTP()"
+    },
+    {
+      "id": "Q012",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.53 in ../data/corpus/azure-functions/add-bindings-existing-function.md (threshold 0.75)",
+      "question": "What registration method does the Go worker use for an Azure Cosmos DB trigger?",
+      "recorded_passage": "Azure Cosmos DB trigger registration method: app.CosmosDB()"
+    },
+    {
+      "id": "Q015",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.62 in ../data/corpus/azure-functions/add-bindings-existing-function.md (threshold 0.75)",
+      "question": "What does the Event Grid trigger registration method look like in the Azure Functions Go worker?",
+      "recorded_passage": "Event Grid trigger registration method: app.EventGrid()"
+    },
+    {
+      "id": "Q019",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.63 in ../data/corpus/azure-functions/add-bindings-existing-function.md (threshold 0.75)",
+      "question": "What registration method does the Go worker in Azure Functions use for an Event Hubs trigger?",
+      "recorded_passage": "Event Hubs trigger registration method: app.EventHub()"
+    },
+    {
+      "id": "Q021",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.59 in ../data/corpus/azure-functions/flex-consumption-plan.md (threshold 0.75)",
+      "question": "What is the maximum number of scale-out instances allowed in the Flex Consumption plan?",
+      "recorded_passage": "Scale-out instances (max): Flex Consumption: 1,000 | Consumption: 200"
+    },
+    {
+      "id": "Q022",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.56 in ../data/corpus/azure-functions/flex-consumption-plan.md (threshold 0.75)",
+      "question": "Does the Flex Consumption plan support virtual network integration?",
+      "recorded_passage": "Virtual network support: Flex Consumption: Supported | Consumption: Not supported"
+    },
+    {
+      "id": "Q023",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.56 in ../data/corpus/azure-functions/flex-consumption-plan.md (threshold 0.75)",
+      "question": "What instance memory sizes does the Flex Consumption plan offer?",
+      "recorded_passage": "Instance Memory (MB) | CPU Cores: 512 | 0.25, 2048 | 1, 4096 | 2"
+    },
+    {
+      "id": "Q028",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.58 in ../data/corpus/azure-functions/flex-consumption-plan.md (threshold 0.75)",
+      "question": "What operating system does the Flex Consumption plan support?",
+      "recorded_passage": "Windows support: Flex Consumption: Linux only | Consumption: Yes"
+    },
+    {
+      "id": "Q035",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.69 in ../data/corpus/container-apps/billing.md (threshold 0.75)",
+      "question": "In the Azure Container Apps Consumption plan, what are the two types of charges that make up the billing?",
+      "recorded_passage": "Billing for apps running in the Consumption plan consists of two types of charges: Resource consumption and HTTP requests"
+    },
+    {
+      "id": "Q051",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.62 in ../data/corpus/container-apps/environment.md (threshold 0.75)",
+      "question": "When should you use multiple Azure Container Apps environments instead of a single one?",
+      "recorded_passage": "Use more than one environment when you want two or more applications to: Never share the same compute resources, Not communicate via the built-in Dapr"
+    },
+    {
+      "id": "Q053",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.68 in ../data/corpus/container-apps/environment.md (threshold 0.75)",
+      "question": "After how many days is an idle Azure Container Apps environment automatically deleted?",
+      "recorded_passage": "Azure Container Apps environments are automatically deleted if one of the following conditions persists for longer than 90 days: The environment is id"
+    },
+    {
+      "id": "Q054",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.74 in ../data/corpus/container-apps/environment.md (threshold 0.75)",
+      "question": "What types of logs does an Azure Container Apps environment collect by default?",
+      "recorded_passage": "These logs include: Container stdout/stderr streams, Container app scaling events, Dapr sidecar logs (if Dapr is enabled), System-level metrics and ev"
+    },
+    {
+      "id": "Q059",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.45 in ../data/corpus/container-apps/billing.md (threshold 0.75)",
+      "question": "What is the minimum billable execution period for the Azure Container Apps Consumption plan?",
+      "recorded_passage": "The minimum billable execution period for both execution modes is 1,000 ms"
+    },
+    {
+      "id": "Q061",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.62 in ../data/corpus/azure-functions/functions-best-practices.md (threshold 0.75)",
+      "question": "Which Azure Functions hosting plan is recommended for dynamic scale apps?",
+      "recorded_passage": "When possible, use the Flex Consumption plan to host your dynamic scale apps"
+    },
+    {
+      "id": "Q077",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.68 in ../data/corpus/container-apps/custom-domains-certificates.md (threshold 0.75)",
+      "question": "In Azure Container Apps, what TXT record must you create when validating an apex domain?",
+      "recorded_passage": "TXT record: host asuid, value: The domain verification code"
+    },
+    {
+      "id": "Q078",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.59 in ../data/corpus/container-apps/environment.md (threshold 0.75)",
+      "question": "What happens to an Azure Container Apps environment that is in a failed state due to virtual network or Azure Policy configuration for more than 90 days?",
+      "recorded_passage": "Azure Container Apps environments are automatically deleted if one of the following conditions persists for longer than 90 days: The environment is in"
+    },
+    {
+      "id": "Q079",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.75 in ../data/corpus/container-apps/custom-domains-certificates.md (threshold 0.75)",
+      "question": "Can you add a custom domain that contains the custom environment DNS suffix to an Azure Container Apps app?",
+      "recorded_passage": "If you configure a custom environment DNS suffix, you can't add a custom domain that contains this suffix to your container app"
+    },
+    {
+      "id": "Q080",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.75 in ../data/corpus/azure-functions/functions-best-practices.md (threshold 0.75)",
+      "question": "For a Premium plan EP2 Azure Function app, what starting value of FUNCTIONS_WORKER_PROCESS_COUNT is recommended?",
+      "recorded_passage": "The Premium plan EP2 provides two cores, so you should start with a value of 2 and increase by two as needed, up to the maximum"
+    },
+    {
+      "id": "Q082",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.72 in ../data/corpus/azure-functions/functions-app-settings.md (threshold 0.75)",
+      "question": "What does setting AZURE_FUNCTIONS_ENVIRONMENT to Development do in Azure Functions?",
+      "recorded_passage": "Development | A development environment supports more verbose logging and other reduced performance optimizations. The Azure Functions Core Tools sets"
+    },
+    {
+      "id": "Q089",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.44 in ../data/corpus/container-apps/dapr-overview.md (threshold 0.75)",
+      "question": "How is Dapr enabled for a container app in Azure Container Apps?",
+      "recorded_passage": "Dapr is enabled through a simple configuration on the container app resource. The Container Apps platform manages the Dapr sidecar and keeps it up to "
+    },
+    {
+      "id": "Q091",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.52 in ../data/corpus/container-apps/dapr-overview.md (threshold 0.75)",
+      "question": "What port does the Dapr sidecar expose its API on by default in Azure Container Apps?",
+      "recorded_passage": "The Dapr sidecar listens on port 3500 for HTTP and port 50001 for gRPC by default"
+    },
+    {
+      "id": "Q092",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.48 in ../data/corpus/container-apps/dapr-overview.md (threshold 0.75)",
+      "question": "What is a Dapr component in Azure Container Apps?",
+      "recorded_passage": "Dapr components are modular units of functionality that your container apps can use. Components can be state stores, pub/sub brokers, secret stores, a"
+    },
+    {
+      "id": "Q095",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.45 in ../data/corpus/container-apps/dapr-overview.md (threshold 0.75)",
+      "question": "What must you configure if you want to use Azure Key Vault as a secret store with Dapr in Azure Container Apps?",
+      "recorded_passage": "To use Azure Key Vault as a secret store, configure a managed identity on the container app and a Dapr secret store component"
+    },
+    {
+      "id": "Q101",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.66 in ../data/corpus/container-apps/functions-secrets-app-level.md (threshold 0.75)",
+      "question": "What two options does Azure Container Apps provide for storing app-level secrets for Azure Functions?",
+      "recorded_passage": "Azure Container Apps gives you two ways to store app-level secrets: Container Apps secrets, Key Vault references"
+    },
+    {
+      "id": "Q107",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.73 in ../data/corpus/container-apps/gpu-types.md (threshold 0.75)",
+      "question": "How much GPU memory does the NVIDIA T4 have compared to the A100 in Azure Container Apps?",
+      "recorded_passage": "GPU Memory | 16GB VRAM | 80GB HBM2/HBM2e"
+    },
+    {
+      "id": "Q110",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.75 in ../data/corpus/container-apps/billing.md (threshold 0.75)",
+      "question": "What compute instance type does each custom container session pool run on in Azure Container Apps dynamic sessions?",
+      "recorded_passage": "Each custom container session pool runs on dedicated E16 compute instances."
+    },
+    {
+      "id": "Q114",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.49 in ../data/corpus/container-apps/connect-apps.md (threshold 0.75)",
+      "question": "How do you connect two Azure Container Apps so they can communicate with each other?",
+      "recorded_passage": "You can connect container apps using built-in service discovery through the container app name as hostname, or via Dapr service invocation using the D"
+    },
+    {
+      "id": "Q116",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.57 in ../data/corpus/container-apps/connect-apps.md (threshold 0.75)",
+      "question": "What format is used as the hostname when one container app calls another within the same Azure Container Apps environment?",
+      "recorded_passage": "The container app name is used directly as the hostname when calling another app within the same environment"
+    },
+    {
+      "id": "Q118",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.39 in ../data/corpus/container-apps/containers.md (threshold 0.75)",
+      "question": "What CPU and memory combination is the minimum allowed per container app on the Consumption plan in Azure Container Apps?",
+      "recorded_passage": "0.25 | 0.5Gi"
+    },
+    {
+      "id": "Q124",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.69 in ../data/corpus/container-apps/authentication.md (threshold 0.75)",
+      "question": "What is the sign-in endpoint path for the Microsoft identity platform in Azure Container Apps built-in authentication?",
+      "recorded_passage": "Microsoft identity platform | `/.auth/login/aad`"
+    },
+    {
+      "id": "Q137",
+      "issue": "PASSAGE_MISMATCH",
+      "detail": "Best fuzzy match score 0.53 in ../data/corpus/container-apps/cold-start.md (threshold 0.75)",
+      "question": "According to Azure Container Apps guidance, what should you do to reduce cold-start times for images with large machine learning models?",
+      "recorded_passage": "Whenever possible, reduce the size of these images as much as possible and eliminate any use of unnecessary libraries. Use storage mounts to hold crit"
+    }
+  ]
+}

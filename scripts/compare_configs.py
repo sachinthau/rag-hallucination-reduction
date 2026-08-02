@@ -1,8 +1,10 @@
 import sys
 import os
+
+from scripts.src.pipeline import config_a, config_b
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import json
-from src.pipeline import config_a, config_b, config_c
+from scripts.src.pipeline import config_c
 
 def compare(question: str):
     print("=" * 70)
@@ -51,7 +53,7 @@ Please evaluate:
 """)
 
     # Save to file for easy copying
-    with open("logs/comparison_output.txt", "a", encoding="utf-8") as f:
+    with open("results/comparison_output.txt", "a", encoding="utf-8") as f:
         f.write(f"\nQUESTION: {question}\n")
         f.write(f"A: {result_a['answer']}\n")
         f.write(f"B: {result_b['answer']}\n")

@@ -2,7 +2,7 @@
 calculate_metrics.py
 ====================
 Run this script after:
-  1. Completing the full evaluation run (python -m src.evaluation.runner)
+  1. Completing the full evaluation run
   2. Manually annotating 100-150 Config C responses
 
 Usage:
@@ -14,6 +14,17 @@ Outputs:
     - Hallucination rate per configuration
     - Full summary table printed to terminal
     - Results saved to logs/metrics_summary.json
+
+UPDATED: Config C responses now go through one of two scoring paths:
+  - "standard_three_layer": 0-1 weighted hybrid score (cross-encoder,
+    RAGAS, reranker)
+  - "abstention_verification": raw Azure AI Search semantic reranker score
+    (~1.0-4.0+), used only for refusal-type answers
+These two scales are NOT comparable, so avg_grv_score is now reported
+separately per scoring path instead of as one blended (and previously
+meaningless) average across both. Older results files without a
+scoring_path column are treated as entirely "standard_three_layer" for
+backward compatibility.
 """
 
 import os
@@ -31,29 +42,29 @@ from sklearn.metrics import (
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-# ── File paths ────────────────────────────────────────────────────────────────
-RESULTS_A   = "logs/results_config_A.csv"
-RESULTS_B   = "logs/results_config_B.csv"
-RESULTS_C   = "logs/results_config_C.csv"
-ANNOTATIONS = "data/annotation_template.csv"
-OUTPUT_JSON = "logs/metrics_summary.json"
+# -- File paths ----------------------------------------------------------------
+RESULTS_A   = "../results/results_config_A.csv"
+RESULTS_B   = "../results/results_config_B.csv"
+RESULTS_C   = "../results/results_config_C.csv"
+ANNOTATIONS = "../data/annotation_template.csv"
+QA_DATASET  = "../data/questions/qa_dataset.json"
+OUTPUT_JSON = "../logs/metrics_summary.json"
 
-# ── Label mappings ────────────────────────────────────────────────────────────
-# Binary: 1 = hallucinated (ungrounded or partially_grounded), 0 = grounded
+# -- Label mappings --------------------------------------------------------------
 def to_binary(label: str) -> int:
     if label in ("ungrounded", "partially_grounded"):
         return 1
     return 0
 
-def sep(char="─", width=70):
+def sep(char="-", width=70):
     print(char * width)
 
 def header(title):
-    sep("═")
+    sep("=")
     print(f"  {title}")
-    sep("═")
+    sep("=")
 
-# ── Hallucination rate ────────────────────────────────────────────────────────
+# -- Hallucination rate ----------------------------------------------------------
 def hallucination_rate(results_path: str, config: str) -> dict:
     if not os.path.exists(results_path):
         print(f"  WARNING: {results_path} not found. Run the evaluation first.")
@@ -69,36 +80,67 @@ def hallucination_rate(results_path: str, config: str) -> dict:
         grounded = len(df[df["grv_label"] == "grounded"])
         partial  = len(df[df["grv_label"] == "partially_grounded"])
         unground = len(df[df["grv_label"] == "ungrounded"])
-        avg_grv  = round(df["grv_score"].dropna().astype(float).mean(), 4)
-        return {
+
+        result = {
             "total": total,
             "grounded": grounded,
             "partially_grounded": partial,
             "ungrounded": unground,
             "hallucination_rate": rate,
-            "avg_grv_score": avg_grv
         }
+
+        # Split avg score by scoring path if the column exists
+        if "scoring_path" in df.columns:
+            std = df[df["scoring_path"] == "standard_three_layer"]
+            abst = df[df["scoring_path"] == "abstention_verification"]
+            if len(std) > 0:
+                result["avg_grv_score_standard_path"] = round(
+                    std["grv_score"].dropna().astype(float).mean(), 4
+                )
+                result["n_standard_path"] = len(std)
+            if len(abst) > 0:
+                result["avg_relevance_score_abstention_path"] = round(
+                    abst["grv_score"].dropna().astype(float).mean(), 4
+                )
+                result["n_abstention_path"] = len(abst)
+            # abstention flag breakdown, if present
+            if "abstention_flag" in df.columns:
+                flags = df["abstention_flag"].dropna()
+                if len(flags) > 0:
+                    result["correct_abstentions"] = int((flags == "correct_abstention").sum())
+                    result["suspected_retrieval_misses"] = int((flags == "retrieval_miss_suspected").sum())
+        else:
+            # Backward compatibility: no scoring_path column means this is
+            # an older results file where every row used the standard path.
+            result["avg_grv_score"] = round(df["grv_score"].dropna().astype(float).mean(), 4)
+
+        return result
     else:
-        # For A and B, no GRV labels - use answer length as rough proxy
-        # Real hallucination rate for A and B comes from human annotation
         return {
             "total": total,
             "note": "No GRV labels for this config. Hallucination rate from human annotation only."
         }
 
-# ── GRV performance against human annotations ─────────────────────────────────
+# -- GRV performance against human annotations ------------------------------------
 def grv_performance(results_path: str, annotations_path: str) -> dict:
     if not os.path.exists(results_path):
         print(f"  ERROR: {results_path} not found.")
         return {}
     if not os.path.exists(annotations_path):
         print(f"  ERROR: {annotations_path} not found.")
-        print("  Create data/annotation_template.csv with columns:")
-        print("  question_id, human_label (grounded/partially_grounded/ungrounded)")
         return {}
 
     results     = pd.read_csv(results_path)
-    annotations = pd.read_csv(annotations_path)
+
+    # annotation_template.csv is often re-saved through Excel/Numbers, which
+    # can write it as Windows-1252/Latin-1 rather than UTF-8, especially if
+    # it contains smart quotes, em-dashes, or other special characters typed
+    # or pasted during manual annotation. Try UTF-8 first, fall back cleanly.
+    try:
+        annotations = pd.read_csv(annotations_path, encoding="utf-8")
+    except UnicodeDecodeError:
+        print("  NOTE: annotation file is not valid UTF-8, retrying with cp1252 encoding...")
+        annotations = pd.read_csv(annotations_path, encoding="cp1252")
 
     if "question_id" not in results.columns or "question_id" not in annotations.columns:
         print("  ERROR: Both files need a question_id column to merge on.")
@@ -125,7 +167,6 @@ def grv_performance(results_path: str, annotations_path: str) -> dict:
     f1        = round(f1_score(human_binary, grv_binary, zero_division=0), 4)
     cm        = confusion_matrix(human_binary, grv_binary).tolist()
 
-    # Kappa interpretation
     if kappa >= 0.8:
         kappa_label = "Almost perfect agreement"
     elif kappa >= 0.6:
@@ -137,7 +178,7 @@ def grv_performance(results_path: str, annotations_path: str) -> dict:
     else:
         kappa_label = "Slight agreement"
 
-    return {
+    result = {
         "n_samples":        n,
         "cohens_kappa":     kappa,
         "kappa_label":      kappa_label,
@@ -148,7 +189,24 @@ def grv_performance(results_path: str, annotations_path: str) -> dict:
         "note": "Binary classification: 1=hallucinated (ungrounded/partial), 0=grounded"
     }
 
-# ── Per-category hallucination analysis ──────────────────────────────────────
+    # Optional: break down agreement by scoring path too, if available
+    if "scoring_path" in merged.columns:
+        for path_name in ("standard_three_layer", "abstention_verification"):
+            subset = merged[merged["scoring_path"] == path_name]
+            if len(subset) == 0:
+                continue
+            sub_grv = [to_binary(l) for l in subset["grv_label"].fillna("ungrounded")]
+            sub_human = [to_binary(l) for l in subset["human_label"].fillna("ungrounded")]
+            try:
+                sub_kappa = round(cohen_kappa_score(sub_human, sub_grv), 4)
+            except Exception:
+                sub_kappa = None
+            result[f"kappa_{path_name}"] = sub_kappa
+            result[f"n_{path_name}"] = len(subset)
+
+    return result
+
+# -- Per-category hallucination analysis -------------------------------------------
 def category_analysis(results_c_path: str, qa_dataset_path: str) -> dict:
     if not os.path.exists(results_c_path):
         return {}
@@ -190,34 +248,41 @@ def category_analysis(results_c_path: str, qa_dataset_path: str) -> dict:
 
     return category_stats
 
-# ── RAGAS scores summary ──────────────────────────────────────────────────────
+# -- RAGAS scores summary -----------------------------------------------------------
 def ragas_summary(results_path: str) -> dict:
+    """
+    NOTE: grv_score is intentionally EXCLUDED from this generic summary,
+    since it can now come from two different, non-comparable scales.
+    See hallucination_rate() for the correctly-separated grv_score
+    reporting by scoring_path.
+    """
     if not os.path.exists(results_path):
         return {}
     df = pd.read_csv(results_path)
     summary = {}
-    for col in ["ragas_faithfulness", "ragas_answer_relevance", "grv_score"]:
+    for col in ["ragas_faithfulness", "ragas_answer_relevance"]:
         if col in df.columns:
             vals = df[col].dropna().astype(float)
+            if len(vals) == 0:
+                continue
             summary[col] = {
                 "mean":   round(vals.mean(), 4),
                 "median": round(vals.median(), 4),
                 "min":    round(vals.min(), 4),
                 "max":    round(vals.max(), 4),
                 "std":    round(vals.std(), 4),
+                "n":      len(vals),
             }
     return summary
 
-# ── MAIN ──────────────────────────────────────────────────────────────────────
+# -- MAIN ----------------------------------------------------------------------------
 def main():
-    header("RAG Hallucination Reduction — Metrics Calculator")
+    header("RAG Hallucination Reduction - Metrics Calculator")
     print(f"  Dissertation: K.G. Sachintha Udara | MSc Advanced Software Engineering")
-    print(f"  Date: June 2026")
     sep()
 
     all_metrics = {}
 
-    # 1. Hallucination rates per configuration
     header("1. Hallucination Rate Per Configuration")
     for cfg, path in [("A", RESULTS_A), ("B", RESULTS_B), ("C", RESULTS_C)]:
         print(f"\n  Config {cfg}:")
@@ -225,23 +290,22 @@ def main():
         all_metrics[f"config_{cfg}_stats"] = stats
         if stats:
             for k, v in stats.items():
-                print(f"    {k:<30} {v}")
+                print(f"    {k:<40} {v}")
 
-    # 2. GRV Performance vs Human Annotations
     header("2. GRV Validator Performance (Cohen's Kappa)")
     perf = grv_performance(RESULTS_C, ANNOTATIONS)
     all_metrics["grv_performance"] = perf
     if perf:
-        sep("─", 50)
+        sep("-", 50)
         print(f"  {'Metric':<30} {'Value':>15}")
-        sep("─", 50)
+        sep("-", 50)
         print(f"  {'Samples annotated':<30} {perf.get('n_samples', 'N/A'):>15}")
         print(f"  {'Cohen Kappa':<30} {perf.get('cohens_kappa', 'N/A'):>15}")
         print(f"  {'Kappa interpretation':<30} {perf.get('kappa_label', 'N/A'):>15}")
         print(f"  {'Precision':<30} {perf.get('precision', 'N/A'):>15}")
         print(f"  {'Recall':<30} {perf.get('recall', 'N/A'):>15}")
         print(f"  {'F1 Score':<30} {perf.get('f1_score', 'N/A'):>15}")
-        sep("─", 50)
+        sep("-", 50)
         print(f"\n  Confusion Matrix (rows=human, cols=GRV):")
         cm = perf.get("confusion_matrix", [])
         if cm:
@@ -249,7 +313,13 @@ def main():
             print(f"  Human:Grounded    {cm[0][0]:<14} {cm[0][1]:<14}")
             print(f"  Human:Hallucinated {cm[1][0]:<13} {cm[1][1]:<14}")
 
-        # Kappa threshold check
+        if "kappa_standard_three_layer" in perf or "kappa_abstention_verification" in perf:
+            print(f"\n  Agreement by scoring path:")
+            if "kappa_standard_three_layer" in perf:
+                print(f"    Standard three-layer (n={perf.get('n_standard_three_layer')}): Kappa = {perf['kappa_standard_three_layer']}")
+            if "kappa_abstention_verification" in perf:
+                print(f"    Abstention verification (n={perf.get('n_abstention_verification')}): Kappa = {perf['kappa_abstention_verification']}")
+
         kappa = perf.get("cohens_kappa", 0)
         print()
         if kappa >= 0.6:
@@ -257,18 +327,18 @@ def main():
         else:
             print(f"  RESULT: Cohen Kappa {kappa} < 0.6 threshold. GRV reliability needs review.")
 
-    # 3. Category breakdown
     header("3. Hallucination Rate by Category (Config C)")
-    cats = category_analysis(RESULTS_C, "data/questions/qa_dataset.json")
+    cats = category_analysis(RESULTS_C, QA_DATASET)
     all_metrics["category_analysis"] = cats
     if cats:
         print(f"\n  {'Category':<40} {'Total':>7} {'Halluci.':>10} {'Rate':>8} {'Corpus'}")
-        sep("─", 75)
+        sep("-", 75)
         for cat, stats in sorted(cats.items()):
             corpus = "In" if stats.get("in_corpus") else "Out"
             print(f"  {cat:<40} {stats['total']:>7} {stats['hallucinated']:>10} {stats['hallucination_rate']:>8.2%} {corpus:>6}")
+    else:
+        print("\n  WARNING: No category data found.")
 
-    # 4. RAGAS scores
     header("4. RAGAS Score Summary (Config C)")
     ragas = ragas_summary(RESULTS_C)
     all_metrics["ragas_summary"] = ragas
@@ -277,76 +347,21 @@ def main():
             print(f"\n  {metric}:")
             for k, v in stats.items():
                 print(f"    {k:<10} {v}")
+    print("\n  NOTE: grv_score is reported separately by scoring path in")
+    print("  Section 1 above (standard_three_layer vs abstention_verification),")
+    print("  since these use different, non-comparable scales.")
 
-    # 5. Trade-off summary
     header("5. Trade-off Summary (Answers Sub-RQ3)")
     print(f"""
   Sub-RQ3: How does adding the post-generation validation step affect
   response latency, and is the trade-off acceptable?
-
-  Configuration comparison:
-  {'Config':<20} {'Avg Latency':>14} {'Hallucination':>15} {'GRV Score':>12}
-  {'A: Baseline LLM':<20} {'~5,000ms':>14} {'High (no GRV)':>15} {'N/A':>12}
-  {'B: RAG Pipeline':<20} {'~9,500ms':>14} {'Low (RAG)':>15} {'N/A':>12}
-  {'C: RAG + GRV':<20} {'~9,200ms':>14} {'Lower (validated)':>15} {'0.88-0.91':>12}
-
-  Finding: Config C adds negligible net latency over Config B because
-  GRV Layers 1 and 3 run locally and finish while RAGAS API call
-  is still processing in parallel. The trade-off is acceptable.
 """)
 
-    # Save results
-    os.makedirs("logs", exist_ok=True)
+    os.makedirs("../logs", exist_ok=True)
     with open(OUTPUT_JSON, "w") as f:
         json.dump(all_metrics, f, indent=2, default=str)
     print(f"  Full metrics saved to {OUTPUT_JSON}")
-    sep("═")
+    sep("=")
 
 if __name__ == "__main__":
     main()
-
-
-# ── Annotation template generator ─────────────────────────────────────────────
-def generate_annotation_template(results_c_path: str, output_path: str, n_samples: int = 150):
-    """
-    Generates a CSV template for manual annotation.
-    Run this after the evaluation to get a pre-filled template.
-
-    Usage:
-        from calculate_metrics import generate_annotation_template
-        generate_annotation_template(
-            "logs/results_config_C.csv",
-            "data/annotation_template.csv",
-            n_samples=150
-        )
-    """
-    if not os.path.exists(results_c_path):
-        print(f"ERROR: {results_c_path} not found. Run evaluation first.")
-        return
-
-    df = pd.read_csv(results_c_path)
-
-    # Sample randomly
-    sample = df.sample(n=min(n_samples, len(df)), random_state=42)
-
-    template = pd.DataFrame({
-        "question_id":   sample.get("question_id", ""),
-        "question":      sample.get("question", ""),
-        "answer_preview": sample.get("answer", "").astype(str).str[:200],
-        "grv_score":     sample.get("grv_score", ""),
-        "grv_label":     sample.get("grv_label", ""),
-        "human_label":   "",   # Fill this in manually
-        "notes":         ""    # Optional notes
-    })
-
-    template.to_csv(output_path, index=False)
-    print(f"Annotation template saved to {output_path}")
-    print(f"Rows to annotate: {len(template)}")
-    print()
-    print("Instructions:")
-    print("  Open the CSV in Excel or Numbers")
-    print("  For each row, fill in the human_label column with one of:")
-    print("    grounded          - answer is fully supported by retrieved docs")
-    print("    partially_grounded - some claims supported, some not")
-    print("    ungrounded        - answer is not supported by retrieved docs")
-    print("  Save and run: python calculate_metrics.py")

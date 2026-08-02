@@ -1,0 +1,13 @@
+{
+  "tau": 2.8514,
+  "percentile_used": 10,
+  "n_calibration_questions": 140,
+  "score_distribution": {
+    "min": 2.5136,
+    "p10": 2.8514,
+    "p25": 3.0079,
+    "median": 3.1907,
+    "p75": 3.3876,
+    "max": 3.6674
+  }
+}

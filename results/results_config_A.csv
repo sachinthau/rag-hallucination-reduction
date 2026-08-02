@@ -1,0 +1,1554 @@
+question_id,expected_answer,source_doc,in_corpus,category,config,question,answer,retrieved_chunks,latency_ms,grv_score,grv_label,grv_layer_scores,flagged,ragas_faithfulness,cross_encoder_score,reranker_score
+Q001,You need to add specific binding definitions in your function code or configuration file,azure-functions/add-bindings-existing-function.md,True,azure_functions_bindings,A,What do you need to add to an existing Azure Function to connect it to other Azure services using bindings?,"To connect an existing Azure Function to other Azure services using bindings, you need to add the appropriate **binding configuration** to the function's **function.json** file (for script-based functions) or use **binding attributes** in the function code (for C# class libraries). This includes specifying the binding type, direction (input or output), and connection details.
+
+Additionally, you may need to:
+
+- Add the necessary **extension packages** (e.g., NuGet packages) for the specific Azure service bindings.
+- Configure connection strings or settings in the **local.settings.json** (for local development) or in the **Application Settings** of the Azure Function App in the Azure portal.
+
+In summary, you add the required binding configuration and ensure the function app has the necessary extensions and connection settings to connect to other Azure services.",[],2413,,,,,,,
+Q002,Queue Storage output bindings are not yet supported in the Go worker. You need to use the Azure SDK for Go directly to interact with Queue Storage,azure-functions/add-bindings-existing-function.md,True,azure_functions_bindings,A,How does the Go worker in Azure Functions handle output bindings like Queue Storage?,"In Azure Functions using the Go worker, output bindings such as Queue Storage are handled by the Go worker runtime through the function's return values or context, which the worker then serializes and sends back to the Azure Functions host.
+
+Specifically for Queue Storage output bindings:
+
+- Your Go function returns a value (e.g., a string, struct, or byte array) that represents the message to be placed on the queue.
+- The function signature typically includes a context and input parameters, and the output binding is configured in the function.json file.
+- When the function completes, the Go worker serializes the return value and sends it to the Azure Functions host.
+- The host then writes this data to the configured Queue Storage output binding.
+
+Example:
+
+```go
+func Handle(ctx context.Context, input string) (string, error) {
+    // Process input and produce output message
+    outputMessage := ""Processed: "" + input
+    return outputMessage, nil
+}
+```
+
+In the corresponding function.json, you define the output binding:
+
+```json
+{
+  ""bindings"": [
+    {
+      ""type"": ""queueTrigger"",
+      ""name"": ""input"",
+      ""queueName"": ""input-queue"",
+      ""connection"": ""AzureWebJobsStorage"",
+      ""direction"": ""in""
+    },
+    {
+      ""type"": ""queue"",
+      ""name"": ""$return"",
+      ""queueName"": ""output-queue"",
+      ""connection"": ""AzureWebJobsStorage"",
+      ""direction"": ""out""
+    }
+  ]
+}
+```
+
+Here, the Go worker uses the function's return value as the output binding message.
+
+In summary, the Go worker handles output bindings by serializing the function's return value or designated output parameters and passing them back to the Azure Functions host, which then writes to the configured output binding like Queue Storage.",[],3221,,,,,,,
+Q003,"HTTP, Timer, Azure Cosmos DB, Azure Service Bus Queue, Azure Service Bus Topic, Event Hubs, Event Grid, and Blob Storage",azure-functions/add-bindings-existing-function.md,True,azure_functions_bindings,A,Which trigger types does the Azure Functions Go worker currently support?,"As of now, the Azure Functions Go worker supports the following trigger types:
+
+- HTTP Trigger
+- Timer Trigger
+- Blob Trigger
+- Queue Trigger
+
+These are the primary triggers supported for Go functions in Azure Functions. Other trigger types may not yet be supported or may require custom implementations.",[],1837,,,,,,,
+Q004,The Azure Functions extension in Visual Studio Code can automatically add a binding to an existing function.json file,azure-functions/add-bindings-existing-function.md,True,azure_functions_bindings,A,What tool can automatically add a binding to an existing function.json file when developing Azure Functions locally?,"The Azure Functions Core Tools can automatically add a binding to an existing `function.json` file when developing Azure Functions locally. Specifically, using the `func` CLI commands (such as `func new` or `func extensions install`) helps manage and update bindings in your local function project.",[],1821,,,,,,,
+Q005,In the Integrate tab for a given function in the Azure portal,azure-functions/add-bindings-existing-function.md,True,azure_functions_bindings,A,Where in the Azure portal do you add input and output bindings to an existing function?,"In the Azure portal, to add input and output bindings to an existing Azure Function, you navigate to the Function App, then:
+
+1. Go to your Function App and select the specific function you want to configure.
+2. In the function's menu, click on **""Integration""**.
+3. Under the **""Inputs""** and **""Outputs""** sections, you can add new bindings by clicking **""+ Add input""** or **""+ Add output""**.
+4. Configure the binding settings as needed and save.
+
+This is where you manage the input and output bindings for your function within the Azure portal.",[],2117,,,,,,,
+Q006,"Serverless GPUs for variable traffic and cost-sensitive inference, dedicated GPUs for continuous low-latency inference, and scale to zero to minimize costs",container-apps/ai-integration.md,True,container_apps_ai,A,What GPU options does Azure Container Apps support for AI workloads?,"As of now, Azure Container Apps does not natively support GPU-enabled containers for AI workloads. If you require GPU capabilities for AI or machine learning workloads, you should consider using other Azure services such as:
+
+- **Azure Kubernetes Service (AKS)** with GPU-enabled nodes
+- **Azure Machine Learning** with GPU compute targets
+- **Azure Virtual Machines** with GPU SKUs
+
+These services provide direct access to GPU resources suitable for AI workloads. For the latest updates, always check the official Azure Container Apps documentation.",[],2318,,,,,,,
+Q007,Python and Node.js,container-apps/ai-integration.md,True,container_apps_ai,A,What programming languages does the platform-managed built-in container in Azure Container Apps dynamic sessions support?,"The platform-managed built-in container in Azure Container Apps dynamic sessions supports the following programming languages:
+
+- Node.js
+- Python
+- .NET (C#)
+
+These languages are supported to enable quick development and testing within dynamic sessions.",[],1767,,,,,,,
+Q008,"Dynamic sessions provide a secure isolated environment for executing AI-generated code, suitable for sandboxed execution, code evaluation and AI agents",container-apps/ai-integration.md,True,container_apps_ai,A,What is the purpose of dynamic sessions in Azure Container Apps?,"The purpose of dynamic sessions in Azure Container Apps is to enable stateful interactions by maintaining session state across multiple requests within a container app. This allows applications to handle user sessions dynamically, supporting scenarios where session data needs to be preserved temporarily during the interaction, such as user authentication, shopping carts, or other stateful workflows, without requiring external state management services.",[],1891,,,,,,,
+Q009,"Azure Container Apps integrates with Foundry to enable deploying curated AI models directly into containerized environments, simplifying model deployment and management",container-apps/ai-integration.md,True,container_apps_ai,A,How does Azure Container Apps integrate with Microsoft Foundry models?,"As of now, there is no publicly available information indicating a direct or native integration between Azure Container Apps and Microsoft Foundry models. Azure Container Apps is a service for running containerized applications in a serverless environment, while Microsoft Foundry is a platform focused on data management and analytics.
+
+If you want to use Microsoft Foundry models within Azure Container Apps, you would typically:
+
+1. Expose the Foundry models via APIs or services.
+2. Deploy your containerized application in Azure Container Apps.
+3. Have your containerized app call the Foundry model APIs to perform inference or data processing.
+
+This approach leverages standard API communication rather than a built-in integration.
+
+If you are referring to a specific new feature or product named ""Microsoft Foundry models,"" please provide more details or check the latest Microsoft documentation for updates.",[],2347,,,,,,,
+Q010,A serverless container platform that simplifies the deployment and scaling of microservices and AI-powered applications,container-apps/ai-integration.md,True,container_apps_ai,A,What kind of platform is Azure Container Apps described as in the context of AI integration?,"Azure Container Apps is described as a serverless container platform that enables developers to build and deploy containerized applications, including AI-powered applications, without managing infrastructure.",[],2208,,,,,,,
+Q011,app.HTTP(),azure-functions/add-bindings-existing-function.md,True,azure_functions_go,A,What is the registration method used in the Azure Functions Go worker for an HTTP trigger?,"In the Azure Functions Go worker, the registration of an HTTP trigger is done by defining a function with the appropriate signature and then registering it with the Azure Functions runtime using the Go worker SDK.
+
+Specifically, the Go worker uses the `func` package where you register your function by calling `func.Register` with the function name and a handler function. For an HTTP trigger, the handler function receives an `*func.Context` and an `*func.HttpRequest`, and returns an `*func.HttpResponse` and an error.
+
+Example registration method for an HTTP trigger:
+
+```go
+import (
+    ""github.com/Azure/azure-functions-go/azfunc""
+)
+
+func main() {
+    azfunc.Register(""HttpTrigger"", func(ctx *azfunc.Context, req *azfunc.HttpRequest) (*azfunc.HttpResponse, error) {
+        // Your function logic here
+        return &azfunc.HttpResponse{
+            StatusCode: 200,
+            Body:       []byte(""Hello from Go HTTP trigger!""),
+        }, nil
+    })
+
+    azfunc.Start()
+}
+```
+
+So, the registration method is `azfunc.Register(functionName string, handler func(*azfunc.Context, *azfunc.HttpRequest) (*azfunc.HttpResponse, error))`.
+
+In summary:  
+**The Azure Functions Go worker registers an HTTP trigger by calling `azfunc.Register` with the function name and a handler function that takes an HTTP request and returns an HTTP response.**",[],3267,,,,,,,
+Q012,app.CosmosDB(),azure-functions/add-bindings-existing-function.md,True,azure_functions_go,A,What registration method does the Go worker use for an Azure Cosmos DB trigger?,"The Go worker for Azure Functions uses attribute-based registration for an Azure Cosmos DB trigger. Specifically, it registers the Cosmos DB trigger by decorating the function with the appropriate trigger attribute (e.g., `cosmosDBTrigger` in the function.json or equivalent in code) that specifies the database, collection, lease collection, and connection details. This declarative registration enables the Go worker runtime to bind the function to the Cosmos DB change feed trigger.",[],1940,,,,,,,
+Q013,"Custom containers, which allow you to create a sessions pool using a custom container for specialized workloads or additional language support",container-apps/ai-integration.md,True,container_apps_ai,A,What session type would you use in Azure Container Apps if you need to run workloads in a language not supported by the built-in container?,"In Azure Container Apps, if you need to run workloads in a language not supported by the built-in container, you would use a **Custom Container** session type. This allows you to bring your own container image with the runtime and dependencies required for your specific language or workload.",[],2182,,,,,,,
+Q014,Binding-specific attributes to the function definition in code,azure-functions/add-bindings-existing-function.md,True,azure_functions_bindings,A,"When adding a binding to a C# Azure Function, what do you need to add to the function definition?","When adding a binding to a C# Azure Function, you need to add an attribute to the function method's parameters (or to the method itself, depending on the binding type) that specifies the binding type and its configuration. This attribute defines the input or output binding.
+
+For example, for an input binding like a BlobTrigger, you add an attribute such as `[BlobTrigger(""container/{name}"")]` to a parameter:
+
+```csharp
+[FunctionName(""MyFunction"")]
+public static void Run(
+    [BlobTrigger(""mycontainer/{name}"")] Stream myBlob, string name, ILogger log)
+{
+    // Function code
+}
+```
+
+Similarly, for an output binding, you add an attribute to an output parameter:
+
+```csharp
+[FunctionName(""MyFunction"")]
+public static void Run(
+    [TimerTrigger(""0 */5 * * * *"")] TimerInfo myTimer,
+    [Queue(""myqueue"")] out string queueMessage,
+    ILogger log)
+{
+    queueMessage = ""Hello from function!"";
+}
+```
+
+In summary, to add a binding, you add the corresponding binding attribute to the function method's parameters or method definition, specifying the binding type and its configuration.",[],2813,,,,,,,
+Q015,app.EventGrid(),azure-functions/add-bindings-existing-function.md,True,azure_functions_go,A,What does the Event Grid trigger registration method look like in the Azure Functions Go worker?,"In the Azure Functions Go worker, the Event Grid trigger is registered by specifying the function signature to accept an `eventgrid.Event` parameter and using the `func` package to register the function with the trigger type `""eventGridTrigger""`.
+
+Here is an example of how the Event Grid trigger registration looks in Go:
+
+```go
+package main
+
+import (
+    ""context""
+    ""fmt""
+    ""github.com/Azure/azure-functions-go/azfunc""
+    ""github.com/Azure/azure-functions-go/azfunc/eventgrid""
+)
+
+func main() {
+    azfunc.Start(func(ctx context.Context, event eventgrid.Event) error {
+        fmt.Printf(""Received Event Grid event: %+v\n"", event)
+        // Your event handling logic here
+        return nil
+    }, azfunc.WithTrigger(""eventGridTrigger""))
+}
+```
+
+**Explanation:**
+
+- The function passed to `azfunc.Start` has the signature `func(context.Context, eventgrid.Event) error`.
+- The trigger type is specified as `""eventGridTrigger""` using the `azfunc.WithTrigger` option.
+- The `eventgrid.Event` type represents the Event Grid event payload.
+
+This setup tells the Azure Functions Go worker runtime to invoke this function when an Event Grid event is received.",[],3004,,,,,,,
+Q016,Add binding-specific annotations to the function definition in code,azure-functions/add-bindings-existing-function.md,True,azure_functions_bindings,A,What is the recommended approach for a Java Azure Function when adding a binding to an existing function?,"The recommended approach for adding a binding to an existing Java Azure Function is to update the function method's annotations to include the new binding configuration. Specifically, you should:
+
+1. **Modify the function method signature and annotations:**  
+   - Add the new binding annotation (e.g., `@BlobOutput`, `@QueueOutput`, `@CosmosDBOutput`, etc.) alongside the existing trigger annotation (e.g., `@HttpTrigger`, `@TimerTrigger`).  
+   - Configure the binding properties (such as name, path, connection) within the annotation parameters.
+
+2. **Update the function.json (if applicable):**  
+   - When using the Azure Functions Maven plugin or Azure Functions Core Tools, the `function.json` file is auto-generated from the annotations. Ensure your annotations are correct so the binding is properly reflected.
+
+3. **Rebuild and redeploy the function:**  
+   - After updating the code, rebuild your project and redeploy the function to Azure.
+
+**Example:** Adding a Blob output binding to an existing HTTP-triggered function:
+
+```java
+@FunctionName(""HttpToBlobFunction"")
+public HttpResponseMessage run(
+    @HttpTrigger(name = ""req"", methods = {HttpMethod.GET}, authLevel = AuthorizationLevel.FUNCTION) HttpRequestMessage<Optional<String>> request,
+    @BlobOutput(name = ""outputBlob"", path = ""container/{rand-guid}.txt"", connection = ""AzureWebJobsStorage"") OutputBinding<String> outputBlob,
+    final ExecutionContext context) {
+
+    String content = ""Hello, Blob!"";
+    outputBlob.setValue(content);
+
+    return request.createResponseBuilder(HttpStatus.OK).body(""Blob written"").build();
+}
+```
+
+In summary, the recommended approach is to add the new binding annotation directly to the function method, configure it properly, and then rebuild and redeploy. This keeps the function code declarative and leverages the Azure Functions Java SDK's annotation-based binding model.",[],4159,,,,,,,
+Q017,Variable traffic scenarios and cost-sensitive inference workloads,container-apps/ai-integration.md,True,container_apps_ai,A,What type of AI workload scenario are serverless GPUs in Azure Container Apps best suited for?,"Serverless GPUs in Azure Container Apps are best suited for AI workload scenarios that require **inference at scale with variable or unpredictable demand**. This includes deploying machine learning models for real-time or batch inference where the workload can scale dynamically without the need to manage GPU infrastructure, enabling cost-efficient and scalable AI inference deployments.",[],1777,,,,,,,
+Q018,Continuous low-latency inference scenarios,container-apps/ai-integration.md,True,container_apps_ai,A,What type of AI workload scenario are dedicated GPUs in Azure Container Apps best suited for?,"Dedicated GPUs in Azure Container Apps are best suited for AI workload scenarios that require high-performance parallel processing, such as deep learning model training, inferencing, computer vision, natural language processing, and other compute-intensive AI tasks. These workloads benefit from the accelerated computation power provided by GPUs to handle large-scale data and complex algorithms efficiently.",[],1938,,,,,,,
+Q019,app.EventHub(),azure-functions/add-bindings-existing-function.md,True,azure_functions_go,A,What registration method does the Go worker in Azure Functions use for an Event Hubs trigger?,"The Go worker in Azure Functions uses attribute-based registration for an Event Hubs trigger. Specifically, it registers the Event Hubs trigger by decorating the function with the `eventhubTrigger` attribute in the function.json or via the Go worker's binding metadata, enabling the runtime to invoke the function when events arrive in the specified Event Hub.",[],1957,,,,,,,
+Q020,Update the function code and add a definition to the function.json configuration file,azure-functions/add-bindings-existing-function.md,True,azure_functions_bindings,A,"For a Python Azure Function using the v1 model, what do you need to do when adding a binding?","For a Python Azure Function using the v1 model, when adding a binding, you need to:
+
+1. **Update the `function.json` file**: Manually add the binding configuration to the `function.json` file associated with your function. This includes specifying the binding type, direction (in/out), name, and any other required properties.
+
+2. **Modify your Python code accordingly**: Adjust your function code to accept parameters or return values that correspond to the bindings defined in `function.json`.
+
+Unlike later versions or other languages, the v1 Python model does not support attribute-based binding declarations in code, so the `function.json` file is the primary place to define bindings.",[],2645,,,,,,,
+Q021,"1,000 instances",azure-functions/flex-consumption-plan.md,True,azure_functions_flex_consumption,A,What is the maximum number of scale-out instances allowed in the Flex Consumption plan?,The maximum number of scale-out instances allowed in the Azure Functions Flex Consumption plan is 200 instances.,[],1616,,,,,,,
+Q022,"Yes, the Flex Consumption plan supports virtual network integration, allowing serverless apps to connect to other Azure services secured inside a virtual network",azure-functions/flex-consumption-plan.md,True,azure_functions_flex_consumption,A,Does the Flex Consumption plan support virtual network integration?,"No, the Azure Functions Premium plan and the App Service plan support virtual network integration, but the Azure Functions Consumption plan (including the Flex Consumption plan) does not support virtual network integration.",[],1902,,,,,,,
+Q023,"512 MB (0.25 CPU cores), 2048 MB (1 CPU core), and 4096 MB (2 CPU cores)",azure-functions/flex-consumption-plan.md,True,azure_functions_flex_consumption,A,What instance memory sizes does the Flex Consumption plan offer?,"The Azure Functions Premium plan offers instance memory sizes ranging from 1.75 GB to 14 GB. However, the Azure Functions Consumption plan (often referred to as the Flex Consumption plan) does not have fixed instance memory sizes like the Premium plan. Instead, it allocates memory dynamically per function execution, with a maximum memory allocation of up to 1.5 GB per function instance.
+
+If you are referring specifically to the Azure App Service Flexible Consumption plan (for example, in Azure Logic Apps or other services), please clarify, as memory sizes can vary by service.
+
+For Azure Functions Consumption plan:
+- Memory allocation per function instance: 128 MB to 1.5 GB (dynamically allocated based on function requirements).
+
+If you need precise instance sizes or more details, please specify the exact service or context.",[],2763,,,,,,,
+Q024,"2,048 MB is recommended as the default for most scenarios",azure-functions/flex-consumption-plan.md,True,azure_functions_flex_consumption,A,What is the recommended default instance memory size for most Flex Consumption scenarios?,The recommended default instance memory size for most Flex Consumption scenarios is 2 GB.,[],1507,,,,,,,
+Q025,The default is 0 (zero),azure-functions/flex-consumption-plan.md,True,azure_functions_flex_consumption,A,What is the default number of always-ready instances in the Flex Consumption plan?,"The default number of always-ready instances in the Azure Functions Premium plan is 1. 
+
+However, in the **Azure Functions Consumption plan (including the Flex Consumption plan)**, there are **no always-ready instances by default**. Instances are dynamically allocated based on demand, and there is no pre-warmed or always-ready instance count set by default.",[],1834,,,,,,,
+Q026,No fewer than two always-ready instances per function or function group,azure-functions/flex-consumption-plan.md,True,azure_functions_flex_consumption,A,What is the minimum number of always-ready instances required when zone redundancy is enabled in the Flex Consumption plan?,"When zone redundancy is enabled in the Azure Functions Premium plan (which supports zone redundancy), the minimum number of always-ready instances required is **3**. 
+
+However, for the Flex Consumption plan specifically, zone redundancy is not supported, so there is no minimum number of always-ready instances related to zone redundancy in that plan.
+
+If you are referring to the Premium plan with zone redundancy enabled, the minimum is 3 always-ready instances to ensure availability across zones.",[],2148,,,,,,,
+Q027,Only Server Message Block (SMB) shares are supported. NFS is not available.,azure-functions/flex-consumption-plan.md,True,azure_functions_flex_consumption,A,What file share protocol does the Flex Consumption plan support for mounting Azure Files shares?,The Azure Functions Flex Consumption plan supports mounting Azure Files shares using the SMB (Server Message Block) protocol.,[],1746,,,,,,,
+Q028,Linux only. Windows is not supported in the Flex Consumption plan.,azure-functions/flex-consumption-plan.md,True,azure_functions_flex_consumption,A,What operating system does the Flex Consumption plan support?,The Flex Consumption plan supports Linux operating systems.,[],1666,,,,,,,
+Q029,100 overall instances by default,azure-functions/event-driven-scaling.md,True,azure_functions_scaling,A,What is the default maximum instance count for apps running in the Flex Consumption plan?,"The default maximum instance count for apps running in the Azure Functions Premium plan (which includes the Flex Consumption plan) is typically 20 instances. However, for the Consumption plan itself, scaling is automatic and there is no fixed maximum instance count set by default; it scales out based on demand up to a platform-defined limit, which can be much higher.
+
+If you are specifically referring to the Flex Consumption plan in Azure Functions, the default maximum instance count is 200 instances. 
+
+Please verify with the latest Azure documentation as limits may change over time.",[],2456,,,,,,,
+Q030,"1,000 instances",azure-functions/event-driven-scaling.md,True,azure_functions_scaling,A,What is the highest supported maximum instance count for a Flex Consumption plan app?,The highest supported maximum instance count for an Azure Functions app using the Consumption (including the Flex Consumption) plan is 200 instances.,[],1803,,,,,,,
+Q031,At most once per second,azure-functions/event-driven-scaling.md,True,azure_functions_scaling,A,"For HTTP triggers in Azure Functions, how often can new instances be allocated at most?","Azure Functions scale out based on demand, and new instances for HTTP-triggered functions can be allocated very rapidly—typically within seconds—to handle incoming requests. There is no fixed maximum frequency for instance allocation; instead, scaling is governed by the platform's scaling algorithms, which monitor metrics like request rate, CPU usage, and memory.
+
+In the Consumption and Premium plans, Azure Functions can scale out to multiple instances automatically and quickly as load increases. However, the exact speed and number of instances allocated depend on factors such as:
+
+- Current load and request rate  
+- Function execution duration and resource consumption  
+- Plan type (Consumption, Premium, or Dedicated)  
+- Any configured scaling limits or quotas  
+
+In summary, new instances for HTTP-triggered Azure Functions can be allocated almost immediately as needed, with no strict maximum frequency, but subject to platform scaling policies and limits.",[],2887,,,,,,,
+Q032,At most once every 30 seconds,azure-functions/event-driven-scaling.md,True,azure_functions_scaling,A,"For non-HTTP triggers in Azure Functions, how often can new instances be allocated at most?","For non-HTTP triggers in Azure Functions (such as timer triggers, queue triggers, event hub triggers, etc.), new instances can be allocated based on the scale controller's evaluation of the workload and queue length. While there is no fixed, publicly documented maximum frequency for instance allocation, scaling decisions typically occur every few seconds to a minute.
+
+In general:
+
+- The Azure Functions scale controller monitors trigger-specific metrics (e.g., queue length, event hub partitions).
+- It evaluates scaling needs approximately every 10 to 30 seconds.
+- New instances can be allocated as needed to handle increased load, but there is a cooldown period to prevent rapid scaling up and down.
+
+Therefore, new instances for non-HTTP triggers can be allocated roughly every 10 to 30 seconds, depending on the trigger type and workload, but exact timing is managed internally by the platform and is not explicitly guaranteed.",[],2962,,,,,,,
+Q033,Up to 60 minutes for Flex Consumption plan apps,azure-functions/event-driven-scaling.md,True,azure_functions_scaling,A,What is the grace period for scale-in drain mode in the Flex Consumption plan?,"The grace period for scale-in drain mode in the Azure Functions Flex Consumption plan is 30 seconds. During this time, the function app stops receiving new invocations on the instance being scaled in but allows in-flight executions to complete before the instance is terminated.",[],1908,,,,,,,
+Q034,Up to 100 triggers,azure-functions/event-driven-scaling.md,True,azure_functions_scaling,A,What is the maximum number of event-based triggers the Azure Functions scale controller can monitor at once?,The Azure Functions scale controller can monitor up to **200 event-based triggers** simultaneously.,[],1733,,,,,,,
+Q035,Resource consumption charges (vCPU-seconds and GiB-seconds) and HTTP request charges,container-apps/billing.md,True,container_apps_billing,A,"In the Azure Container Apps Consumption plan, what are the two types of charges that make up the billing?","In the Azure Container Apps Consumption plan, billing is based on two types of charges:
+
+1. **vCPU and Memory Consumption**: Charges for the amount of CPU and memory resources consumed by the container apps, measured in vCPU-seconds and GB-seconds.
+
+2. **Outbound Data Transfer**: Charges for the data egress (outbound data transfer) from the container apps to the internet or other Azure regions.
+
+These two components together determine the overall cost in the Consumption plan.",[],2909,,,,,,,
+Q036,"The first 180,000 vCPU-seconds are free each calendar month per subscription",container-apps/billing.md,True,container_apps_billing,A,How many free vCPU-seconds does Azure Container Apps provide per subscription each calendar month?,"Azure Container Apps provides 180,000 free vCPU-seconds per subscription each calendar month.",[],1536,,,,,,,
+Q037,The first 2 million HTTP requests are free per subscription each calendar month,container-apps/billing.md,True,container_apps_billing,A,How many free HTTP requests does Azure Container Apps provide per subscription each calendar month?,Azure Container Apps provides 10 million free HTTP requests per subscription each calendar month.,[],1418,,,,,,,
+Q038,"No, health probe requests are not billable",container-apps/billing.md,True,container_apps_billing,A,Are health probe requests billable in Azure Container Apps?,"No, health probe requests themselves are not separately billable in Azure Container Apps. Billing is generally based on the compute resources (vCPU and memory) allocated to your container apps, the number of instances, and other factors like outbound data transfer. Health probes are part of the platform's management and do not incur additional charges.",[],1881,,,,,,,
+Q039,"A replica is idle when it is not processing any HTTP requests, is using less than 0.01 vCPU cores, and is receiving less than 1,000 bytes per second of network traffic, while the revision is configured with a minimum replica count greater than zero",container-apps/billing.md,True,container_apps_billing,A,Under what conditions is a replica considered idle in Azure Container Apps?,"In Azure Container Apps, a replica is considered idle when it is not processing any requests or workload. Specifically, this occurs when the container instance has no active incoming traffic or tasks to handle. Under these conditions, the platform may scale down the number of replicas to zero to save resources, effectively marking those replicas as idle. This idle state typically happens in scenarios where the app experiences low or no traffic, enabling Azure Container Apps to perform automatic scale-to-zero.",[],2183,,,,,,,
+Q040,"Billing is based on workload profile instances, not by individual applications",container-apps/billing.md,True,container_apps_billing,A,"In Azure Container Apps Dedicated plan billing, what is billing based on?","In Azure Container Apps Dedicated plan billing, charges are based on the number of vCPU and memory resources allocated to the dedicated environment, billed per second. This means you pay for the compute and memory capacity reserved for your container apps in the dedicated plan, regardless of actual usage.",[],2146,,,,,,,
+Q041,"Basic, Standard, Premium, and Isolated SKUs",azure-functions/dedicated-plan.md,True,azure_functions_dedicated,A,What App Service plan tiers are supported for hosting Azure Functions in a dedicated plan?,"Azure Functions running in a dedicated (App Service) plan support the following App Service plan tiers:
+
+- Basic (B1, B2, B3)
+- Standard (S1, S2, S3)
+- Premium (P1v2, P2v2, P3v2)
+- PremiumV3 (P1v3, P2v3, P3v3)
+- Isolated (I1, I2, I3)
+
+These tiers provide dedicated compute resources for your Azure Functions, unlike the Consumption plan which is serverless and scales automatically.",[],2485,,,,,,,
+Q042,"No, Azure Functions does not support Free and Shared tier App Service plans",azure-functions/dedicated-plan.md,True,azure_functions_dedicated,A,Does Azure Functions support Free and Shared tier App Service plans?,"Azure Functions does not support the Free and Shared tier App Service plans. It requires at least the Basic tier or higher for App Service plans. However, Azure Functions can run on the Consumption plan, which is a serverless hosting option that automatically scales and charges based on usage.",[],1985,,,,,,,
+Q043,The Always On setting must be enabled,azure-functions/dedicated-plan.md,True,azure_functions_dedicated,A,What setting must be enabled on an App Service plan to prevent the Azure Functions runtime from going idle?,"To prevent the Azure Functions runtime from going idle, the App Service plan must have the **""Always On""** setting enabled. This setting keeps the app loaded and running, preventing it from being unloaded due to inactivity.",[],1744,,,,,,,
+Q044,"You are billed only for the plan regardless of how many function apps or web apps run in it, not based on function executions",azure-functions/dedicated-plan.md,True,azure_functions_dedicated,A,How is billing calculated for Azure Functions running on a dedicated App Service plan?,"When Azure Functions run on a **dedicated App Service plan**, billing is based on the underlying App Service plan's pricing model, not on the number of function executions or execution time.
+
+Specifically:
+
+- You are charged for the App Service plan's compute resources (VM instances) allocated to your plan.
+- Billing is based on the **App Service plan tier** (e.g., Basic, Standard, Premium) and the number of instances running.
+- The cost is incurred regardless of how many functions run or how often they execute, as the compute resources are always allocated.
+- There are no additional charges per function execution or execution duration in this mode.
+
+In summary, for Azure Functions on a dedicated App Service plan, you pay for the App Service plan's fixed compute resources, similar to hosting a web app, rather than on a consumption-based model.",[],2957,,,,,,,
+Q045,It lets you fully isolate your functions and take advantage of higher numbers of instances than a regular App Service plan,azure-functions/dedicated-plan.md,True,azure_functions_dedicated,A,What is an App Service Environment used for when hosting Azure Functions?,"An App Service Environment (ASE) is used when hosting Azure Functions to provide a fully isolated, dedicated environment within an Azure Virtual Network. This enables enhanced network isolation, improved security, and high scale for hosting functions. Specifically, ASE allows Azure Functions to:
+
+- Run in a private, dedicated environment isolated from other customers.
+- Integrate securely with on-premises resources via virtual network connectivity.
+- Meet compliance and regulatory requirements by controlling inbound and outbound network traffic.
+- Scale to high workloads with dedicated compute resources.
+
+In summary, an App Service Environment is used to host Azure Functions when you need a secure, high-scale, and network-isolated environment.",[],2451,,,,,,,
+Q046,"Send a request to an HTTP trigger endpoint or any other endpoint on the app, or access the app in the Azure portal",azure-functions/dedicated-plan.md,True,azure_functions_dedicated,A,How can you reactivate an idled Azure Functions app on an App Service plan without enabling Always On?,"If your Azure Functions app is running on an App Service plan and you do **not** have Always On enabled, the app can go idle after a period of inactivity. To reactivate (wake up) the app without enabling Always On, you can:
+
+1. **Send an HTTP request to the function app endpoint:**  
+   Simply make an HTTP GET or POST request to one of your function endpoints. This will cause the app service to spin up the app and process the request, effectively ""waking"" it from the idle state.
+
+2. **Use a scheduled ping or heartbeat:**  
+   Set up an external service (like Azure Logic Apps, Azure Monitor Webhook, or an external cron job) to periodically send HTTP requests to your function app. This keeps the app active without enabling Always On.
+
+3. **Trigger via other event sources:**  
+   If your function is triggered by events (e.g., queue messages, Event Hub, Service Bus), sending a test event to the trigger will also wake the app.
+
+**Note:** Without Always On, the app will still idle after inactivity, so periodic pings are necessary to keep it warm.
+
+---
+
+**Summary:** To reactivate an idled Azure Functions app on an App Service plan without Always On, send an HTTP request or trigger an event to the function app endpoint to wake it up.",[],3239,,,,,,,
+Q047,"A secure boundary around one or more container apps and jobs where the Container Apps runtime manages OS upgrades, scale operations, failover procedures, and resource balancing",container-apps/environment.md,True,container_apps_environment,A,What is a Container Apps environment in Azure Container Apps?,"A Container Apps environment in Azure Container Apps is a secure, isolated boundary that hosts one or more containerized applications. It provides a dedicated infrastructure with shared compute, networking, and scaling capabilities, enabling containers within the environment to communicate with each other securely. Essentially, it acts as a logical grouping for container apps, managing resources, networking (including ingress and egress), and scaling policies collectively. This environment simplifies deployment and management by isolating workloads and providing features like virtual network integration and enhanced security.",[],2168,,,,,,,
+Q048,Workload profiles environments (the default) and Consumption only environments (legacy),container-apps/environment.md,True,container_apps_environment,A,What are the two types of Azure Container Apps environments?,"The two types of Azure Container Apps environments are:
+
+1. **Managed Environment**: A fully managed, serverless environment where Azure handles the infrastructure, scaling, and maintenance.
+
+2. **Connected Environment**: An environment connected to an existing Azure Virtual Network (VNet), allowing for more control over networking and integration with other resources.",[],1928,,,,,,,
+Q049,Both the Consumption and Dedicated plans,container-apps/environment.md,True,container_apps_environment,A,What plans does a Workload profiles environment support in Azure Container Apps?,"In Azure Container Apps, a Workload Profiles environment supports the **Premium** and **Isolated** plans. These plans provide enhanced capabilities such as higher scale limits, increased resource allocation, and improved network isolation compared to the standard Consumption plan.",[],2138,,,,,,,
+Q050,Only the Consumption plan,container-apps/environment.md,True,container_apps_environment,A,What plan does a Consumption only environment support in Azure Container Apps?,"A Consumption-only environment in Azure Container Apps supports the **""Consumption"" plan**. This plan is serverless and automatically scales based on the workload, allowing you to pay only for the resources your container apps consume.",[],2053,,,,,,,
+Q051,"When you want applications to never share compute resources, not communicate via built-in Dapr service invocation, or be isolated due to team or environment usage such as test vs production",container-apps/environment.md,True,container_apps_environment,A,When should you use multiple Azure Container Apps environments instead of a single one?,"You should use multiple Azure Container Apps environments instead of a single one when you need to achieve strong isolation boundaries between groups of container apps. Specifically, multiple environments are appropriate when:
+
+- **Isolation Requirements:** You want to isolate workloads for security, compliance, or organizational reasons (e.g., separating development, testing, and production workloads).
+- **Networking Boundaries:** You need distinct virtual network configurations or want to isolate network traffic between environments.
+- **Resource and Scale Management:** You want to manage scaling, resource quotas, or policies independently for different sets of container apps.
+- **Deployment and Lifecycle Separation:** You require separate deployment lifecycles, monitoring, or access controls for different teams or projects.
+
+In contrast, a single environment is suitable when container apps share the same network, scaling, and operational context.",[],2869,,,,,,,
+Q052,To a common Log Analytics workspace,container-apps/environment.md,True,container_apps_environment,A,Where do all container apps within the same Azure Container Apps environment send their logs by default?,"By default, all container apps within the same Azure Container Apps environment send their logs to the same Azure Log Analytics workspace associated with that environment.",[],2052,,,,,,,
+Q053,After 90 days of being idle with no active container apps or jobs running,container-apps/environment.md,True,container_apps_environment,A,After how many days is an idle Azure Container Apps environment automatically deleted?,An idle Azure Container Apps environment is automatically deleted after 30 days of inactivity.,[],1574,,,,,,,
+Q054,"Container stdout and stderr streams, container app scaling events, Dapr sidecar logs if Dapr is enabled, and system-level metrics and events",container-apps/environment.md,True,container_apps_environment,A,What types of logs does an Azure Container Apps environment collect by default?,"By default, an Azure Container Apps environment collects the following types of logs:
+
+1. **Container Logs**: Standard output (stdout) and standard error (stderr) streams from the containers running in the environment.
+2. **Platform Logs**: Logs related to the infrastructure and platform operations of the Container Apps environment, such as scaling events and health status.
+
+These logs are typically sent to Azure Monitor Logs (Log Analytics) if diagnostics are enabled, allowing for querying and analysis.",[],2117,,,,,,,
+Q055,The function code files are deleted and cannot be recovered,azure-functions/event-driven-scaling.md,True,azure_functions_scaling,A,What happens to function code files if you delete the main storage account of an Azure Functions app?,"If you delete the main storage account associated with an Azure Functions app, the function code files stored in that storage account are lost. This is because Azure Functions relies on the storage account to store function code, triggers, logs, and other metadata. Without the storage account, the function app cannot access its code or state, effectively causing the function app to stop working.",[],2013,,,,,,,
+Q056,The scale controller,azure-functions/event-driven-scaling.md,True,azure_functions_scaling,A,What component in Azure Functions monitors event rates and decides whether to scale out or scale in?,"In Azure Functions, the **Scale Controller** (also known as the Scale Controller or Scale Monitor) is the component that monitors event rates and decides whether to scale out (add more instances) or scale in (reduce instances) based on the workload.",[],1945,,,,,,,
+Q057,1.5 GB of memory and one CPU,azure-functions/event-driven-scaling.md,True,azure_functions_scaling,A,"In the Azure Functions Consumption plan, what is each host instance typically limited to?","In the Azure Functions Consumption plan, each host instance is typically limited to 1.5 GB of memory and a single CPU core.",[],1866,,,,,,,
+Q058,properties.appLogsConfiguration which is used for configuring the Log Analytics workspace,container-apps/environment.md,True,container_apps_environment,A,What property controls the log configuration for all apps in an Azure Container Apps environment?,"The property that controls the log configuration for all apps in an Azure Container Apps environment is the **""Dapr""** or more specifically, the **""log analytics""** configuration within the environment's diagnostic settings. However, the primary property used to configure centralized logging for all container apps in an Azure Container Apps environment is the **""logAnalyticsConfiguration""** property of the Container Apps Environment resource.
+
+This property specifies the Log Analytics workspace to which all container apps in the environment send their logs and metrics.
+
+In summary:
+
+- **Property:** `logAnalyticsConfiguration`
+- **Scope:** Azure Container Apps Environment
+- **Purpose:** Controls centralized log collection and configuration for all apps within the environment.",[],2771,,,,,,,
+Q059,"1,000 milliseconds",container-apps/billing.md,True,container_apps_billing,A,What is the minimum billable execution period for the Azure Container Apps Consumption plan?,The minimum billable execution period for the Azure Container Apps Consumption plan is 1 second. Billing is based on the actual CPU and memory resources consumed per second.,[],1945,,,,,,,
+Q060,"You are charged a Dedicated plan management fee if you have one or more dedicated workload profiles in your environment, regardless of the number of applications",container-apps/billing.md,True,container_apps_billing,A,"In Azure Container Apps, what does the Dedicated plan management fee depend on?","In Azure Container Apps, the Dedicated plan management fee depends on the number of vCPU cores allocated to the Dedicated plan. The fee is charged based on the total vCPU capacity reserved for the plan, regardless of actual usage.",[],1687,,,,,,,
+Q061,The Flex Consumption plan is recommended for hosting dynamic scale apps,azure-functions/functions-best-practices.md,True,azure_functions_best_practices,A,Which Azure Functions hosting plan is recommended for dynamic scale apps?,"The Azure Functions **Consumption Plan** is recommended for dynamic scale apps because it automatically scales out based on demand, allowing your functions to handle varying workloads efficiently without manual intervention.",[],1763,,,,,,,
+Q062,"A general-purpose Azure Storage account that supports Blob, Queue, and Table storage",azure-functions/functions-best-practices.md,True,azure_functions_best_practices,A,What type of Azure Storage account is required when creating a function app?,"When creating an Azure Function App, a **General-purpose v2 (GPv2) Storage account** is required. This type of storage account supports all the necessary features for Azure Functions, including blobs, queues, and tables, which are used for function triggers and logging.",[],2265,,,,,,,
+Q063,In the same region as the function app,azure-functions/functions-best-practices.md,True,azure_functions_best_practices,A,"To reduce latency, where should the storage account for an Azure Functions app be created?","To reduce latency, the storage account for an Azure Functions app should be created in the same Azure region (data center) as the Azure Functions app itself. This proximity minimizes network latency between the function app and its storage account.",[],1800,,,,,,,
+Q064,AzureWebJobsStorage and WEBSITE_CONTENTAZUREFILECONNECTIONSTRING,azure-functions/functions-best-practices.md,True,azure_functions_best_practices,A,What application setting stores the storage account connection string for an Azure Functions app?,The application setting named **`AzureWebJobsStorage`** stores the storage account connection string for an Azure Functions app.,[],1562,,,,,,,
+Q065,"It reduces the risk of file copy locking problems, can be deployed directly to production without triggering a restart, and may reduce cold-start times",azure-functions/functions-best-practices.md,True,azure_functions_best_practices,A,What is one benefit of running Azure Functions from a deployment package?,"One benefit of running Azure Functions from a deployment package is faster cold start times. Deployment packages allow the function app to load all necessary code and dependencies upfront, improving startup performance compared to other deployment methods like run-from-blob or direct code deployment.",[],1660,,,,,,,
+Q066,FUNCTIONS_WORKER_PROCESS_COUNT controls the maximum number of language worker processes. The default value is 1.,azure-functions/functions-best-practices.md,True,azure_functions_best_practices,A,What setting controls the maximum number of language worker processes in an Azure Functions app?,"The setting that controls the maximum number of language worker processes in an Azure Functions app is:
+
+**`FUNCTIONS_WORKER_PROCESS_COUNT`**
+
+This app setting specifies the maximum number of language worker processes that the Azure Functions host can start for a given language runtime. Increasing this value can improve concurrency for certain workloads by allowing multiple worker processes to run in parallel.",[],2034,,,,,,,
+Q067,Configure rolling updates for zero-downtime deployments in the Flex Consumption plan,azure-functions/functions-best-practices.md,True,azure_functions_best_practices,A,How should you minimise deployment downtime in the Azure Functions Flex Consumption plan?,"To minimize deployment downtime in the Azure Functions Premium plan (formerly known as the Flex Consumption plan), you should use **deployment slots**. Deployment slots allow you to deploy your new function app version to a staging slot, warm it up, and then perform a swap with the production slot. This approach ensures near-zero downtime because the swap is seamless and the new version is ready to serve requests immediately.
+
+Key steps to minimize downtime:
+
+1. **Use Deployment Slots:** Create a staging slot alongside your production slot.
+2. **Deploy to Staging Slot:** Deploy your updated function app code to the staging slot.
+3. **Warm Up the Slot:** Ensure the staging slot is warmed up and ready to handle requests.
+4. **Swap Slots:** Swap the staging slot with the production slot to make the new version live instantly.
+5. **Monitor Post-Swap:** Verify the production slot is functioning correctly after the swap.
+
+Note: Deployment slots are supported in the Azure Functions Premium plan and not in the standard Consumption plan. The Premium plan offers more advanced features like VNET integration, unlimited execution duration, and deployment slots to help minimize downtime during deployments.",[],3206,,,,,,,
+Q068,"No, the Flex Consumption plan does not require these settings. It uses a Blob storage container to host deployment packages instead of an Azure Files share.",azure-functions/functions-best-practices.md,True,azure_functions_best_practices,A,Does the Flex Consumption plan require the WEBSITE_CONTENTAZUREFILECONNECTIONSTRING and WEBSITE_CONTENTSHARE settings?,"No, the Azure Functions Flex Consumption plan does not require the `WEBSITE_CONTENTAZUREFILECONNECTIONSTRING` and `WEBSITE_CONTENTSHARE` settings. These settings are typically used in the Consumption and Premium plans to configure Azure Files for content sharing and persistence. In the Flex Consumption plan, the content is managed differently, and these specific app settings are not needed.",[],2082,,,,,,,
+Q069,SNI (Server Name Identification) domain certificates are required,container-apps/custom-domains-certificates.md,True,container_apps_custom_domains,A,What certificate type is required when adding a custom domain to an Azure Container Apps application?,"When adding a custom domain to an Azure Container Apps application, you need to use a **TLS/SSL certificate** in the **PFX (Personal Information Exchange) format**. This certificate must include the private key and be valid for the custom domain you are configuring.",[],2007,,,,,,,
+Q070,Ingress must be enabled for the container app,container-apps/custom-domains-certificates.md,True,container_apps_custom_domains,A,What must be enabled on a container app before you can add a custom domain to it?,"Before you can add a custom domain to a container app, you must enable **TLS/SSL** (HTTPS) on the container app. This typically involves configuring a TLS certificate to secure the custom domain. Additionally, the container app must be deployed and have a publicly accessible endpoint.",[],2048,,,,,,,
+Q071,An A record is used for apex domains,container-apps/custom-domains-certificates.md,True,container_apps_custom_domains,A,What DNS record type is used for an apex domain when adding a custom domain to Azure Container Apps?,"When adding a custom apex domain to Azure Container Apps, you use an **A record** or an **ALIAS/ANAME record** (if your DNS provider supports it) to point the apex domain to the Azure Container Apps' IP address. Azure does not support CNAME records at the apex domain level because the DNS standard disallows CNAME records at the zone apex.
+
+In summary:
+
+- Use an **A record** pointing to the IP address provided by Azure Container Apps.
+- Alternatively, use an **ALIAS** or **ANAME** record if your DNS provider supports these, as they allow aliasing the apex domain to a hostname.
+
+Azure documentation typically recommends using A records or ALIAS/ANAME records for apex domains.",[],2636,,,,,,,
+Q072,A CNAME record is used for subdomains,container-apps/custom-domains-certificates.md,True,container_apps_custom_domains,A,What DNS record type is used for a subdomain when adding a custom domain to Azure Container Apps?,"When adding a custom domain to Azure Container Apps, the DNS record type typically used for a subdomain is a **CNAME** record. This CNAME record points the subdomain to the Azure-provided domain name for the container app.",[],1656,,,,,,,
+Q073,Certificates are applied to the container app environment and are bound to individual container apps,container-apps/custom-domains-certificates.md,True,container_apps_custom_domains,A,Where are certificates applied and bound in Azure Container Apps?,"In Azure Container Apps, certificates are applied and bound at the environment or container app level to enable secure TLS/SSL communication. Specifically:
+
+- **Applying Certificates:** Certificates are uploaded and stored as secrets within the Container Apps environment or linked via Azure Key Vault.
+- **Binding Certificates:** These certificates are then bound to the container app's ingress configuration to enable HTTPS endpoints.
+
+This setup allows Azure Container Apps to serve traffic over secure HTTPS connections using the applied certificates.",[],1967,,,,,,,
+Q074,You can upload your own certificate or use a free managed certificate,container-apps/custom-domains-certificates.md,True,container_apps_custom_domains,A,What are the two certificate options available when adding a custom domain to Azure Container Apps?,"When adding a custom domain to Azure Container Apps, the two certificate options available are:
+
+1. **App Service Managed Certificate** – A free SSL/TLS certificate managed by Azure, suitable for basic SSL needs and automatically renewed.
+
+2. **Bring Your Own Certificate (BYOC)** – Upload your own SSL/TLS certificate (in PFX format) to secure the custom domain, giving you full control over the certificate.",[],1995,,,,,,,
+Q075,You must have role-based access to the environment to add certificates,container-apps/custom-domains-certificates.md,True,container_apps_custom_domains,A,What role-based access is required to add certificates in Azure Container Apps?,"To add certificates in Azure Container Apps, you need the **""Contributor""** role or a custom role with the following permissions on the resource or resource group:
+
+- `Microsoft.App/containerApps/write`
+- `Microsoft.App/certificates/write`
+
+The **Contributor** role includes these permissions by default, allowing you to create and manage certificates within Azure Container Apps. If using a custom role, ensure it has write permissions for both container apps and certificates.",[],2001,,,,,,,
+Q076,Do not use an account with Data Lake Storage enabled for Event Hubs triggered functions,azure-functions/functions-best-practices.md,True,azure_functions_best_practices,A,"For an Event Hubs triggered Azure Function, what storage account configuration should you avoid?","For an Event Hubs triggered Azure Function, you should avoid using a **storage account with a firewall enabled that blocks access from the Function App** or one that restricts network access in a way that prevents the Function App from connecting. The Azure Functions runtime relies on the storage account for managing triggers and checkpoints, so it must have unrestricted network access from the Function App.
+
+In summary, **do not use a storage account with network restrictions (such as firewall rules or virtual network service endpoints) that block the Function App's access**, unless properly configured to allow the Function App's outbound IP addresses or virtual network.",[],2329,,,,,,,
+Q077,A TXT record with the host asuid containing the domain verification code,container-apps/custom-domains-certificates.md,True,container_apps_custom_domains,A,"In Azure Container Apps, what TXT record must you create when validating an apex domain?","When validating an apex domain in Azure Container Apps, you must create a TXT record with the following details:
+
+- **Name (Host):** `asuid`  
+- **Value:** The unique validation token provided by Azure for your domain verification.
+
+So, the TXT record typically looks like:
+
+```
+Name: asuid
+Type: TXT
+Value: <validation-token-provided-by-azure>
+```
+
+This TXT record is used by Azure to verify that you own the apex domain before you can bind it to your Container App. The exact token value is given in the Azure portal during the custom domain setup process.",[],2091,,,,,,,
+Q078,It is automatically deleted,container-apps/environment.md,True,container_apps_environment,A,What happens to an Azure Container Apps environment that is in a failed state due to virtual network or Azure Policy configuration for more than 90 days?,"If an Azure Container Apps environment remains in a failed state due to virtual network or Azure Policy configuration issues for more than 90 days, the environment is automatically deleted by the platform. This is to prevent lingering resources that cannot function properly.",[],1853,,,,,,,
+Q079,"No, if you configure a custom environment DNS suffix you cannot add a custom domain that contains this suffix to your container app",container-apps/custom-domains-certificates.md,True,container_apps_custom_domains,A,Can you add a custom domain that contains the custom environment DNS suffix to an Azure Container Apps app?,"No, you cannot add a custom domain that contains the custom environment DNS suffix to an Azure Container Apps app. Azure Container Apps uses a default DNS suffix for the environment (e.g., `*.azurecontainerapps.io`), but when adding custom domains, you must use your own domain names that you own and manage, not the environment's DNS suffix. Custom domains are intended to map your own domain names to the app, not to reuse or extend the environment's DNS suffix.",[],2040,,,,,,,
+Q080,"Start with a value of 2 since the EP2 provides two cores, and increase by two as needed",azure-functions/functions-best-practices.md,True,azure_functions_best_practices,A,"For a Premium plan EP2 Azure Function app, what starting value of FUNCTIONS_WORKER_PROCESS_COUNT is recommended?","For a Premium plan EP2 Azure Function app, the recommended starting value for **FUNCTIONS_WORKER_PROCESS_COUNT** is **1**. 
+
+This setting controls the number of language worker processes per function app instance. Starting with 1 is typical, and you can increase it based on your app's workload and performance requirements.",[],2039,,,,,,,
+Q081,The connection string for the Azure Storage account that the Functions runtime uses for normal operations including managing triggers and logging function executions,azure-functions/functions-app-settings.md,True,azure_functions_settings,A,What does the AzureWebJobsStorage setting store in an Azure Functions app?,"The **AzureWebJobsStorage** setting in an Azure Functions app specifies the connection string to an Azure Storage account. This storage account is used by the Functions runtime to manage and store:
+
+- Trigger metadata (e.g., for queue, blob, and timer triggers)
+- Function execution logs
+- Checkpoints and leases for event processing
+- Internal state and bindings
+
+In short, **AzureWebJobsStorage** is essential for the proper operation of many Azure Functions triggers and bindings that rely on Azure Storage.",[],2370,,,,,,,
+Q082,It enables more verbose logging and reduced performance optimizations for local development; Azure Functions Core Tools sets this automatically when running locally,azure-functions/functions-app-settings.md,True,azure_functions_settings,A,What does setting AZURE_FUNCTIONS_ENVIRONMENT to Development do in Azure Functions?,"Setting `AZURE_FUNCTIONS_ENVIRONMENT` to `Development` in Azure Functions configures the function app to run in the Development environment. This affects behavior such as:
+
+- Enabling more detailed logging and diagnostics to help with debugging.
+- Allowing local development settings and configurations to be applied.
+- Potentially enabling features like the developer exception page.
+- Influencing how configuration values are loaded, for example, loading `appsettings.Development.json` if present.
+
+In short, it signals the runtime and your function code that the app is running in a development context rather than Production, enabling development-specific behaviors and easier troubleshooting.",[],2769,,,,,,,
+Q083,It specifies the version of the Azure Functions runtime to target. The tilde (~) combined with a major version pins the app to that major version.,azure-functions/functions-app-settings.md,True,azure_functions_settings,A,What is the purpose of FUNCTIONS_EXTENSION_VERSION in Azure Functions?,"The **FUNCTIONS_EXTENSION_VERSION** setting in Azure Functions specifies the version of the Azure Functions runtime that your function app should use. It controls which runtime version your functions run on, allowing you to target a specific major version or use the latest available version.
+
+For example:
+- Setting `FUNCTIONS_EXTENSION_VERSION` to `~4` will use the latest 4.x runtime version.
+- Setting it to `~3` will use the latest 3.x runtime version.
+- Setting it to a specific version like `2.0.12345` targets that exact runtime version.
+
+This setting helps ensure compatibility and stability by allowing you to lock to a known runtime version or automatically receive updates within a major version.",[],2550,,,,,,,
+Q084,It specifies the language or language stack of the worker runtime loaded in the function app,azure-functions/functions-app-settings.md,True,azure_functions_settings,A,What does the FUNCTIONS_WORKER_RUNTIME setting control in Azure Functions?,"The `FUNCTIONS_WORKER_RUNTIME` setting in Azure Functions specifies the runtime language stack that the function app uses to execute functions. It tells the Azure Functions host which language worker to load, such as:
+
+- `dotnet` for C#/.NET
+- `node` for JavaScript/Node.js
+- `python` for Python
+- `java` for Java
+- `powershell` for PowerShell
+
+This setting is essential for the function app to run correctly in the chosen language environment.",[],2286,,,,,,,
+Q085,The first 2 million HTTP requests are free,container-apps/billing.md,True,container_apps_billing,A,How many free HTTP requests does Azure Container Apps provide per subscription per calendar month on the Consumption plan?,Azure Container Apps on the Consumption plan provides 1 million free HTTP requests per subscription per calendar month.,[],1571,,,,,,,
+Q086,"It enables your function app to run from a mounted package file, which helps avoid file locking issues and can improve cold start performance",azure-functions/functions-app-settings.md,True,azure_functions_settings,A,What does the WEBSITE_RUN_FROM_PACKAGE setting do in Azure Functions?,"The `WEBSITE_RUN_FROM_PACKAGE` setting in Azure Functions configures the function app to run directly from a deployment package (a ZIP file) instead of from the extracted files in the wwwroot folder. When this setting is enabled (typically set to `1` or a URL pointing to a package), Azure mounts the package as a read-only file system, which can improve deployment speed, reduce cold start times, and ensure consistency by running the exact package deployed.
+
+In summary, `WEBSITE_RUN_FROM_PACKAGE` allows Azure Functions to run the app from a packaged ZIP file rather than from extracted files on disk.",[],2561,,,,,,,
+Q087,The name of the Azure Files share used to store the function app's code and configuration content,azure-functions/functions-app-settings.md,True,azure_functions_settings,A,What is the purpose of the WEBSITE_CONTENTSHARE setting in Azure Functions?,"The `WEBSITE_CONTENTSHARE` setting in Azure Functions specifies the name of the Azure Files share used to store the function app's content (code and files) when running in a Consumption or Premium plan. This setting is primarily used in Linux-based function apps or when the function app's content is stored on Azure Files for shared access across instances.
+
+In summary, `WEBSITE_CONTENTSHARE` defines the Azure Files share name that holds the function app's content, enabling the platform to mount and access the app files consistently across scaled instances.",[],2289,,,,,,,
+Q088,"APIs powered by the Distributed Application Runtime that help write simple, portable, resilient, and secured microservices",container-apps/dapr-overview.md,True,container_apps_dapr,A,What is Dapr in Azure Container Apps?,"Dapr (Distributed Application Runtime) in Azure Container Apps is a portable, event-driven runtime that simplifies building microservices by providing APIs for common capabilities such as service invocation, state management, pub/sub messaging, and resource bindings. It enables developers to build resilient, stateless or stateful applications without having to implement these features from scratch. In Azure Container Apps, Dapr is integrated as a sidecar container alongside your application, allowing seamless communication and interaction between microservices with built-in observability, security, and scalability.",[],2122,,,,,,,
+Q089,Dapr is enabled at the container app level by configuring a set of Dapr arguments,container-apps/dapr-overview.md,True,container_apps_dapr,A,How is Dapr enabled for a container app in Azure Container Apps?,"Dapr is enabled for a container app in Azure Container Apps by specifying the `--enable-dapr` flag when creating or updating the container app. This activates the Dapr sidecar for the app, allowing it to use Dapr's building blocks such as service invocation, state management, pub/sub, and more.
+
+For example, when creating a container app via Azure CLI:
+
+```bash
+az containerapp create \
+  --name myapp \
+  --resource-group myrg \
+  --image myimage:latest \
+  --enable-dapr \
+  --dapr-app-id myapp-id \
+  --dapr-app-port 80
+```
+
+Key points:
+- `--enable-dapr` enables the Dapr sidecar.
+- `--dapr-app-id` sets the Dapr application ID (used for service invocation).
+- `--dapr-app-port` specifies the port your app listens on for Dapr to communicate.
+
+If you are updating an existing container app, you can enable Dapr with:
+
+```bash
+az containerapp update \
+  --name myapp \
+  --resource-group myrg \
+  --enable-dapr \
+  --dapr-app-id myapp-id \
+  --dapr-app-port 80
+```
+
+In summary, enabling Dapr involves setting the `enableDapr` property to true and configuring the app ID and port in the container app's settings.",[],3155,,,,,,,
+Q090,"Each Dapr-enabled container app runs a sidecar process alongside your application; to call another Dapr-enabled app, you make a local HTTP request to the Dapr sidecar, which handles service discovery and routing",container-apps/connect-apps.md,True,container_apps_dapr,A,What is the Dapr sidecar pattern in Azure Container Apps?,"The Dapr sidecar pattern in Azure Container Apps refers to the practice of deploying the Dapr runtime as a sidecar container alongside your application container within the same pod or container instance. This sidecar runs alongside your app and provides a set of building blocks—such as service invocation, state management, pub/sub messaging, and secret management—via standardized APIs.
+
+In Azure Container Apps, the Dapr sidecar pattern enables your microservices to leverage Dapr's capabilities without modifying the application code significantly. The sidecar intercepts calls and handles communication, state, and other concerns, allowing developers to focus on business logic while benefiting from distributed application features.
+
+Key points:
+- Dapr runs as a sidecar container next to your app container.
+- Provides APIs for common microservice patterns.
+- Enables easier building of distributed, event-driven applications.
+- Integrated natively in Azure Container Apps for seamless use.
+
+This pattern simplifies microservice development by abstracting infrastructure concerns into the Dapr sidecar.",[],2384,,,,,,,
+Q091,Port 3500 for HTTP and port 50001 for gRPC,container-apps/dapr-overview.md,True,container_apps_dapr,A,What port does the Dapr sidecar expose its API on by default in Azure Container Apps?,"By default, the Dapr sidecar in Azure Container Apps exposes its HTTP API on port **3500**.",[],1535,,,,,,,
+Q092,An environment-level resource that provides a pluggable abstraction model for connecting to supporting external services,container-apps/dapr-components.md,True,container_apps_dapr,A,What kind of resource is a Dapr component in Azure Container Apps?,"In Azure Container Apps, a Dapr component is a resource that defines the configuration for a specific building block of the Dapr runtime, such as state stores, pub/sub brokers, bindings, or secret stores. It enables your containerized applications to easily integrate with external systems and services by specifying how Dapr should connect to and interact with those resources. Essentially, a Dapr component in Azure Container Apps is a declarative configuration resource that configures middleware capabilities for distributed applications running within the environment.",[],2335,,,,,,,
+Q093,"Yes, Dapr components can be scoped to specific container apps or shared across all apps in the same environment",container-apps/dapr-components.md,True,container_apps_dapr,A,Can Dapr components be shared across multiple container apps in the same Azure Container Apps environment?,"Yes, Dapr components can be shared across multiple container apps within the same Azure Container Apps environment. In Azure Container Apps, Dapr components are defined at the environment level, making them accessible to all container apps running in that environment. This allows multiple apps to reuse the same component configurations (such as state stores, pub/sub brokers, or bindings) without needing to redefine them individually for each app.",[],1968,,,,,,,
+Q094,"A unique identifier for the container app used for service discovery, state encapsulation, and the pub/sub consumer ID",container-apps/enable-dapr.md,True,container_apps_dapr,A,What is the Dapr app ID used for in Azure Container Apps?,"In Azure Container Apps, the Dapr app ID is a unique identifier assigned to each application instance that uses Dapr (Distributed Application Runtime). It is used to enable service-to-service invocation, state management, and other Dapr building blocks by uniquely identifying the app within the Dapr sidecar environment. Essentially, the Dapr app ID allows different microservices or components running in Azure Container Apps to discover and securely communicate with each other through Dapr's APIs.",[],1897,,,,,,,
+Q095,A managed identity on the container app and a Dapr secret store component configured to use Azure Key Vault,container-apps/dapr-component-connect-services.md,True,container_apps_dapr,A,What must you configure if you want to use Azure Key Vault as a secret store with Dapr in Azure Container Apps?,"To use Azure Key Vault as a secret store with Dapr in Azure Container Apps, you must configure the following:
+
+1. **Azure Key Vault**: Create an Azure Key Vault and add your secrets to it.
+
+2. **Managed Identity**: Enable a managed identity (either system-assigned or user-assigned) for your Azure Container App.
+
+3. **Access Policy**: Grant the managed identity access permissions (typically ""Get"" and ""List"" secret permissions) on the Azure Key Vault.
+
+4. **Dapr Component Configuration**: Create a Dapr secret store component YAML file specifying:
+   - The component type as `azure.keyvault`.
+   - The vault name.
+   - The authentication method using the managed identity.
+   
+   Example snippet:
+   ```yaml
+   apiVersion: dapr.io/v1alpha1
+   kind: Component
+   metadata:
+     name: azurekeyvault
+     namespace: default
+   spec:
+     type: secretstores.azure.keyvault
+     version: v1
+     metadata:
+     - name: vaultName
+       value: ""<your-keyvault-name>""
+     - name: identityClientId
+       value: ""<managed-identity-client-id>"" # optional for user-assigned identity
+   ```
+
+5. **Deploy the Component**: Deploy this component configuration to your Azure Container App environment so Dapr can use it to fetch secrets.
+
+In summary, you must configure Azure Key Vault with secrets, assign and grant a managed identity to your container app with access to the vault, and create a Dapr secret store component referencing the vault and identity.",[],3771,,,,,,,
+Q096,C# running in an isolated worker process,azure-functions/functions-app-settings.md,True,azure_functions_settings,A,What language does the FUNCTIONS_WORKER_RUNTIME value dotnet-isolated refer to in Azure Functions?,"The value `dotnet-isolated` for the `FUNCTIONS_WORKER_RUNTIME` setting in Azure Functions refers to the **.NET isolated process model**. This means the function app runs using the .NET runtime in an isolated worker process, separate from the Azure Functions host process. It is used for Azure Functions written in **.NET 5, .NET 6, .NET 7, or later** using the isolated worker model, as opposed to the in-process model used in earlier versions like .NET Core 3.1.",[],2526,,,,,,,
+Q097,"Dapr service invocation provides a sidecar-based approach to inter-app communication, giving container apps built-in service invocation with mutual TLS, automatic retries, and distributed tracing",container-apps/connect-apps.md,True,container_apps_dapr,A,What is the Dapr service invocation API used for in Azure Container Apps?,"The Dapr service invocation API in Azure Container Apps is used to enable secure and reliable communication between microservices. It allows one service to call another service's endpoint directly using HTTP or gRPC, abstracting away the underlying network details. This API simplifies service-to-service invocation by handling service discovery, load balancing, retries, and secure communication within the container app environment.",[],1946,,,,,,,
+Q098,1,azure-functions/functions-app-settings.md,True,azure_functions_settings,A,What is the default value of the FUNCTIONS_WORKER_PROCESS_COUNT setting in Azure Functions?,"The default value of the `FUNCTIONS_WORKER_PROCESS_COUNT` setting in Azure Functions is **1**. This means that by default, a single worker process is used per function app instance.",[],1718,,,,,,,
+Q099,The Metadata API,container-apps/dapr-overview.md,True,container_apps_dapr,A,What Dapr operational API in Azure Container Apps returns information about the sidecar for runtime discoverability?,"The Dapr operational API in Azure Container Apps that returns information about the sidecar for runtime discoverability is the **`/v1.0/metadata`** endpoint. 
+
+This endpoint provides metadata about the Dapr sidecar instance, including its ID, version, and other runtime details, enabling applications and services to discover and interact with the sidecar.",[],1896,,,,,,,
+Q100,The connection string of the storage account where the function app content and code are stored on Azure Files,azure-functions/functions-app-settings.md,True,azure_functions_settings,A,What does the WEBSITE_CONTENTAZUREFILECONNECTIONSTRING setting point to in an Azure Functions app?,"The `WEBSITE_CONTENTAZUREFILECONNECTIONSTRING` setting in an Azure Functions app specifies the connection string to the Azure Storage account that is used to mount the Azure Files share for the function app's content. This Azure Files share contains the function app's code and content files, enabling the app to access and run the function code.
+
+In other words, this setting points to the Azure Storage account connection string where the function app's content (code and related files) is stored via Azure Files, allowing the platform to load and serve the function app.",[],2146,,,,,,,
+Q101,Container Apps secrets and Key Vault references,container-apps/functions-secrets-app-level.md,True,azure_functions_secrets,A,What two options does Azure Container Apps provide for storing app-level secrets for Azure Functions?,"Azure Container Apps provide two options for storing app-level secrets for Azure Functions:
+
+1. **Azure Key Vault**: You can integrate Azure Container Apps with Azure Key Vault to securely store and manage sensitive information such as connection strings, API keys, and other secrets.
+
+2. **Azure Container Apps Secrets Store**: Azure Container Apps have a built-in secrets store where you can directly store secrets that your containerized applications can access at runtime.
+
+These options help ensure that sensitive data is managed securely and accessed appropriately by your Azure Functions running within Azure Container Apps.",[],2187,,,,,,,
+Q102,Key Vault Secrets User,container-apps/functions-secrets-app-level.md,True,azure_functions_secrets,A,What role must be assigned to a managed identity so it can read secrets from Azure Key Vault in Container Apps?,"To allow a managed identity to read secrets from an Azure Key Vault in Container Apps, you must assign it the **""Key Vault Secrets User""** role (built-in role: `Key Vault Secrets User`). This role grants the necessary permissions to get and list secrets from the Key Vault.",[],1878,,,,,,,
+Q103,Within 30 minutes,container-apps/functions-secrets-app-level.md,True,azure_functions_secrets,A,How often does Azure Container Apps check for a new version of a Key Vault secret referenced by a versionless URI?,"Azure Container Apps refreshes a versionless Key Vault secret reference approximately every 24 hours. This means that if you reference a secret in Azure Key Vault without specifying a version, the container app will check for and retrieve the latest version of that secret about once a day.",[],2266,,,,,,,
+Q104,The last one in the list takes effect,container-apps/environment-variables.md,True,container_apps_environment,A,"In Azure Container Apps, what happens when multiple environment variables are given the same name?","In Azure Container Apps, if multiple environment variables are given the same name, the last one specified typically takes precedence and overrides the previous ones. This means only one environment variable with that name will be available to the container, holding the value of the last definition. It is best practice to avoid duplicate environment variable names to prevent unexpected behavior.",[],1787,,,,,,,
+Q105,CONTAINER_APP_PORT,container-apps/environment-variables.md,True,container_apps_environment,A,What built-in environment variable holds the target port of a container app in Azure Container Apps?,The built-in environment variable that holds the target port of a container app in Azure Container Apps is `PORT`.,[],1600,,,,,,,
+Q106,secretref:,container-apps/environment-variables.md,True,container_apps_environment,A,What prefix do you use to reference a secret's value in an Azure Container Apps environment variable?,"In an Azure Container Apps environment variable, you use the prefix `secretref:` to reference a secret's value. For example:
+
+```yaml
+env:
+  - name: MY_SECRET
+    value: secretref:mySecretName
+```",[],1827,,,,,,,
+Q107,"T4 has 16GB VRAM, A100 has 80GB HBM2/HBM2e",container-apps/gpu-types.md,True,container_apps_gpu,A,How much GPU memory does the NVIDIA T4 have compared to the A100 in Azure Container Apps?,"The NVIDIA T4 GPU has 16 GB of memory, while the NVIDIA A100 GPU has 40 GB or 80 GB of memory depending on the specific A100 variant. In Azure Container Apps, the T4 typically provides 16 GB of GPU memory, whereas the A100 offers significantly more, with options for 40 GB or 80 GB of GPU memory.",[],2246,,,,,,,
+Q108,Up to 20 times better performance,container-apps/gpu-types.md,True,container_apps_gpu,A,"According to Azure Container Apps documentation, how much faster is the A100 GPU than the T4 for training large models?","According to Azure Container Apps documentation, the NVIDIA A100 GPU is up to 3 times faster than the T4 GPU for training large models.",[],1653,,,,,,,
+Q109,"Billed based on running duration in increments of one hour, from allocation until deallocation",container-apps/billing.md,True,container_apps_billing,A,"In Azure Container Apps dynamic sessions, how is a code interpreter session billed?","In Azure Container Apps dynamic sessions, a code interpreter session is billed based on the underlying compute resources consumed during the session. This typically includes charges for CPU, memory, and the duration the container instance runs while the code interpreter session is active. Billing is usage-based, reflecting the actual resource consumption rather than a flat fee per session.",[],2201,,,,,,,
+Q110,E16 compute instances,container-apps/billing.md,True,container_apps_billing,A,What compute instance type does each custom container session pool run on in Azure Container Apps dynamic sessions?,"In Azure Container Apps dynamic sessions, each custom container session pool runs on the **Standard_D4s_v3** compute instance type.",[],1678,,,,,,,
+Q111,8 GB per app or job replica,container-apps/containers.md,True,container_apps_containers,A,What is the maximum container image size supported for a Consumption workload profile in Azure Container Apps?,The maximum container image size supported for a Consumption workload profile in Azure Container Apps is 10 GB.,[],1741,,,,,,,
+Q112,"No, privileged containers with host-level access are not allowed",container-apps/containers.md,True,container_apps_containers,A,Does Azure Container Apps allow privileged containers with host-level access?,"No, Azure Container Apps does not allow privileged containers with host-level access. It is a managed serverless container service designed to run containers in a secure, isolated environment without granting direct host-level or privileged access. If you require privileged containers or host-level access, you would need to use other Azure services like Azure Kubernetes Service (AKS) with appropriate node configurations.",[],1971,,,,,,,
+Q113,It identifies the name of the secret in the secrets array where the registry password is defined,container-apps/containers.md,True,container_apps_containers,A,What role does the passwordSecretRef field play when configuring a private container registry in Azure Container Apps?,"The `passwordSecretRef` field in Azure Container Apps is used to reference a secret that contains the password (or access token) for authenticating to a private container registry. When configuring a private container registry, you provide the registry server URL, username, and a password. Instead of embedding the password directly in the configuration, you store it securely as a secret in Azure Container Apps, and `passwordSecretRef` points to that secret. This enhances security by keeping sensitive credentials out of the main configuration and enabling secure retrieval at runtime.",[],2382,,,,,,,
+Q114,"By using the built-in service discovery through the container app name as the hostname, or via Dapr service invocation using the Dapr app ID",container-apps/connect-apps.md,True,container_apps_networking,A,How do you connect two Azure Container Apps so they can communicate with each other?,"To connect two Azure Container Apps so they can communicate with each other, you typically use the built-in networking features of Azure Container Apps within the same environment. Here’s how you can do it:
+
+1. **Deploy Both Container Apps in the Same Container Apps Environment**  
+   Azure Container Apps that are deployed within the same Container Apps Environment share a virtual network and can communicate with each other using their internal FQDN (Fully Qualified Domain Name).
+
+2. **Use Internal DNS Names for Communication**  
+   Each container app gets an internal DNS name in the format:  
+   ```
+   <app-name>.<environment-name>.azurecontainerapps.io
+   ```  
+   You can use this DNS name to call one container app from another.
+
+3. **Example**  
+   Suppose you have two container apps: `app1` and `app2` in the environment `myenv`. From `app1`, you can send HTTP requests to `app2` using:  
+   ```
+   http://app2.myenv.azurecontainerapps.io
+   ```
+
+4. **Ensure Proper Ingress and Authentication Settings**  
+   - If you want the apps to communicate internally only, configure ingress to be internal or disabled as needed.  
+   - If authentication is enabled, ensure that the calling app has the necessary tokens or credentials.
+
+5. **Use Environment Variables or Configuration to Store Target URLs**  
+   Pass the target app’s internal URL as an environment variable or configuration setting to the calling app.
+
+---
+
+**Summary:**  
+- Deploy both apps in the same Container Apps Environment.  
+- Use the internal DNS name `<app-name>.<environment-name>.azurecontainerapps.io` to communicate.  
+- Configure ingress and authentication appropriately.
+
+This approach leverages Azure Container Apps’ built-in service discovery and networking capabilities for seamless communication.",[],4260,,,,,,,
+Q115,Requests from outside the environment receive a 404 response; the app is only reachable from other container apps in the same environment,container-apps/connect-apps.md,True,container_apps_networking,A,What happens to a container app's traffic when it's configured with internal ingress visibility in Azure Container Apps?,"When a container app in Azure Container Apps is configured with **internal ingress visibility**, its ingress endpoint is accessible **only within the virtual network (VNet)** or the internal Azure environment. This means:
+
+- The app does **not** receive traffic from the public internet.
+- Traffic to the app is restricted to internal clients or services within the same VNet or connected networks.
+- The app can still communicate with other internal resources securely.
+- External users cannot directly access the app via its ingress endpoint.
+
+In summary, configuring internal ingress visibility makes the container app's traffic internal-only, isolating it from public internet access.",[],2179,,,,,,,
+Q116,The container app name is used directly as the hostname,container-apps/connect-apps.md,True,container_apps_networking,A,What format is used as the hostname when one container app calls another within the same Azure Container Apps environment?,"Within the same Azure Container Apps environment, containers communicate with each other using the **container app name** as the hostname. Specifically, you use the container app's name as the DNS name to call another container app.
+
+For example, if you have two container apps named `app1` and `app2` in the same environment, `app1` can call `app2` using the hostname:
+
+```
+http://app2
+```
+
+This works because Azure Container Apps provides internal DNS resolution within the same environment, allowing container apps to discover and communicate with each other by their app names.",[],2189,,,,,,,
+Q117,"They must complete successfully, running in the order defined in the array",container-apps/containers.md,True,container_apps_containers,A,What must be true of init containers in Azure Container Apps before the primary app container starts?,"In Azure Container Apps, init containers must complete successfully before the primary app container starts. This means that all init containers run to completion and exit without errors, ensuring any necessary setup or initialization tasks are finished prior to launching the main application container.",[],1839,,,,,,,
+Q118,0.25 vCPU and 0.5Gi memory,container-apps/containers.md,True,container_apps_containers,A,What CPU and memory combination is the minimum allowed per container app on the Consumption plan in Azure Container Apps?,"The minimum allowed CPU and memory combination per container in Azure Container Apps on the Consumption plan is:
+
+- **CPU:** 0.25 vCPU  
+- **Memory:** 0.5 GB (512 MB)
+
+This is the smallest resource allocation you can specify for a container app in the Consumption plan.",[],1834,,,,,,,
+Q119,0 issue digicert.com,container-apps/custom-domains-managed-certificates.md,True,container_apps_custom_domains,A,"What CAA record value must you add if a Certification Authority Authorization record exists on your root domain, to allow a free managed certificate in Azure Container Apps?","To allow Azure Container Apps to issue a free managed certificate when a CAA record exists on your root domain, you must add the following CAA record value:
+
+```
+0 issue ""digicert.com""
+```
+
+Explanation:
+- Azure's free managed certificates are issued by DigiCert.
+- The CAA record authorizes DigiCert to issue certificates for your domain.
+- The record syntax is: `<flags> <tag> ""<value>""`
+- Here, `0` is the flag, `issue` is the tag, and `""digicert.com""` is the CA domain.
+
+Make sure this CAA record is added alongside any existing CAA records to avoid blocking certificate issuance by DigiCert.",[],2456,,,,,,,
+Q120,Elastic Premium plan or a dedicated App Service plan,azure-functions/functions-bindings-cache.md,True,azure_functions_cache,A,What hosting plans support Redis triggers in Azure Functions?,Redis triggers in Azure Functions are supported only on the **Premium** and **Dedicated (App Service)** hosting plans. They are not supported on the Consumption or Elastic Premium plans.,[],1748,,,,,,,
+Q121,X-ZUMO-AUTH,container-apps/authentication.md,True,container_apps_authentication,A,What header does Azure Container Apps use for a client to present its authentication token on subsequent requests after client-directed sign-in?,"Azure Container Apps uses the standard HTTP `Authorization` header for a client to present its authentication token on subsequent requests after client-directed sign-in. The token is typically included as a Bearer token in this header, for example:
+
+```
+Authorization: Bearer <token>
+```",[],1704,,,,,,,
+Q122,/.auth/logout/done,container-apps/authentication.md,True,container_apps_authentication,A,What URL does a successful sign-out redirect the client to by default in Azure Container Apps authentication?,"By default, a successful sign-out in Azure Container Apps authentication redirects the client to the root URL of the application (i.e., ""/"").",[],2200,,,,,,,
+Q123,X-MS-CLIENT-PRINCIPAL-NAME and X-MS-CLIENT-PRINCIPAL-ID,container-apps/authentication.md,True,container_apps_authentication,A,What two example headers does Azure Container Apps inject into request headers to expose user claims to application code?,"Azure Container Apps injects the following two example headers into request headers to expose user claims to application code:
+
+1. `X-MS-CLIENT-PRINCIPAL-ID` – contains the user’s unique identifier.
+2. `X-MS-CLIENT-PRINCIPAL-NAME` – contains the user’s username or email.
+
+These headers allow the application to access authenticated user information passed from the identity provider.",[],1960,,,,,,,
+Q124,/.auth/login/aad,container-apps/authentication.md,True,container_apps_authentication,A,What is the sign-in endpoint path for the Microsoft identity platform in Azure Container Apps built-in authentication?,"The sign-in endpoint path for the Microsoft identity platform in Azure Container Apps built-in authentication is:
+
+```
+/.ory/kratos/public/self-service/methods/oidc/callback/microsoft
+```
+
+However, in the context of Azure Container Apps built-in authentication (also known as App Service Authentication / Easy Auth), the typical sign-in endpoint path for Microsoft identity platform is:
+
+```
+/.auth/login/aad
+```
+
+This endpoint initiates the sign-in flow using Azure Active Directory (Microsoft identity platform).
+
+So, the sign-in endpoint path you would use is:
+
+```
+/.auth/login/aad
+```
+
+This is the standard path to trigger Microsoft identity platform sign-in in Azure Container Apps built-in authentication.",[],2188,,,,,,,
+Q125,Access-Control-Max-Age,container-apps/cors.md,True,container_apps_cors,A,What CORS response header does the maxAge setting control in Azure Container Apps?,"In Azure Container Apps, the `maxAge` setting controls the `Access-Control-Max-Age` response header in CORS. This header specifies the number of seconds that the results of a preflight request can be cached by the client.",[],1793,,,,,,,
+Q126,* (asterisk),container-apps/cors.md,True,container_apps_cors,A,"What character do you use in Azure Container Apps CORS settings to allow all origins, methods, or headers?","In Azure Container Apps CORS settings, you use the asterisk character `*` to allow all origins, methods, or headers.",[],1647,,,,,,,
+Q127,Updates via the command line overwrite your current settings,container-apps/cors.md,True,container_apps_cors,A,What happens to your current CORS settings when you update configuration via the Azure CLI for Container Apps?,"When you update the CORS settings for an Azure Container App via the Azure CLI, the new configuration you provide replaces the existing CORS settings entirely. In other words, the update operation overwrites the current CORS configuration rather than merging with it. Therefore, you need to include all desired CORS origins and settings in your update command to avoid unintentionally removing existing allowed origins.",[],1890,,,,,,,
+Q128,30 seconds,azure-functions/functions-bindings-azure-sql.md,True,azure_functions_sql,A,What is the default command timeout in seconds for Azure SQL bindings in Azure Functions before a query is terminated?,"The default command timeout for Azure SQL bindings in Azure Functions is 30 seconds. If a query execution exceeds this duration, it will be terminated unless the timeout is explicitly configured to a different value.",[],1681,,,,,,,
+Q129,"NTEXT, TEXT, and IMAGE",azure-functions/functions-bindings-azure-sql.md,True,azure_functions_sql,A,"Which SQL Server data types are not supported for output bindings in Azure Functions, causing data upserts to fail?","In Azure Functions, when using SQL Server output bindings, certain SQL Server data types are not supported and can cause data upserts to fail. These unsupported data types typically include:
+
+- **TEXT, NTEXT, IMAGE** (deprecated large object types)
+- **XML**
+- **GEOGRAPHY, GEOMETRY** (spatial types)
+- **TIMESTAMP / ROWVERSION**
+- **SQL_VARIANT**
+- **CURSOR**
+- **TABLE**
+
+The most common issues arise with large object types (TEXT, NTEXT, IMAGE), XML, and spatial types because the binding does not handle their serialization properly.
+
+To avoid upsert failures, ensure your table columns use supported data types such as:
+
+- INT, BIGINT, SMALLINT, TINYINT
+- BIT
+- DECIMAL, NUMERIC, FLOAT, REAL
+- CHAR, VARCHAR, NCHAR, NVARCHAR
+- DATE, DATETIME, DATETIME2, SMALLDATETIME, TIME
+- UNIQUEIDENTIFIER
+
+If you need to work with unsupported types, consider handling the data operations manually in code instead of relying on output bindings.",[],3067,,,,,,,
+Q130,app.CosmosDB(),azure-functions/functions-bindings-cosmosdb-v2.md,True,azure_functions_go,A,What registration method does the Go worker in Azure Functions use for an Azure Cosmos DB trigger?,"The Go worker in Azure Functions uses attribute-based registration for an Azure Cosmos DB trigger. Specifically, it relies on function metadata defined in the `function.json` file to register the trigger binding, rather than using code-based decorators or annotations as in some other languages. This metadata-driven approach enables the Go worker to recognize and bind the Azure Cosmos DB trigger when the function is invoked.",[],2305,,,,,,,
+Q131,Gateway,azure-functions/functions-bindings-cosmosdb-v2.md,True,azure_functions_cosmosdb,A,What is the default connection mode for the Azure Cosmos DB binding in Azure Functions host.json settings?,The default connection mode for the Azure Cosmos DB binding in Azure Functions `host.json` settings is **Gateway** mode.,[],1914,,,,,,,
+Q132,uid,azure-functions/functions-bindings-azure-mysql.md,True,azure_functions_mysql,A,What connection string keyword specifies the MySQL user account for authentication in Azure Functions MySQL bindings?,"The connection string keyword that specifies the MySQL user account for authentication in Azure Functions MySQL bindings is **""User Id""** (or equivalently **""Uid""**).",[],1746,,,,,,,
+Q133,"GEOMETRY, POINT, and POLYGON",azure-functions/functions-bindings-azure-mysql.md,True,azure_functions_mysql,A,Which spatial data types are unsupported for output bindings in Azure Database for MySQL bindings for Azure Functions?,"Azure Database for MySQL bindings for Azure Functions do not support spatial data types such as **GEOMETRY**, **POINT**, **LINESTRING**, and **POLYGON** for output bindings. These spatial types are unsupported when used as output parameters in the bindings.",[],1856,,,,,,,
+Q134,Viewer permissions,azure-functions/functions-bindings-azure-data-explorer.md,True,azure_functions_data_explorer,A,What permission level do users need for Azure Data Explorer input bindings in Azure Functions?,"For Azure Data Explorer input bindings in Azure Functions, users need **read** permission on the target Azure Data Explorer (Kusto) database or table. This typically means the Azure Function's managed identity or service principal must have at least the **Viewer** role or a custom role with **read** access to the relevant database or table in Azure Data Explorer.",[],2146,,,,,,,
+Q135,Ingestor permissions,azure-functions/functions-bindings-azure-data-explorer.md,True,azure_functions_data_explorer,A,What permission level do users need for Azure Data Explorer output bindings in Azure Functions?,"For Azure Data Explorer output bindings in Azure Functions, users need **write** permissions on the target Azure Data Explorer (Kusto) database or table. Specifically, the identity used by the Azure Function (such as a managed identity or service principal) must have the **""Data Ingestor""** role or equivalent permissions that allow data ingestion into the database or table. This typically includes permissions to execute the `.ingest` commands or write data via the SDK/API.",[],2283,,,,,,,
+Q136,managedServiceIdentity,azure-functions/functions-bindings-azure-data-explorer.md,True,azure_functions_data_explorer,A,What property must be set in the binding definition to use managed identity connections with Azure Data Explorer bindings in Azure Functions?,"To use managed identity connections with Azure Data Explorer bindings in Azure Functions, you must set the property **`authenticationType`** to **`ManagedIdentity`** in the binding definition.",[],1721,,,,,,,
+Q137,"Reduce container image size and eliminate unnecessary libraries, or pre-download large models to storage using storage mounts",container-apps/cold-start.md,True,container_apps_cold_start,A,"According to Azure Container Apps guidance, what should you do to reduce cold-start times for images with large machine learning models?","According to Azure Container Apps guidance, to reduce cold-start times for images with large machine learning models, you should **preload or cache the model during container startup** rather than loading it on-demand. This can be done by initializing the model in the container's startup code so that the model is ready to serve requests immediately after the container starts, minimizing latency caused by loading large models at request time. Additionally, using smaller, optimized models or leveraging techniques like model quantization can also help reduce startup time.",[],2124,,,,,,,
+Q138,1,azure-functions/functions-bindings-azure-sql.md,True,azure_functions_sql,A,What is the default value of ConnectRetryCount for Azure SQL bindings in Azure Functions?,"The default value of **ConnectRetryCount** for Azure SQL bindings in Azure Functions is **0**. This means that by default, the binding does not retry the connection on failure unless you explicitly set this property to a higher value.",[],2024,,,,,,,
+Q139,6380,azure-functions/functions-bindings-cache.md,True,azure_functions_cache,A,What port is used in the connection string when connecting Azure Functions to Azure Cache for Redis?,"When connecting Azure Functions to Azure Cache for Redis, the connection string typically uses port **6380** for SSL/TLS encrypted connections. The default non-SSL port is **6379**, but Azure Cache for Redis enforces SSL by default, so port 6380 is commonly used.",[],1933,,,,,,,
+Q140,A liveness probe,container-apps/cold-start.md,True,container_apps_cold_start,A,"What does Azure Container Apps automatically set up when ingress is enabled, which can cause a slow-starting app to be killed?","When ingress is enabled in Azure Container Apps, it automatically sets up a **readiness probe**. This readiness probe checks if the app is ready to receive traffic. If the app is slow to start and does not respond to the readiness probe in time, the platform may consider the app unhealthy and kill or restart it.",[],1761,,,,,,,
+Q141,,,False,cosmos_db,A,What is the default consistency level in Azure Cosmos DB?,The default consistency level in Azure Cosmos DB is **Session** consistency.,[],1843,,,,,,,
+Q142,,,False,cosmos_db,A,How does Azure Cosmos DB handle automatic failover across regions?,"Azure Cosmos DB handles automatic failover across regions through its multi-region replication and failover capabilities. Specifically:
+
+1. **Multi-Region Replication:**  
+   Azure Cosmos DB allows you to configure your database account to replicate data across multiple Azure regions. This replication is fully managed and provides low-latency, high-availability access to your data globally.
+
+2. **Automatic Failover:**  
+   When you enable automatic failover, Azure Cosmos DB continuously monitors the health of the primary write region. If the primary region becomes unavailable due to an outage or failure, Azure Cosmos DB automatically fails over to the next available region in the failover priority list.
+
+3. **Failover Priority:**  
+   You define a failover priority order for the regions associated with your Cosmos DB account. The region with the highest priority is the primary write region, and others serve as read regions. During failover, the system promotes the next highest priority region to be the new write region.
+
+4. **Seamless Client Experience:**  
+   Cosmos DB SDKs are designed to handle failover transparently. They automatically detect the new write region endpoint after failover and route requests accordingly, minimizing downtime and disruption.
+
+5. **Consistency and Data Integrity:**  
+   Because Cosmos DB uses multi-master replication and guarantees data consistency models, the failover process ensures that data remains consistent and durable across regions.
+
+In summary, Azure Cosmos DB’s automatic failover mechanism provides high availability by monitoring the primary region and switching write operations to a healthy secondary region based on a configured priority, ensuring minimal downtime and continuous data access.",[],3769,,,,,,,
+Q143,,,False,cosmos_db,A,What is a partition key in Azure Cosmos DB and why is it important?,"A partition key in Azure Cosmos DB is a property within your data that Cosmos DB uses to distribute and organize data across multiple physical partitions. It is a value chosen from each item in a container that determines how the data is partitioned.
+
+**Why it is important:**
+
+1. **Scalability:** The partition key enables Cosmos DB to scale out by distributing data and request load evenly across multiple partitions, allowing the database to handle large volumes of data and high throughput.
+
+2. **Performance:** Proper choice of partition key ensures efficient query performance and low latency by minimizing cross-partition queries and evenly distributing workload.
+
+3. **Cost Efficiency:** Since throughput (Request Units) is provisioned per physical partition, a well-chosen partition key helps optimize resource utilization and cost.
+
+4. **Data Organization:** It logically groups related data together, which can improve query efficiency when accessing items with the same partition key.
+
+In summary, the partition key is critical for achieving high availability, scalability, and performance in Azure Cosmos DB. Choosing the right partition key is essential for the effective operation of your Cosmos DB container.",[],4489,,,,,,,
+Q144,,,False,cosmos_db,A,What is the maximum document size supported by Azure Cosmos DB?,The maximum document size supported by Azure Cosmos DB is 2 MB.,[],1774,,,,,,,
+Q145,,,False,cosmos_db,A,What are Request Units in Azure Cosmos DB?,"Request Units (RUs) in Azure Cosmos DB are a performance currency that abstracts the system resources required to perform database operations such as reads, writes, and queries. Each operation in Cosmos DB consumes a certain number of RUs based on factors like the complexity of the query, the size of the data, and the consistency level. By provisioning a certain number of RUs per second (RU/s), you allocate throughput capacity to your Cosmos DB container or database, ensuring predictable performance and scalability. This model simplifies capacity planning and billing by providing a single measure for resource consumption.",[],2673,,,,,,,
+Q146,,,False,cosmos_db,A,What APIs does Azure Cosmos DB support for data access?,"Azure Cosmos DB supports multiple APIs for data access, including:
+
+1. SQL API (Core API) – for querying JSON documents using SQL-like syntax.
+2. MongoDB API – for applications using MongoDB drivers.
+3. Cassandra API – for applications using Cassandra query language (CQL).
+4. Gremlin API – for graph database queries using the Gremlin traversal language.
+5. Table API – for key-value and table storage scenarios compatible with Azure Table Storage.
+
+These APIs allow developers to use familiar tools and SDKs to interact with Cosmos DB.",[],2386,,,,,,,
+Q147,,,False,cosmos_db,A,How does the change feed feature work in Azure Cosmos DB?,"The change feed feature in Azure Cosmos DB provides a persistent, ordered log of changes (inserts and updates) made to items within a container. It enables applications to listen to and process these changes in near real-time.
+
+Here's how it works:
+
+1. **Change Tracking**: Whenever items are created or updated in a Cosmos DB container, the changes are recorded in the change feed. Deletes are not included in the change feed.
+
+2. **Ordered Log**: The change feed is an append-only, ordered sequence of changes, sorted by the order in which the changes occurred within each logical partition.
+
+3. **Incremental Processing**: Consumers can read the change feed incrementally, starting from a specific point in time or from the beginning, allowing them to process only new changes since their last read.
+
+4. **Multiple Consumers**: Multiple consumers can independently read the change feed without interfering with each other.
+
+5. **Integration**: The change feed can be accessed programmatically via the SDKs or integrated with Azure Functions, Azure Stream Analytics, or other event-driven architectures to trigger downstream processing.
+
+6. **Use Cases**: Common use cases include real-time data processing, event sourcing, cache invalidation, materialized views, and data replication.
+
+In summary, the change feed in Azure Cosmos DB acts as a reliable, ordered stream of data changes that applications can consume to react to data modifications efficiently.",[],3426,,,,,,,
+Q148,,,False,cosmos_db,A,What is the difference between provisioned throughput and serverless mode in Azure Cosmos DB?,"The difference between provisioned throughput and serverless mode in Azure Cosmos DB lies in how resources are allocated and billed:
+
+1. **Provisioned Throughput:**
+   - You explicitly allocate a fixed amount of Request Units per second (RU/s) to your Cosmos DB container or database.
+   - You are billed for the provisioned RU/s capacity regardless of actual usage.
+   - Provides predictable performance and is suitable for workloads with steady or predictable traffic.
+   - Allows for scaling throughput up or down manually or via autoscale.
+   - Offers higher availability and SLA guarantees for throughput.
+
+2. **Serverless Mode:**
+   - No need to provision throughput upfront.
+   - You are billed based on the actual Request Units consumed by your operations.
+   - Ideal for intermittent, unpredictable, or low-traffic workloads.
+   - Automatically scales with demand without manual intervention.
+   - Has some limitations on maximum RU/s per operation and may not be suitable for high-throughput scenarios.
+
+In summary, provisioned throughput is a capacity-based, pre-allocated model with predictable billing and performance, while serverless mode is a consumption-based model that charges based on usage and is optimized for variable or low traffic patterns.",[],3506,,,,,,,
+Q149,,,False,cosmos_db,A,How do you perform a cross-partition query in Azure Cosmos DB?,"To perform a cross-partition query in Azure Cosmos DB, you need to:
+
+1. **Enable cross-partition querying**: When using the SDK or REST API, set the option to allow cross-partition queries. For example, in the .NET SDK, set `EnableCrossPartitionQuery = true` in the `QueryRequestOptions`.
+
+2. **Use a query that does not specify a single partition key**: Cross-partition queries run across all partitions, so your query should not restrict to a single partition key value.
+
+3. **Example in .NET SDK**:
+
+```csharp
+var queryDefinition = new QueryDefinition(""SELECT * FROM c WHERE c.property = @value"")
+    .WithParameter(""@value"", someValue);
+
+var queryRequestOptions = new QueryRequestOptions
+{
+    MaxItemCount = -1,
+    EnableCrossPartitionQuery = true
+};
+
+FeedIterator<MyItem> resultSetIterator = container.GetItemQueryIterator<MyItem>(
+    queryDefinition,
+    requestOptions: queryRequestOptions);
+
+while (resultSetIterator.HasMoreResults)
+{
+    FeedResponse<MyItem> response = await resultSetIterator.ReadNextAsync();
+    foreach (var item in response)
+    {
+        // Process item
+    }
+}
+```
+
+4. **In SQL API (Azure Portal or SDK)**: Just run your query without specifying a partition key, and ensure the SDK or tool supports cross-partition queries.
+
+**Note:** Cross-partition queries can be more expensive and slower than single-partition queries, so use them judiciously.
+
+---
+
+**Summary:** To perform a cross-partition query, run your query without specifying a partition key and enable cross-partition querying in your SDK or API call.",[],3823,,,,,,,
+Q150,,,False,cosmos_db,A,What is the TTL feature in Azure Cosmos DB used for?,"The TTL (Time to Live) feature in Azure Cosmos DB is used to automatically delete items from a container after a specified period of time. This helps manage data lifecycle by enabling automatic expiration and removal of data, reducing storage costs and simplifying data management for scenarios like session state, cache, or temporary data.",[],1828,,,,,,,
+Q151,,,False,cosmos_db,A,What consistency levels are available in Azure Cosmos DB?,"Azure Cosmos DB offers five consistency levels:
+
+1. **Strong** – Guarantees linearizability; reads always return the most recent committed write.
+2. **Bounded Staleness** – Reads lag behind writes by a defined number of versions or time interval.
+3. **Session** – Guarantees monotonic reads and writes within a single client session.
+4. **Consistent Prefix** – Reads never see out-of-order writes; updates are seen in the order they were committed.
+5. **Eventual** – No ordering guarantees; reads may see stale data but will eventually be consistent.
+
+These levels allow you to balance between consistency, availability, and latency based on your application needs.",[],2455,,,,,,,
+Q152,,,False,cosmos_db,A,How does Azure Cosmos DB support multi-region writes?,"Azure Cosmos DB supports multi-region writes through its **multi-master replication** feature. This allows you to enable **write operations in multiple Azure regions simultaneously**, providing the following capabilities:
+
+1. **Global Distribution with Multi-Master**: You can configure your Cosmos DB account to have multiple writable regions. Each region acts as a master, allowing applications to perform write operations locally, reducing latency.
+
+2. **Conflict Resolution**: Since writes can occur concurrently in multiple regions, Cosmos DB provides automatic conflict resolution policies to handle data conflicts. You can choose from:
+   - Last write wins (based on a timestamp)
+   - Custom conflict resolution using stored procedures
+
+3. **Consistency Models**: Cosmos DB offers five well-defined consistency levels (Strong, Bounded Staleness, Session, Consistent Prefix, Eventual) that work seamlessly with multi-region writes, allowing you to balance between consistency and performance.
+
+4. **Automatic Replication and Synchronization**: Changes made in one region are asynchronously replicated to other writable regions, ensuring data synchronization across the globe.
+
+In summary, Azure Cosmos DB’s multi-master capability enables multi-region writes by allowing multiple writable replicas, automatic conflict resolution, and global data synchronization, thereby supporting highly available and low-latency write operations worldwide.",[],3264,,,,,,,
+Q153,,,False,cosmos_db,A,What is the Azure Cosmos DB emulator used for?,"The Azure Cosmos DB emulator is used for developing and testing applications locally that interact with Azure Cosmos DB. It provides a local environment that emulates the Azure Cosmos DB service, allowing developers to build and test their applications without needing an internet connection or an actual Azure subscription. This helps in speeding up development cycles and reducing costs before deploying to the cloud.",[],1814,,,,,,,
+Q154,,,False,cosmos_db,A,How does Azure Cosmos DB index data by default?,"By default, Azure Cosmos DB automatically indexes all data within a container without requiring any schema or index management from the user. It uses a range index on all properties, which supports efficient queries including equality and range queries. This automatic indexing enables fast query performance and flexible querying capabilities out of the box.",[],2134,,,,,,,
+Q155,,,False,cosmos_db,A,What is the difference between a database and a container in Azure Cosmos DB?,"In Azure Cosmos DB, the terms **database** and **container** refer to different levels of the data hierarchy and serve distinct purposes:
+
+- **Database**:  
+  - A logical namespace that groups one or more containers.  
+  - It acts as a top-level organizational unit within a Cosmos DB account.  
+  - Databases help manage and isolate containers, and you can set throughput (RU/s) at the database level if desired.  
+  - Example: You might have a database named ""CustomerData"" that contains multiple containers related to customer information.
+
+- **Container**:  
+  - A container is a schema-agnostic container of items (documents, key-value pairs, graph nodes, etc.) within a database.  
+  - It is the unit of scalability and distribution in Cosmos DB.  
+  - Containers store the actual data and have a partition key that determines how data is distributed across partitions.  
+  - You can configure throughput (RU/s) at the container level if not set at the database level.  
+  - Example: Within the ""CustomerData"" database, you might have containers like ""Profiles,"" ""Orders,"" and ""Feedback.""
+
+**In summary:**  
+- A **database** is a logical grouping of containers.  
+- A **container** is where the actual data resides and is the unit of scalability and partitioning.",[],3324,,,,,,,
+Q156,,,False,kubernetes,A,What is a Kubernetes pod?,"A Kubernetes pod is the smallest and simplest unit in the Kubernetes object model that you can create or deploy. It represents a single instance of a running process in a cluster and can contain one or more tightly coupled containers that share the same network namespace, storage volumes, and lifecycle. Pods are used to host application containers and provide an environment for them to run together on the same node.",[],2070,,,,,,,
+Q157,,,False,kubernetes,A,What is the difference between a Deployment and a StatefulSet in Kubernetes?,"The key differences between a **Deployment** and a **StatefulSet** in Kubernetes are related to how they manage pods and their associated storage:
+
+1. **Pod Identity and Ordering:**
+   - **Deployment:** Pods are interchangeable and have no stable, unique identity. They are created and destroyed in any order.
+   - **StatefulSet:** Pods have a stable, unique network identity (a persistent hostname) and are created, updated, and deleted in a defined order (sequentially).
+
+2. **Storage:**
+   - **Deployment:** Typically uses ephemeral storage or shared storage; pods do not have stable persistent storage tied to their identity.
+   - **StatefulSet:** Provides stable, persistent storage for each pod using PersistentVolumeClaims (PVCs) that are retained across pod restarts and rescheduling.
+
+3. **Use Cases:**
+   - **Deployment:** Suitable for stateless applications where any pod can serve any request (e.g., web servers, front-end apps).
+   - **StatefulSet:** Designed for stateful applications that require stable identities and persistent storage (e.g., databases, distributed systems like Kafka, Cassandra).
+
+In summary, use **Deployment** for stateless workloads and **StatefulSet** for stateful workloads requiring stable identities and persistent storage.",[],3594,,,,,,,
+Q158,,,False,kubernetes,A,How does the Kubernetes Horizontal Pod Autoscaler work?,"The Kubernetes Horizontal Pod Autoscaler (HPA) automatically adjusts the number of pod replicas in a deployment, replica set, or stateful set based on observed metrics such as CPU utilization, memory usage, or custom metrics.
+
+Here's how it works:
+
+1. **Metrics Collection**: HPA continuously monitors the resource usage of pods using metrics from the Kubernetes Metrics Server or other custom metrics sources.
+
+2. **Target Utilization**: You define a target metric value (e.g., 50% CPU utilization) in the HPA configuration.
+
+3. **Scaling Decision**: The HPA controller compares the current average metric value across pods to the target. If the current usage is higher than the target, it increases the number of replicas; if lower, it decreases them.
+
+4. **Scaling Action**: The HPA updates the replica count in the deployment or other controller accordingly, causing Kubernetes to add or remove pods.
+
+5. **Cooldown and Stabilization**: HPA includes stabilization windows and cooldown periods to avoid rapid scaling fluctuations.
+
+In summary, the HPA dynamically scales the number of pods to maintain desired performance and resource utilization levels based on real-time metrics.",[],3342,,,,,,,
+Q159,,,False,kubernetes,A,What is a Kubernetes ConfigMap used for?,"A Kubernetes ConfigMap is used to store configuration data in key-value pairs that can be consumed by pods and containers. It allows you to decouple configuration artifacts from image content, enabling applications to be easily configured and updated without rebuilding container images. ConfigMaps can provide environment variables, command-line arguments, or configuration files to containers.",[],2012,,,,,,,
+Q160,,,False,kubernetes,A,What is the role of etcd in a Kubernetes cluster?,"etcd is a distributed key-value store that serves as the primary data store for a Kubernetes cluster. Its role is to reliably store all cluster state and configuration data, including information about nodes, pods, services, secrets, and other Kubernetes objects. Kubernetes components interact with etcd to read and write cluster state, ensuring consistency and coordination across the cluster. In summary, etcd acts as the single source of truth for the entire Kubernetes cluster.",[],2302,,,,,,,
+Q161,,,False,kubernetes,A,What is a Kubernetes namespace and when would you use one?,"A Kubernetes namespace is a virtual cluster or a logical partition within a single physical Kubernetes cluster. It provides a way to divide cluster resources between multiple users or teams, allowing for resource isolation and organization.
+
+You would use a namespace to:
+
+1. **Isolate resources:** Separate resources (pods, services, deployments, etc.) for different projects, teams, or environments (e.g., development, staging, production) within the same cluster.
+2. **Manage resource quotas:** Apply resource limits and quotas to control resource consumption per namespace.
+3. **Simplify access control:** Use Role-Based Access Control (RBAC) to grant permissions scoped to a specific namespace.
+4. **Avoid naming conflicts:** Since resource names must be unique within a namespace but can be reused across namespaces, namespaces help prevent naming collisions.
+
+In summary, namespaces help organize and manage cluster resources efficiently, especially in multi-tenant or multi-environment scenarios.",[],2446,,,,,,,
+Q162,,,False,kubernetes,A,How does Kubernetes handle rolling updates for a Deployment?,"Kubernetes handles rolling updates for a Deployment by gradually replacing old Pods with new ones to update the application without downtime. Here's how it works:
+
+1. **Update Deployment Spec:** When you change the Deployment's Pod template (e.g., update the container image), Kubernetes detects the change.
+
+2. **Create New ReplicaSet:** Kubernetes creates a new ReplicaSet with the updated Pod template.
+
+3. **Gradual Pod Replacement:** Kubernetes incrementally scales up the new ReplicaSet while scaling down the old one, maintaining the desired number of Pods.
+
+4. **Rolling Update Strategy:** By default, Kubernetes uses the `RollingUpdate` strategy with parameters:
+   - `maxUnavailable` (default 25%): Maximum number of Pods that can be unavailable during the update.
+   - `maxSurge` (default 25%): Maximum number of extra Pods that can be created above the desired number during the update.
+
+5. **Health Checks:** Kubernetes waits for new Pods to become ready (passing readiness probes) before terminating old Pods, ensuring continuous availability.
+
+6. **Completion:** The update completes when all old Pods are replaced by new Pods running the updated version.
+
+This approach enables zero-downtime deployments by carefully controlling the pace of Pod replacement and ensuring service availability throughout the update.",[],3538,,,,,,,
+Q163,,,False,kubernetes,A,What is a Kubernetes Service and what types are available?,"A **Kubernetes Service** is an abstraction that defines a logical set of Pods and a policy by which to access them. It enables stable network access to a dynamic group of Pods, providing load balancing and service discovery within a Kubernetes cluster.
+
+### Types of Kubernetes Services:
+
+1. **ClusterIP (default)**  
+   - Exposes the Service on a cluster-internal IP.  
+   - Accessible only within the cluster.  
+   - Used for internal communication between Pods.
+
+2. **NodePort**  
+   - Exposes the Service on each Node’s IP at a static port (the NodePort).  
+   - Accessible from outside the cluster using `<NodeIP>:<NodePort>`.  
+   - Useful for simple external access without a load balancer.
+
+3. **LoadBalancer**  
+   - Exposes the Service externally using a cloud provider’s load balancer.  
+   - Automatically provisions a load balancer that routes to the Service.  
+   - Provides a single external IP address.
+
+4. **ExternalName**  
+   - Maps the Service to the contents of the `externalName` field (a DNS name).  
+   - Does not create a proxy or load balancer; instead, it returns a CNAME record.  
+   - Used to redirect Service requests to external services outside the cluster.
+
+These types allow flexible ways to expose and access applications running in Kubernetes.",[],3527,,,,,,,
+Q164,,,False,kubernetes,A,What does the kubectl apply command do in Kubernetes?,"The `kubectl apply` command in Kubernetes is used to create or update resources defined in configuration files. It applies the changes specified in the YAML or JSON manifest to the cluster, performing a declarative update by comparing the desired state in the file with the current state in the cluster and making necessary adjustments. This allows you to manage Kubernetes objects in a version-controlled and repeatable way.",[],2149,,,,,,,
+Q165,,,False,kubernetes,A,What is a Kubernetes Ingress resource used for?,"A Kubernetes Ingress resource is used to manage external access to services within a Kubernetes cluster, typically HTTP and HTTPS traffic. It provides routing rules to direct incoming requests to the appropriate backend services based on hostnames, paths, or other criteria, enabling features like load balancing, SSL termination, and name-based virtual hosting.",[],2079,,,,,,,
+Q166,,,False,kubernetes,A,How does Azure Kubernetes Service manage node upgrades?,"Azure Kubernetes Service (AKS) manages node upgrades through a controlled, automated process designed to minimize downtime and maintain cluster availability. Key aspects include:
+
+1. **Cluster and Node Pool Upgrades**: AKS allows upgrading the Kubernetes control plane (managed by Azure) and the node pools (worker nodes) separately. The control plane is upgraded first by Microsoft, then you upgrade the node pools.
+
+2. **Rolling Upgrades**: When upgrading node pools, AKS performs a rolling upgrade by cordoning and draining nodes one at a time, then upgrading or replacing them. This ensures workloads are rescheduled on other nodes, maintaining application availability.
+
+3. **Upgrade Orchestration**: AKS orchestrates the upgrade process to avoid simultaneous downtime of multiple nodes, respecting Pod Disruption Budgets and ensuring minimal impact on running applications.
+
+4. **Node Image Upgrades**: AKS also supports node image upgrades, which update the underlying VM image for security patches and improvements, done similarly via rolling upgrades.
+
+5. **Manual or Automated Upgrades**: While control plane upgrades are managed by Azure, node pool upgrades can be initiated manually via the Azure portal, CLI, or automated using Azure Update Management or other DevOps pipelines.
+
+In summary, AKS manages node upgrades by performing rolling, orchestrated upgrades of nodes within node pools to ensure high availability and minimal disruption to workloads.",[],3537,,,,,,,
+Q167,,,False,kubernetes,A,What is a DaemonSet in Kubernetes?,"A DaemonSet in Kubernetes is a workload resource that ensures a copy of a specific pod runs on all (or some) nodes in a cluster. It is commonly used for running background tasks such as log collection, monitoring agents, or networking components on every node. When new nodes are added to the cluster, the DaemonSet automatically schedules the pod on those nodes as well.",[],2891,,,,,,,
+Q168,,,False,kubernetes,A,What is the purpose of a Kubernetes liveness probe?,"The purpose of a Kubernetes liveness probe is to determine if a container is still running and healthy. If the liveness probe fails, Kubernetes will restart the container, helping to recover from situations where the application is running but stuck or unhealthy. This ensures that unhealthy containers are automatically detected and replaced to maintain application availability.",[],1861,,,,,,,
+Q169,,,False,kubernetes,A,What is the maximum number of nodes in an AKS node pool?,"The maximum number of nodes in an Azure Kubernetes Service (AKS) node pool is 1,000 nodes.",[],1677,,,,,,,
+Q170,,,False,kubernetes,A,What is a Kubernetes Secret and how is it different from a ConfigMap?,"A **Kubernetes Secret** is an object used to store and manage sensitive information, such as passwords, OAuth tokens, SSH keys, and other confidential data. Secrets are encoded (base64) and can be mounted as files or exposed as environment variables to pods, helping to keep sensitive data separate from application code.
+
+**Differences between a Secret and a ConfigMap:**
+
+1. **Purpose:**
+   - **Secret:** Designed specifically for sensitive data that should be kept confidential.
+   - **ConfigMap:** Used to store non-sensitive configuration data, such as configuration files, command-line arguments, or environment variables.
+
+2. **Data Encoding:**
+   - **Secret:** Data is base64-encoded and can be optionally encrypted at rest by the Kubernetes cluster.
+   - **ConfigMap:** Data is stored as plain text.
+
+3. **Access Control:**
+   - **Secret:** Access to Secrets is more tightly controlled and can be integrated with Kubernetes RBAC and encryption mechanisms.
+   - **ConfigMap:** Less restrictive, as it contains non-sensitive data.
+
+4. **Use Cases:**
+   - **Secret:** Storing passwords, tokens, keys.
+   - **ConfigMap:** Storing configuration files, environment variables, or command-line arguments that are not sensitive.
+
+In summary, use **Secrets** for sensitive information and **ConfigMaps** for general configuration data.",[],3233,,,,,,,
+Q171,,,False,aws_lambda,A,What is the maximum execution timeout for an AWS Lambda function?,The maximum execution timeout for an AWS Lambda function is 15 minutes (900 seconds).,[],2128,,,,,,,
+Q172,,,False,aws_lambda,A,What is the maximum memory size you can allocate to an AWS Lambda function?,"The maximum memory size you can allocate to an AWS Lambda function is 10,240 MB (10 GB).",[],1665,,,,,,,
+Q173,,,False,aws_lambda,A,What is a Lambda Layer in AWS and what is it used for?,"A Lambda Layer in AWS is a distribution mechanism for libraries, custom runtimes, and other dependencies that you can use with AWS Lambda functions. It allows you to package and manage common code and assets separately from your function code, enabling code sharing and easier updates across multiple Lambda functions.
+
+**Uses of Lambda Layers:**
+- Share common libraries or dependencies across multiple Lambda functions without including them in each function's deployment package.
+- Reduce deployment package size by offloading dependencies to layers.
+- Manage and update shared code centrally, improving maintainability.
+- Include custom runtimes or binaries that your Lambda functions require.
+
+In summary, Lambda Layers help improve code reuse, simplify dependency management, and streamline deployment in AWS Lambda environments.",[],2445,,,,,,,
+Q174,,,False,aws_lambda,A,How does AWS Lambda handle cold starts?,"AWS Lambda handles cold starts by initializing a new execution environment when a function is invoked for the first time or after a period of inactivity. During a cold start, Lambda provisions the necessary compute resources, sets up the runtime environment, loads the function code, and runs any initialization code before executing the handler. This process introduces additional latency compared to subsequent invocations (warm starts), where the execution environment is already initialized and reused.
+
+To mitigate cold start latency, AWS Lambda employs several strategies:
+
+1. **Execution Environment Reuse:** After a function invocation, Lambda keeps the execution environment alive for some time to serve subsequent requests without reinitialization.
+
+2. **Provisioned Concurrency:** Customers can configure provisioned concurrency to keep a specified number of execution environments initialized and ready to respond immediately, effectively eliminating cold start delays for those instances.
+
+3. **Optimized Runtimes and Packaging:** Using lightweight runtimes, minimizing deployment package size, and reducing initialization code can help reduce cold start duration.
+
+In summary, AWS Lambda handles cold starts by initializing new execution environments on demand, and offers features like provisioned concurrency to reduce or eliminate cold start latency.",[],2951,,,,,,,
+Q175,,,False,aws_lambda,A,What is the difference between synchronous and asynchronous invocation in AWS Lambda?,"The difference between synchronous and asynchronous invocation in AWS Lambda lies in how the function is executed and how the caller receives the response:
+
+1. **Synchronous Invocation:**
+   - The caller invokes the Lambda function and waits for the function to process the event and return a response.
+   - The caller receives the function's response (or error) immediately.
+   - Common use cases: APIs, real-time processing where the caller needs the result right away.
+   - Example: Invoking Lambda via AWS SDK with `InvocationType` set to `RequestResponse`.
+
+2. **Asynchronous Invocation:**
+   - The caller invokes the Lambda function and immediately receives a success response without waiting for the function to complete.
+   - Lambda queues the event and processes it in the background.
+   - If the function fails, Lambda can retry the invocation or send the event to a dead-letter queue or on-failure destination.
+   - Common use cases: Event-driven processing, background tasks, decoupled workflows.
+   - Example: Invoking Lambda with `InvocationType` set to `Event`.
+
+In summary, synchronous invocation waits for the function's result, while asynchronous invocation returns immediately and processes the function in the background.",[],3643,,,,,,,
+Q176,,,False,aws_lambda,A,What is an AWS Lambda Alias used for?,"An AWS Lambda Alias is used to create a pointer to a specific version of a Lambda function. It allows you to manage and invoke different versions of a function using a stable identifier (the alias name) instead of the version number. This is useful for:
+
+- **Version management:** You can deploy new versions of your function and update the alias to point to the new version without changing the client code.
+- **Traffic shifting:** You can split traffic between two versions of a function by configuring the alias to route a percentage of invocations to different versions, enabling gradual deployments and canary releases.
+- **Environment separation:** Aliases can represent different environments like ""dev,"" ""test,"" and ""prod,"" each pointing to different function versions.
+
+In summary, Lambda Aliases provide a way to manage function versions and deployment workflows more effectively.",[],2320,,,,,,,
+Q177,,,False,aws_lambda,A,What is the default concurrency limit for AWS Lambda functions per region?,"The default concurrency limit for AWS Lambda functions per region is 1,000 concurrent executions.",[],1559,,,,,,,
+Q178,,,False,aws_lambda,A,What is Provisioned Concurrency in AWS Lambda?,Provisioned Concurrency in AWS Lambda is a feature that keeps a specified number of Lambda function instances initialized and ready to respond immediately to invocations. This helps reduce cold start latency by ensuring that functions are pre-warmed and can handle requests with minimal startup delay. It is particularly useful for latency-sensitive applications where consistent and fast response times are critical.,[],1922,,,,,,,
+Q179,,,False,aws_lambda,A,What event sources can trigger an AWS Lambda function?,"AWS Lambda functions can be triggered by a wide variety of event sources, including but not limited to:
+
+1. **API Gateway** – HTTP requests via RESTful APIs or WebSocket APIs.
+2. **Amazon S3** – Object creation, deletion, or other bucket events.
+3. **Amazon DynamoDB** – Streams for item-level changes.
+4. **Amazon Kinesis** – Data stream records.
+5. **Amazon Simple Notification Service (SNS)** – Notifications and messages.
+6. **Amazon Simple Queue Service (SQS)** – Messages in queues.
+7. **Amazon CloudWatch Events / EventBridge** – Scheduled events or event patterns.
+8. **AWS CloudFormation** – Custom resource lifecycle events.
+9. **AWS CodeCommit** – Repository events like commits or pull requests.
+10. **AWS IoT** – IoT rule actions.
+11. **Amazon Cognito** – User pool triggers.
+12. **AWS Config** – Configuration changes.
+13. **AWS CloudWatch Logs** – Log events.
+14. **Alexa Skills Kit** – Voice interaction events.
+15. **AWS Step Functions** – Task state transitions.
+16. **AWS CodePipeline** – Pipeline state changes.
+17. **Amazon EventBridge** – Custom application events or SaaS partner events.
+
+These event sources allow Lambda to respond automatically to changes in data, system state, or user actions.",[],3347,,,,,,,
+Q180,,,False,aws_lambda,A,How does AWS Lambda pricing work?,"AWS Lambda pricing is based on the number of requests and the duration of code execution, measured in gigabyte-seconds (GB-s). Here’s a breakdown:
+
+1. **Number of Requests**  
+   - You are charged for the total number of requests to your Lambda functions.  
+   - The first 1 million requests per month are free. After that, you pay a fixed rate per million requests.
+
+2. **Duration**  
+   - Duration is calculated from the time your code begins executing until it returns or otherwise terminates, rounded up to the nearest millisecond.  
+   - Pricing depends on the amount of memory you allocate to your function. You pay for the compute time in GB-seconds, which is the allocated memory (in GB) multiplied by the execution time (in seconds).  
+   - The first 400,000 GB-seconds per month are free. After that, you pay a rate per GB-second.
+
+3. **Additional Charges**  
+   - If your Lambda function uses other AWS services (e.g., data transfer, API Gateway), those services may incur additional charges.  
+   - Provisioned Concurrency, if used, has separate pricing.
+
+**Summary:**  
+- Free tier: 1 million requests and 400,000 GB-seconds per month.  
+- After free tier: Pay per request and per GB-second of execution time.  
+- Memory allocation affects cost since it determines GB-seconds.
+
+For the most accurate and up-to-date pricing, always refer to the official AWS Lambda pricing page.",[],3719,,,,,,,
+Q181,,,False,aws_lambda,A,What is the AWS Lambda deployment package size limit?,"The AWS Lambda deployment package size limits are:
+
+- Compressed deployment package (ZIP file) uploaded directly: **50 MB**
+- Uncompressed deployment package size (extracted): **250 MB**
+- When using an Amazon S3 bucket to upload the deployment package, the compressed size can be up to **250 MB**
+
+Additionally, for container images used with Lambda:
+
+- Maximum image size: **10 GB**
+
+These limits apply to the total size of your function code and dependencies.",[],2217,,,,,,,
+Q182,,,False,aws_lambda,A,What is a dead letter queue in AWS Lambda?,"A dead letter queue (DLQ) in AWS Lambda is a destination (either an Amazon SQS queue or an Amazon SNS topic) where Lambda sends event messages that it failed to process successfully after retry attempts. This allows you to capture and analyze failed events for troubleshooting and debugging purposes. If a Lambda function invocation fails and the function is configured with a DLQ, the event that caused the failure is sent to the DLQ instead of being lost.",[],2006,,,,,,,
+Q183,,,False,aws_lambda,A,How does AWS Lambda integrate with Amazon API Gateway?,"AWS Lambda integrates with Amazon API Gateway by allowing API Gateway to act as a front door for applications to invoke Lambda functions in response to HTTP(S) requests. Here’s how the integration works:
+
+1. **API Gateway Setup**: You create an API in Amazon API Gateway and define resources and methods (e.g., GET, POST).
+
+2. **Integration with Lambda**: For each method, you configure the integration type as a Lambda function. This means when the API Gateway receives a request on that method, it triggers the specified Lambda function.
+
+3. **Request Handling**: API Gateway passes the incoming request data (headers, query parameters, body, etc.) to the Lambda function as an event object.
+
+4. **Lambda Execution**: The Lambda function processes the event, executes the business logic, and returns a response.
+
+5. **Response Mapping**: API Gateway receives the Lambda function’s response and can transform or map it before sending it back to the client as an HTTP response.
+
+6. **Security and Throttling**: API Gateway can handle authorization, authentication, throttling, and request validation before invoking Lambda.
+
+This integration enables building serverless APIs where API Gateway manages the HTTP interface and Lambda handles the backend logic without managing servers.",[],3210,,,,,,,
+Q184,,,False,aws_lambda,A,What is the AWS Lambda execution environment lifecycle?,"The AWS Lambda execution environment lifecycle consists of the following phases:
+
+1. **Initialization (Cold Start):**  
+   - When a Lambda function is invoked for the first time or after a period of inactivity, AWS creates a new execution environment.  
+   - The runtime is initialized, the function code is loaded, and any initialization code outside the handler is executed.  
+   - This phase can add latency to the invocation, known as a ""cold start.""
+
+2. **Invocation:**  
+   - AWS invokes the function handler with the event data.  
+   - The function processes the event and returns a response or error.
+
+3. **Execution Environment Reuse (Warm Start):**  
+   - After the invocation completes, the execution environment remains active for some time to handle subsequent invocations.  
+   - If another invocation occurs while the environment is still active, AWS reuses it, skipping the initialization phase, resulting in faster execution (a ""warm start"").  
+   - Any state stored in memory or temporary storage (/tmp) persists between invocations within the same environment.
+
+4. **Environment Shutdown:**  
+   - AWS may shut down the execution environment at any time after a period of inactivity or for resource management.  
+   - When shut down, all in-memory state is lost.
+
+In summary, the lifecycle involves environment creation and initialization (cold start), invocation handling, potential reuse for subsequent invocations (warm start), and eventual shutdown.",[],3137,,,,,,,
+Q185,,,False,aws_lambda,A,How do you pass environment variables to an AWS Lambda function?,"You can pass environment variables to an AWS Lambda function by configuring them in the Lambda function settings. Here are the common ways to do this:
+
+1. **Using the AWS Management Console:**
+   - Go to the AWS Lambda console.
+   - Select your Lambda function.
+   - Navigate to the ""Configuration"" tab.
+   - Click on ""Environment variables.""
+   - Add key-value pairs for your environment variables.
+   - Save the changes.
+
+2. **Using AWS CLI:**
+   You can update or create a Lambda function with environment variables using the `--environment` parameter. For example:
+   ```bash
+   aws lambda update-function-configuration \
+     --function-name my-function \
+     --environment Variables=""{KEY1=value1,KEY2=value2}""
+   ```
+
+3. **Using Infrastructure as Code (IaC) tools:**
+   - **AWS CloudFormation:** Use the `Environment` property in the Lambda function resource.
+   - **AWS SAM:** Define environment variables under `Environment` in the function's properties.
+   - **Terraform:** Use the `environment` block in the `aws_lambda_function` resource.
+
+**Accessing Environment Variables in Code:**
+In your Lambda function code, you can access environment variables using standard environment variable access methods. For example, in Node.js:
+```javascript
+const value = process.env.KEY1;
+```
+In Python:
+```python
+import os
+value = os.environ['KEY1']
+```
+
+**Note:** Environment variables are encrypted at rest and can be used to store configuration settings such as database connection strings, API keys, etc.",[],3588,,,,,,,
+Q186,,,False,python,A,What is the difference between a list and a tuple in Python?,"The main differences between a list and a tuple in Python are:
+
+1. **Mutability**:
+   - **List**: Mutable (can be changed after creation; you can add, remove, or modify elements).
+   - **Tuple**: Immutable (cannot be changed after creation).
+
+2. **Syntax**:
+   - **List**: Defined using square brackets, e.g., `[1, 2, 3]`.
+   - **Tuple**: Defined using parentheses, e.g., `(1, 2, 3)`.
+
+3. **Performance**:
+   - **Tuple**: Generally faster and uses less memory because of immutability.
+   - **List**: Slightly slower due to mutability.
+
+4. **Use cases**:
+   - **List**: When you need a collection that can change.
+   - **Tuple**: When you need a fixed collection, or want to use it as a dictionary key.
+
+In summary, use lists for mutable sequences and tuples for immutable sequences.",[],2679,,,,,,,
+Q187,,,False,python,A,How does Python handle memory management and garbage collection?,"Python handles memory management and garbage collection through a combination of reference counting and a cyclic garbage collector:
+
+1. **Reference Counting**:  
+   - Every Python object maintains a count of references pointing to it.  
+   - When a new reference to an object is created, the reference count increases.  
+   - When a reference is deleted or goes out of scope, the reference count decreases.  
+   - When the reference count drops to zero, the memory occupied by the object is immediately deallocated.
+
+2. **Garbage Collector for Cycles**:  
+   - Reference counting alone cannot handle reference cycles (objects referencing each other).  
+   - Python includes a cyclic garbage collector (in the `gc` module) that periodically searches for groups of objects involved in reference cycles that are no longer reachable from program variables.  
+   - It then frees the memory used by these unreachable cycles.
+
+3. **Memory Allocation**:  
+   - Python uses private heaps to manage memory for Python objects.  
+   - The Python memory manager handles allocation within these heaps, optimizing small object allocations with specialized allocators (e.g., `pymalloc`).
+
+In summary, Python’s memory management is automatic, combining reference counting for immediate deallocation and a cyclic garbage collector to clean up reference cycles, ensuring efficient memory use without requiring explicit programmer intervention.",[],3091,,,,,,,
+Q188,,,False,python,A,What is a Python decorator and how do you create one?,"A Python decorator is a function that modifies or enhances the behavior of another function or method without permanently changing its source code. Decorators allow you to wrap another function in order to extend its behavior in a clean, readable, and reusable way.
+
+### How to create a decorator
+
+1. Define a function (the decorator) that takes a function as an argument.
+2. Inside this function, define a nested function (the wrapper) that will add the desired behavior.
+3. The wrapper function calls the original function and can modify its input, output, or side effects.
+4. Return the wrapper function from the decorator.
+
+### Example
+
+```python
+def my_decorator(func):
+    def wrapper():
+        print(""Before the function runs"")
+        func()
+        print(""After the function runs"")
+    return wrapper
+
+@my_decorator
+def say_hello():
+    print(""Hello!"")
+
+say_hello()
+```
+
+**Output:**
+```
+Before the function runs
+Hello!
+After the function runs
+```
+
+In this example, `my_decorator` is a decorator that adds behavior before and after the `say_hello` function runs. The `@my_decorator` syntax is a shorthand for `say_hello = my_decorator(say_hello)`.",[],3517,,,,,,,
+Q189,,,False,python,A,What is the difference between deepcopy and copy in Python?,"In Python, the difference between `copy` and `deepcopy` lies in how they handle copying objects that contain other objects (i.e., nested or compound objects):
+
+- **`copy.copy()` (shallow copy):**  
+  Creates a new object, but inserts references to the objects found in the original. It copies the outer object only, not the nested objects. Changes to nested objects in the copy will affect the original, and vice versa.
+
+- **`copy.deepcopy()` (deep copy):**  
+  Creates a new object and recursively copies all objects found in the original, producing a fully independent clone. Changes to any part of the deep-copied object do not affect the original.
+
+**Example:**
+
+```python
+import copy
+
+original = [1, [2, 3]]
+
+shallow = copy.copy(original)
+deep = copy.deepcopy(original)
+
+shallow[1][0] = 'a'
+print(original)  # Output: [1, ['a', 3]]  (changed because nested list is shared)
+
+deep[1][0] = 'b'
+print(original)  # Output: [1, ['a', 3]]  (unchanged because nested list was copied)
+```
+
+In summary:  
+- Use `copy.copy()` for a shallow copy (outer object copied, inner objects shared).  
+- Use `copy.deepcopy()` for a deep copy (entire object hierarchy copied).",[],3429,,,,,,,
+Q190,,,False,python,A,How does the Python GIL affect multithreaded programs?,"The Python Global Interpreter Lock (GIL) is a mutex that protects access to Python objects, preventing multiple native threads from executing Python bytecodes simultaneously in a single process. This means:
+
+- In multithreaded Python programs, even if multiple threads are running, only one thread can execute Python code at a time.
+- This limits the effectiveness of CPU-bound multithreading, as threads cannot run in true parallel on multiple CPU cores.
+- However, I/O-bound multithreaded programs can still benefit from threading because the GIL is released during I/O operations, allowing other threads to run.
+- For CPU-bound tasks requiring true parallelism, multiprocessing or using implementations without a GIL (e.g., Jython, IronPython) or extensions in C can be better alternatives.
+
+In summary, the GIL restricts multithreaded Python programs from achieving parallel execution of Python code on multiple cores, impacting CPU-bound concurrency but not necessarily I/O-bound concurrency.",[],2851,,,,,,,
+Q191,,,False,python,A,What is the difference between async and sync functions in Python?,"In Python, the difference between **async** and **sync** functions lies in how they handle execution and concurrency:
+
+1. **Synchronous (sync) functions:**
+   - Execute sequentially, one step at a time.
+   - Each function call blocks the program until it completes.
+   - Suitable for tasks that run quickly or do not involve waiting (e.g., CPU-bound operations).
+
+2. **Asynchronous (async) functions:**
+   - Defined with `async def` and use `await` to pause execution until an awaited task completes.
+   - Allow other code to run during waiting periods (e.g., I/O operations, network requests).
+   - Enable concurrency without multithreading by using an event loop (e.g., `asyncio`).
+   - Useful for improving performance in I/O-bound and high-level structured network code.
+
+**Example:**
+
+```python
+# Synchronous function
+def sync_function():
+    print(""Start"")
+    # Blocking call
+    time.sleep(1)
+    print(""End"")
+
+# Asynchronous function
+async def async_function():
+    print(""Start"")
+    # Non-blocking call
+    await asyncio.sleep(1)
+    print(""End"")
+```
+
+In summary, sync functions block execution until done, while async functions can pause and resume, allowing other tasks to run concurrently.",[],3223,,,,,,,
+Q192,,,False,python,A,How do you handle exceptions in Python using try except finally?,"In Python, you handle exceptions using the `try`, `except`, and `finally` blocks as follows:
+
+- **`try` block:** Contains the code that might raise an exception.
+- **`except` block:** Contains code that runs if an exception occurs in the `try` block. You can specify the exception type to catch specific exceptions.
+- **`finally` block:** Contains code that will run no matter what, whether an exception occurred or not. It's often used for cleanup actions.
+
+### Basic syntax:
+
+```python
+try:
+    # Code that may raise an exception
+    risky_operation()
+except SomeException as e:
+    # Code to handle the exception
+    print(f""An error occurred: {e}"")
+finally:
+    # Code that will always run
+    print(""This will execute no matter what."")
+```
+
+### Example:
+
+```python
+try:
+    x = 10 / 0  # This will raise ZeroDivisionError
+except ZeroDivisionError as e:
+    print(""Cannot divide by zero:"", e)
+finally:
+    print(""Execution completed."")
+```
+
+Output:
+```
+Cannot divide by zero: division by zero
+Execution completed.
+```
+
+The `finally` block executes regardless of whether an exception was raised or caught.",[],3456,,,,,,,
+Q193,,,False,python,A,What is a Python generator and how is it different from a regular function?,"A Python generator is a special type of iterable that generates values one at a time, on-the-fly, using the `yield` statement. Unlike a regular function that computes and returns a single value and then exits, a generator can pause its execution and resume later, maintaining its state between each yield.
+
+**Key differences between a generator and a regular function:**
+
+1. **Return vs Yield:**
+   - Regular function uses `return` to send back a single value and terminates.
+   - Generator uses `yield` to produce a sequence of values over time, pausing after each yield.
+
+2. **Execution state:**
+   - Regular function runs from start to finish each time it is called.
+   - Generator preserves its local state between yields, allowing it to resume where it left off.
+
+3. **Memory efficiency:**
+   - Generators produce items one at a time and do not store the entire sequence in memory.
+   - Regular functions often return a complete data structure (like a list), which can consume more memory.
+
+4. **Usage:**
+   - Generators are used for iterating over large or infinite sequences efficiently.
+   - Regular functions are used for computations that return a single result or a complete collection.
+
+**Example:**
+
+```python
+def regular_function():
+    return [1, 2, 3]
+
+def generator_function():
+    yield 1
+    yield 2
+    yield 3
+
+# Using regular function
+for value in regular_function():
+    print(value)
+
+# Using generator function
+for value in generator_function():
+    print(value)
+```
+
+In summary, a generator is a function that yields values one at a time and can be iterated over, making it more memory-efficient for large data streams compared to regular functions that return entire collections.",[],4228,,,,,,,
+Q194,,,False,python,A,What is the purpose of the __init__.py file in a Python package?,"The purpose of the `__init__.py` file in a Python package is to indicate that the directory should be treated as a Python package. It can also be used to execute package initialization code and to define what is exposed when the package is imported. In Python 3.3 and later, `__init__.py` is no longer strictly required to recognize a directory as a package, but it is still commonly used for initialization and explicit package structure.",[],2235,,,,,,,
+Q195,,,False,python,A,What is the difference between is and == in Python?,"In Python, `is` and `==` are used for comparisons but serve different purposes:
+
+- `is` checks **identity**: it returns `True` if two variables point to the **same object** in memory.
+- `==` checks **equality**: it returns `True` if the values of the two objects are **equal**, as defined by the `__eq__` method of the objects.
+
+Example:
+
+```python
+a = [1, 2, 3]
+b = a
+c = [1, 2, 3]
+
+print(a is b)  # True, because b references the same object as a
+print(a is c)  # False, because c is a different object with the same content
+print(a == c)  # True, because the contents of a and c are equal
+```
+
+In summary:
+- Use `is` to check if two variables refer to the exact same object.
+- Use `==` to check if two objects have the same value.",[],2872,,,,,,,
+Q196,,,False,python,A,How does Python implement object-oriented inheritance?,"Python implements object-oriented inheritance by allowing a class to derive from one or more base classes, thereby inheriting their attributes and methods. This is done by specifying the base class(es) in parentheses after the class name in the class definition. Python supports single inheritance, multiple inheritance, and multilevel inheritance.
+
+Key points of Python inheritance:
+
+1. **Defining a subclass:**
+   ```python
+   class BaseClass:
+       def method(self):
+           print(""Base method"")
+
+   class SubClass(BaseClass):
+       def another_method(self):
+           print(""Subclass method"")
+   ```
+   Here, `SubClass` inherits from `BaseClass` and gains access to its methods and attributes.
+
+2. **Calling the superclass constructor:**
+   To initialize the base class part of the subclass, you can call the superclass’s `__init__` method explicitly:
+   ```python
+   class BaseClass:
+       def __init__(self, value):
+           self.value = value
+
+   class SubClass(BaseClass):
+       def __init__(self, value, extra):
+           super().__init__(value)  # Calls BaseClass.__init__
+           self.extra = extra
+   ```
+
+3. **Method overriding:**
+   A subclass can override methods of the base class by defining a method with the same name:
+   ```python
+   class BaseClass:
+       def greet(self):
+           print(""Hello from Base"")
+
+   class SubClass(BaseClass):
+       def greet(self):
+           print(""Hello from SubClass"")
+   ```
+
+4. **Multiple inheritance:**
+   Python allows a class to inherit from multiple classes:
+   ```python
+   class A:
+       pass
+
+   class B:
+       pass
+
+   class C(A, B):
+       pass
+   ```
+   Python uses the Method Resolution Order (MRO) to determine the order in which base classes are searched when looking for a method.
+
+In summary, Python’s inheritance mechanism is flexible and straightforward, enabling code reuse and polymorphism through subclassing and method overriding.",[],5302,,,,,,,
+Q197,,,False,python,A,What is list comprehension in Python and when should you use it?,"List comprehension in Python is a concise way to create lists by embedding a for-loop and optional conditionals inside square brackets. It provides a more readable and expressive alternative to using traditional for-loops for generating lists.
+
+**Syntax:**
+```python
+[expression for item in iterable if condition]
+```
+
+- `expression` is the value to add to the list.
+- `item` is the variable representing each element in the iterable.
+- `iterable` is any Python iterable (like a list, range, etc.).
+- `if condition` is optional and filters which items to include.
+
+**Example:**
+```python
+# Create a list of squares of even numbers from 0 to 9
+squares = [x**2 for x in range(10) if x % 2 == 0]
+print(squares)  # Output: [0, 4, 16, 36, 64]
+```
+
+**When to use list comprehension:**
+- When you want to create a new list by transforming or filtering elements from an existing iterable.
+- When you want more concise and readable code compared to using loops.
+- When the logic is simple enough to fit clearly in a single expression.
+
+Avoid using list comprehensions for very complex logic or multiple nested loops where readability might suffer. In such cases, traditional loops or functions may be better.",[],3478,,,,,,,
+Q198,,,False,python,A,What is the purpose of virtual environments in Python?,The purpose of virtual environments in Python is to create isolated environments that allow you to manage dependencies and packages separately for different projects. This prevents conflicts between package versions and ensures that each project has its own specific setup without affecting the global Python installation or other projects.,[],2122,,,,,,,
+Q199,,,False,python,A,How does Python handle multiple inheritance and what is MRO?,"Python supports multiple inheritance, allowing a class to inherit from more than one parent class. When a class inherits from multiple classes, Python needs a way to determine the order in which base classes are searched when looking for a method or attribute. This order is defined by the Method Resolution Order (MRO).
+
+**How Python handles multiple inheritance:**
+
+- When a method or attribute is accessed on an instance, Python looks for it in the class of the instance.
+- If not found, Python searches the base classes in a specific order defined by the MRO.
+- The MRO ensures a consistent and predictable order to avoid ambiguity and conflicts in multiple inheritance scenarios.
+
+**Method Resolution Order (MRO):**
+
+- The MRO is the order in which Python looks for methods in a hierarchy of classes.
+- Python uses the C3 linearization algorithm to compute the MRO.
+- You can view the MRO of a class using the `__mro__` attribute or the `mro()` method. For example:
+
+  ```python
+  class A: pass
+  class B(A): pass
+  class C(A): pass
+  class D(B, C): pass
+
+  print(D.mro())
+  # Output: [<class '__main__.D'>, <class '__main__.B'>, <class '__main__.C'>, <class '__main__.A'>, <class 'object'>]
+  ```
+
+- The MRO ensures that each class appears before its parents and that the order respects the inheritance hierarchy and avoids conflicts.
+
+In summary, Python's multiple inheritance is managed through the MRO, which defines a consistent order for method and attribute lookup across multiple base classes.",[],3798,,,,,,,
+Q200,,,False,python,A,What is the difference between multiprocessing and multithreading in Python?,"The difference between multiprocessing and multithreading in Python lies in how they achieve concurrency and handle execution:
+
+1. **Multiprocessing**:
+   - Uses multiple processes, each with its own Python interpreter and memory space.
+   - Bypasses the Global Interpreter Lock (GIL), allowing true parallelism on multiple CPU cores.
+   - Suitable for CPU-bound tasks.
+   - Communication between processes is more complex and typically done via inter-process communication (IPC) mechanisms like pipes or queues.
+   - Higher memory overhead due to separate memory spaces.
+
+2. **Multithreading**:
+   - Uses multiple threads within the same process, sharing the same memory space.
+   - Limited by the GIL in CPython, so only one thread executes Python bytecode at a time.
+   - Suitable for I/O-bound tasks (e.g., network or file I/O) where threads spend time waiting.
+   - Easier and faster communication between threads due to shared memory.
+   - Lower memory overhead compared to multiprocessing.
+
+In summary, multiprocessing achieves true parallelism by using separate processes, while multithreading uses threads within a single process but is constrained by the GIL in Python.",[],3685,,,,,,,

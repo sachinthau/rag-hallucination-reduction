@@ -1,0 +1,252 @@
+{
+  "config_A_stats": {
+    "total": 200,
+    "note": "No GRV labels for this config. Hallucination rate from human annotation only."
+  },
+  "config_B_stats": {
+    "total": 200,
+    "note": "No GRV labels for this config. Hallucination rate from human annotation only."
+  },
+  "config_C_stats": {
+    "total": 200,
+    "grounded": 194,
+    "partially_grounded": 5,
+    "ungrounded": 1,
+    "hallucination_rate": 0.03,
+    "avg_grv_score_standard_path": 0.6866,
+    "n_standard_path": 146,
+    "avg_relevance_score_abstention_path": 2.1834,
+    "n_abstention_path": 54
+  },
+  "grv_performance": {
+    "n_samples": 200,
+    "cohens_kappa": 0.6564,
+    "kappa_label": "Substantial agreement (meets threshold)",
+    "precision": 0.6667,
+    "recall": 0.6667,
+    "f1_score": 0.6667,
+    "confusion_matrix": [
+      [
+        192,
+        2
+      ],
+      [
+        2,
+        4
+      ]
+    ],
+    "note": "Binary classification: 1=hallucinated (ungrounded/partial), 0=grounded",
+    "kappa_standard_three_layer": 0.6524,
+    "n_standard_three_layer": 146,
+    "kappa_abstention_verification": NaN,
+    "n_abstention_verification": 54
+  },
+  "category_analysis": {
+    "azure_functions_bindings": {
+      "total": 8,
+      "grounded": 8,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "container_apps_ai": {
+      "total": 8,
+      "grounded": 8,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "azure_functions_go": {
+      "total": 5,
+      "grounded": 5,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "azure_functions_flex_consumption": {
+      "total": 8,
+      "grounded": 7,
+      "hallucinated": 1,
+      "in_corpus": true,
+      "hallucination_rate": 0.125
+    },
+    "azure_functions_scaling": {
+      "total": 9,
+      "grounded": 9,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "container_apps_billing": {
+      "total": 11,
+      "grounded": 11,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "azure_functions_dedicated": {
+      "total": 6,
+      "grounded": 6,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "container_apps_environment": {
+      "total": 13,
+      "grounded": 13,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "azure_functions_best_practices": {
+      "total": 10,
+      "grounded": 9,
+      "hallucinated": 1,
+      "in_corpus": true,
+      "hallucination_rate": 0.1
+    },
+    "container_apps_custom_domains": {
+      "total": 10,
+      "grounded": 10,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "azure_functions_settings": {
+      "total": 9,
+      "grounded": 8,
+      "hallucinated": 1,
+      "in_corpus": true,
+      "hallucination_rate": 0.1111
+    },
+    "container_apps_dapr": {
+      "total": 10,
+      "grounded": 10,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "azure_functions_secrets": {
+      "total": 3,
+      "grounded": 3,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "container_apps_gpu": {
+      "total": 2,
+      "grounded": 2,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "container_apps_containers": {
+      "total": 5,
+      "grounded": 5,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "container_apps_networking": {
+      "total": 3,
+      "grounded": 3,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "azure_functions_cache": {
+      "total": 2,
+      "grounded": 2,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "container_apps_authentication": {
+      "total": 4,
+      "grounded": 4,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "container_apps_cors": {
+      "total": 3,
+      "grounded": 1,
+      "hallucinated": 2,
+      "in_corpus": true,
+      "hallucination_rate": 0.6667
+    },
+    "azure_functions_sql": {
+      "total": 3,
+      "grounded": 3,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "azure_functions_cosmosdb": {
+      "total": 1,
+      "grounded": 1,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "azure_functions_mysql": {
+      "total": 2,
+      "grounded": 1,
+      "hallucinated": 1,
+      "in_corpus": true,
+      "hallucination_rate": 0.5
+    },
+    "azure_functions_data_explorer": {
+      "total": 3,
+      "grounded": 3,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "container_apps_cold_start": {
+      "total": 2,
+      "grounded": 2,
+      "hallucinated": 0,
+      "in_corpus": true,
+      "hallucination_rate": 0.0
+    },
+    "cosmos_db": {
+      "total": 15,
+      "grounded": 15,
+      "hallucinated": 0,
+      "in_corpus": false,
+      "hallucination_rate": 0.0
+    },
+    "kubernetes": {
+      "total": 15,
+      "grounded": 15,
+      "hallucinated": 0,
+      "in_corpus": false,
+      "hallucination_rate": 0.0
+    },
+    "aws_lambda": {
+      "total": 15,
+      "grounded": 15,
+      "hallucinated": 0,
+      "in_corpus": false,
+      "hallucination_rate": 0.0
+    },
+    "python": {
+      "total": 15,
+      "grounded": 15,
+      "hallucinated": 0,
+      "in_corpus": false,
+      "hallucination_rate": 0.0
+    }
+  },
+  "ragas_summary": {
+    "ragas_faithfulness": {
+      "mean": 0.9643,
+      "median": 1.0,
+      "min": 0.0,
+      "max": 1.0,
+      "std": 0.1235,
+      "n": 146
+    }
+  }
+}

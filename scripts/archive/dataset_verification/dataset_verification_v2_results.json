@@ -1,0 +1,264 @@
+{
+  "likely_ok_count": 14,
+  "likely_fabricated_count": 3,
+  "needs_manual_check_count": 17,
+  "likely_ok": [
+    {
+      "id": "Q007",
+      "question": "What programming languages does the platform-managed built-in container in Azure Container Apps dynamic sessions support?",
+      "expected_answer": "Python and Node.js",
+      "anchors_checked": [
+        "Python and Node.js"
+      ],
+      "source_doc": "container-apps/ai-integration.md"
+    },
+    {
+      "id": "Q011",
+      "question": "What is the registration method used in the Azure Functions Go worker for an HTTP trigger?",
+      "expected_answer": "app.HTTP()",
+      "anchors_checked": [
+        "app.HTTP()"
+      ],
+      "source_doc": "azure-functions/add-bindings-existing-function.md"
+    },
+    {
+      "id": "Q012",
+      "question": "What registration method does the Go worker use for an Azure Cosmos DB trigger?",
+      "expected_answer": "app.CosmosDB()",
+      "anchors_checked": [
+        "app.CosmosDB()"
+      ],
+      "source_doc": "azure-functions/add-bindings-existing-function.md"
+    },
+    {
+      "id": "Q015",
+      "question": "What does the Event Grid trigger registration method look like in the Azure Functions Go worker?",
+      "expected_answer": "app.EventGrid()",
+      "anchors_checked": [
+        "app.EventGrid()"
+      ],
+      "source_doc": "azure-functions/add-bindings-existing-function.md"
+    },
+    {
+      "id": "Q019",
+      "question": "What registration method does the Go worker in Azure Functions use for an Event Hubs trigger?",
+      "expected_answer": "app.EventHub()",
+      "anchors_checked": [
+        "app.EventHub()"
+      ],
+      "source_doc": "azure-functions/add-bindings-existing-function.md"
+    },
+    {
+      "id": "Q021",
+      "question": "What is the maximum number of scale-out instances allowed in the Flex Consumption plan?",
+      "expected_answer": "1,000 instances",
+      "anchors_checked": [
+        "200",
+        "1,000 instances",
+        "000"
+      ],
+      "source_doc": "azure-functions/flex-consumption-plan.md"
+    },
+    {
+      "id": "Q023",
+      "question": "What instance memory sizes does the Flex Consumption plan offer?",
+      "expected_answer": "512 MB (0.25 CPU cores), 2048 MB (1 CPU core), and 4096 MB (2 CPU cores)",
+      "anchors_checked": [
+        "4096",
+        "512",
+        "2048",
+        "25"
+      ],
+      "source_doc": "azure-functions/flex-consumption-plan.md"
+    },
+    {
+      "id": "Q053",
+      "question": "After how many days is an idle Azure Container Apps environment automatically deleted?",
+      "expected_answer": "After 90 days of being idle with no active container apps or jobs running",
+      "anchors_checked": [
+        "90 days",
+        "90"
+      ],
+      "source_doc": "container-apps/environment.md"
+    },
+    {
+      "id": "Q059",
+      "question": "What is the minimum billable execution period for the Azure Container Apps Consumption plan?",
+      "expected_answer": "1,000 milliseconds",
+      "anchors_checked": [
+        "1,000 milliseconds",
+        "000",
+        "1,000 ms"
+      ],
+      "source_doc": "container-apps/billing.md"
+    },
+    {
+      "id": "Q078",
+      "question": "What happens to an Azure Container Apps environment that is in a failed state due to virtual network or Azure Policy configuration for more than 90 days?",
+      "expected_answer": "It is automatically deleted",
+      "anchors_checked": [
+        "90 days",
+        "It is automatically deleted",
+        "90"
+      ],
+      "source_doc": "container-apps/environment.md"
+    },
+    {
+      "id": "Q091",
+      "question": "What port does the Dapr sidecar expose its API on by default in Azure Container Apps?",
+      "expected_answer": "Port 3500 for HTTP and port 50001 for gRPC",
+      "anchors_checked": [
+        "50001",
+        "3500",
+        "Port 3500 for HTTP and port 50001 for gRPC"
+      ],
+      "source_doc": "container-apps/dapr-overview.md"
+    },
+    {
+      "id": "Q107",
+      "question": "How much GPU memory does the NVIDIA T4 have compared to the A100 in Azure Container Apps?",
+      "expected_answer": "T4 has 16GB VRAM, A100 has 80GB HBM2/HBM2e",
+      "anchors_checked": [
+        "16GB",
+        "T4 has 16GB VRAM, A100 has 80GB HBM2/HBM2e",
+        "80GB"
+      ],
+      "source_doc": "container-apps/gpu-types.md"
+    },
+    {
+      "id": "Q118",
+      "question": "What CPU and memory combination is the minimum allowed per container app on the Consumption plan in Azure Container Apps?",
+      "expected_answer": "0.25 vCPU and 0.5Gi memory",
+      "anchors_checked": [
+        "0.25 vCPU and 0.5Gi memory",
+        "25"
+      ],
+      "source_doc": "container-apps/containers.md"
+    },
+    {
+      "id": "Q124",
+      "question": "What is the sign-in endpoint path for the Microsoft identity platform in Azure Container Apps built-in authentication?",
+      "expected_answer": "/.auth/login/aad",
+      "anchors_checked": [
+        "/.auth/login/aad"
+      ],
+      "source_doc": "container-apps/authentication.md"
+    }
+  ],
+  "likely_fabricated": [
+    {
+      "id": "Q101",
+      "question": "What two options does Azure Container Apps provide for storing app-level secrets for Azure Functions?",
+      "expected_answer": "Container Apps secrets and Key Vault references",
+      "anchors_checked": [
+        "Container Apps secrets and Key Vault references"
+      ],
+      "source_doc": "container-apps/functions-secrets-app-level.md"
+    },
+    {
+      "id": "Q110",
+      "question": "What compute instance type does each custom container session pool run on in Azure Container Apps dynamic sessions?",
+      "expected_answer": "E16 compute instances",
+      "anchors_checked": [
+        "E16 compute instances"
+      ],
+      "source_doc": "container-apps/billing.md"
+    },
+    {
+      "id": "Q116",
+      "question": "What format is used as the hostname when one container app calls another within the same Azure Container Apps environment?",
+      "expected_answer": "The container app name is used directly as the hostname",
+      "anchors_checked": [
+        "The container app name is used directly as the hostname"
+      ],
+      "source_doc": "container-apps/connect-apps.md"
+    }
+  ],
+  "needs_manual_check": [
+    {
+      "id": "Q003",
+      "question": "Which trigger types does the Azure Functions Go worker currently support?",
+      "reason": "No extractable factual anchor (numbers/code/short answer) to check automatically."
+    },
+    {
+      "id": "Q006",
+      "question": "What GPU options does Azure Container Apps support for AI workloads?",
+      "reason": "No extractable factual anchor (numbers/code/short answer) to check automatically."
+    },
+    {
+      "id": "Q022",
+      "question": "Does the Flex Consumption plan support virtual network integration?",
+      "reason": "No extractable factual anchor (numbers/code/short answer) to check automatically."
+    },
+    {
+      "id": "Q028",
+      "question": "What operating system does the Flex Consumption plan support?",
+      "reason": "No extractable factual anchor (numbers/code/short answer) to check automatically."
+    },
+    {
+      "id": "Q035",
+      "question": "In the Azure Container Apps Consumption plan, what are the two types of charges that make up the billing?",
+      "reason": "No extractable factual anchor (numbers/code/short answer) to check automatically."
+    },
+    {
+      "id": "Q051",
+      "question": "When should you use multiple Azure Container Apps environments instead of a single one?",
+      "reason": "No extractable factual anchor (numbers/code/short answer) to check automatically."
+    },
+    {
+      "id": "Q054",
+      "question": "What types of logs does an Azure Container Apps environment collect by default?",
+      "reason": "No extractable factual anchor (numbers/code/short answer) to check automatically."
+    },
+    {
+      "id": "Q061",
+      "question": "Which Azure Functions hosting plan is recommended for dynamic scale apps?",
+      "reason": "No extractable factual anchor (numbers/code/short answer) to check automatically."
+    },
+    {
+      "id": "Q077",
+      "question": "In Azure Container Apps, what TXT record must you create when validating an apex domain?",
+      "reason": "No extractable factual anchor (numbers/code/short answer) to check automatically."
+    },
+    {
+      "id": "Q079",
+      "question": "Can you add a custom domain that contains the custom environment DNS suffix to an Azure Container Apps app?",
+      "reason": "No extractable factual anchor (numbers/code/short answer) to check automatically."
+    },
+    {
+      "id": "Q080",
+      "question": "For a Premium plan EP2 Azure Function app, what starting value of FUNCTIONS_WORKER_PROCESS_COUNT is recommended?",
+      "reason": "No extractable factual anchor (numbers/code/short answer) to check automatically."
+    },
+    {
+      "id": "Q082",
+      "question": "What does setting AZURE_FUNCTIONS_ENVIRONMENT to Development do in Azure Functions?",
+      "reason": "No extractable factual anchor (numbers/code/short answer) to check automatically."
+    },
+    {
+      "id": "Q089",
+      "question": "How is Dapr enabled for a container app in Azure Container Apps?",
+      "reason": "No extractable factual anchor (numbers/code/short answer) to check automatically."
+    },
+    {
+      "id": "Q092",
+      "question": "What is a Dapr component in Azure Container Apps?",
+      "reason": "No extractable factual anchor (numbers/code/short answer) to check automatically."
+    },
+    {
+      "id": "Q095",
+      "question": "What must you configure if you want to use Azure Key Vault as a secret store with Dapr in Azure Container Apps?",
+      "reason": "No extractable factual anchor (numbers/code/short answer) to check automatically."
+    },
+    {
+      "id": "Q114",
+      "question": "How do you connect two Azure Container Apps so they can communicate with each other?",
+      "reason": "No extractable factual anchor (numbers/code/short answer) to check automatically."
+    },
+    {
+      "id": "Q137",
+      "question": "According to Azure Container Apps guidance, what should you do to reduce cold-start times for images with large machine learning models?",
+      "reason": "No extractable factual anchor (numbers/code/short answer) to check automatically."
+    }
+  ]
+}

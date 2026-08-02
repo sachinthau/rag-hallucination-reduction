@@ -5,8 +5,8 @@ from langchain_community.document_loaders import DirectoryLoader, TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 CORPUS_FOLDERS = [
-    "data/corpus/azure-functions",
-    "data/corpus/container-apps",
+    "../data/corpus/azure-functions",
+    "../data/corpus/container-apps",
 ]
 
 CHUNK_SIZE = 1000

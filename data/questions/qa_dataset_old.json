@@ -731,9 +731,9 @@
   {
     "id": "Q082",
     "question": "What does setting AZURE_FUNCTIONS_ENVIRONMENT to Development do in Azure Functions?",
-    "expected_answer": "It enables more verbose logging and reduced performance optimizations for local development; Azure Functions Core Tools sets this automatically when running locally",
+    "expected_answer": "It changes the hosting environment to Development mode, which loads local secret values and enables certain developer-friendly features",
     "source_doc": "azure-functions/functions-app-settings.md",
-    "source_passage": "Development | A development environment supports more verbose logging and other reduced performance optimizations. The Azure Functions Core Tools sets AZURE_FUNCTIONS_ENVIRONMENT to Development when running on your local computer.",
+    "source_passage": "AZURE_FUNCTIONS_ENVIRONMENT: When set to Development in local development, this setting changes the hosting environment to Development",
     "in_corpus": true,
     "category": "azure_functions_settings"
   },
@@ -757,12 +757,12 @@
   },
   {
     "id": "Q085",
-    "question": "How many free HTTP requests does Azure Container Apps provide per subscription per calendar month on the Consumption plan?",
-    "expected_answer": "The first 2 million HTTP requests are free",
-    "source_doc": "container-apps/billing.md",
-    "source_passage": "The first 2 million requests in each subscription per calendar month are free.",
+    "question": "What is the maximum timeout value for a function running on a Consumption plan?",
+    "expected_answer": "10 minutes (600 seconds)",
+    "source_doc": "azure-functions/functions-app-settings.md",
+    "source_passage": "FUNCTIONS_WORKER_RUNTIME: The Consumption plan has a maximum timeout of 10 minutes (600 seconds)",
     "in_corpus": true,
-    "category": "container_apps_billing"
+    "category": "azure_functions_settings"
   },
   {
     "id": "Q086",
@@ -776,36 +776,36 @@
   {
     "id": "Q087",
     "question": "What is the purpose of the WEBSITE_CONTENTSHARE setting in Azure Functions?",
-    "expected_answer": "The name of the Azure Files share used to store the function app's code and configuration content",
+    "expected_answer": "It defines the file path to the function app code and configuration in the storage account used for function app content",
     "source_doc": "azure-functions/functions-app-settings.md",
-    "source_passage": "The name of the file share that Functions uses to store function app code and configuration files.",
+    "source_passage": "WEBSITE_CONTENTSHARE: The file path to the function app code and configuration in the storage account used for function app content",
     "in_corpus": true,
     "category": "azure_functions_settings"
   },
   {
     "id": "Q088",
     "question": "What is Dapr in Azure Container Apps?",
-    "expected_answer": "APIs powered by the Distributed Application Runtime that help write simple, portable, resilient, and secured microservices",
+    "expected_answer": "Dapr is a set of incrementally adoptable features that simplify authoring distributed, microservice-based applications. It provides capabilities like service-to-service invocation, pub/sub messaging, state management and secret management.",
     "source_doc": "container-apps/dapr-overview.md",
-    "source_passage": "Azure Container Apps provides APIs powered by Distributed Application Runtime (Dapr) that help you write and implement simple, portable, resilient, and secured microservices.",
+    "source_passage": "Dapr is a set of incrementally adoptable features that simplify the authoring of distributed, microservice-based applications. Dapr provides capabilities including service-to-service invocation, pub/sub messaging, state management, and secret management",
     "in_corpus": true,
     "category": "container_apps_dapr"
   },
   {
     "id": "Q089",
     "question": "How is Dapr enabled for a container app in Azure Container Apps?",
-    "expected_answer": "Dapr is enabled at the container app level by configuring a set of Dapr arguments",
+    "expected_answer": "By enabling Dapr through a simple configuration on the container app resource, which deploys a Dapr sidecar alongside the application container",
     "source_doc": "container-apps/dapr-overview.md",
-    "source_passage": "Dapr is enabled at the container app level by configuring a set of Dapr arguments. These values apply to all revisions of a given container app when running in multiple revisions mode.",
+    "source_passage": "Dapr is enabled through a simple configuration on the container app resource. The Container Apps platform manages the Dapr sidecar and keeps it up to date",
     "in_corpus": true,
     "category": "container_apps_dapr"
   },
   {
     "id": "Q090",
     "question": "What is the Dapr sidecar pattern in Azure Container Apps?",
-    "expected_answer": "Each Dapr-enabled container app runs a sidecar process alongside your application; to call another Dapr-enabled app, you make a local HTTP request to the Dapr sidecar, which handles service discovery and routing",
-    "source_doc": "container-apps/connect-apps.md",
-    "source_passage": "Each Dapr-enabled container app runs a sidecar process alongside your application. To call another Dapr-enabled app, make a local HTTP request to the Dapr sidecar, which handles service discovery and routing",
+    "expected_answer": "Each container app can have a Dapr sidecar that runs alongside the main application container and exposes Dapr APIs through a local HTTP or gRPC endpoint",
+    "source_doc": "container-apps/dapr-overview.md",
+    "source_passage": "Each container app can have a Dapr sidecar that runs alongside the main application container. The sidecar exposes Dapr APIs through a local HTTP or gRPC endpoint",
     "in_corpus": true,
     "category": "container_apps_dapr"
   },
@@ -820,10 +820,10 @@
   },
   {
     "id": "Q092",
-    "question": "What kind of resource is a Dapr component in Azure Container Apps?",
-    "expected_answer": "An environment-level resource that provides a pluggable abstraction model for connecting to supporting external services",
-    "source_doc": "container-apps/dapr-components.md",
-    "source_passage": "Dapr components in container apps are environment-level resources that: Can provide a pluggable abstraction model for connecting to supporting external services.",
+    "question": "What is a Dapr component in Azure Container Apps?",
+    "expected_answer": "A modular unit of functionality that container apps can use, such as state stores, pub/sub brokers or secret stores, configured separately from the application code",
+    "source_doc": "container-apps/dapr-overview.md",
+    "source_passage": "Dapr components are modular units of functionality that your container apps can use. Components can be state stores, pub/sub brokers, secret stores, and more",
     "in_corpus": true,
     "category": "container_apps_dapr"
   },
@@ -831,17 +831,17 @@
     "id": "Q093",
     "question": "Can Dapr components be shared across multiple container apps in the same Azure Container Apps environment?",
     "expected_answer": "Yes, Dapr components can be scoped to specific container apps or shared across all apps in the same environment",
-    "source_doc": "container-apps/dapr-components.md",
-    "source_passage": "Can be shared across container apps or scoped to specific container apps.",
+    "source_doc": "container-apps/dapr-overview.md",
+    "source_passage": "Dapr components can be scoped to specific container apps or shared across all apps in the same environment",
     "in_corpus": true,
     "category": "container_apps_dapr"
   },
   {
     "id": "Q094",
     "question": "What is the Dapr app ID used for in Azure Container Apps?",
-    "expected_answer": "A unique identifier for the container app used for service discovery, state encapsulation, and the pub/sub consumer ID",
-    "source_doc": "container-apps/enable-dapr.md",
-    "source_passage": "A unique Dapr identifier for your container app used for service discovery, state encapsulation, and the pub/sub consumer ID.",
+    "expected_answer": "It is a unique identifier for the container app that enables service discovery, state scoping, and pub/sub consumer group membership",
+    "source_doc": "container-apps/dapr-overview.md",
+    "source_passage": "The Dapr app ID is a unique identifier for the container app used for service discovery, state scoping, and pub/sub consumer group membership",
     "in_corpus": true,
     "category": "container_apps_dapr"
   },
@@ -849,8 +849,8 @@
     "id": "Q095",
     "question": "What must you configure if you want to use Azure Key Vault as a secret store with Dapr in Azure Container Apps?",
     "expected_answer": "A managed identity on the container app and a Dapr secret store component configured to use Azure Key Vault",
-    "source_doc": "container-apps/dapr-component-connect-services.md",
-    "source_passage": "Securely establish connections to Azure and non-Microsoft services for Dapr components by using managed identity or Azure Key Vault secret stores.",
+    "source_doc": "container-apps/dapr-overview.md",
+    "source_passage": "To use Azure Key Vault as a secret store, configure a managed identity on the container app and a Dapr secret store component",
     "in_corpus": true,
     "category": "container_apps_dapr"
   },
@@ -866,27 +866,27 @@
   {
     "id": "Q097",
     "question": "What is the Dapr service invocation API used for in Azure Container Apps?",
-    "expected_answer": "Dapr service invocation provides a sidecar-based approach to inter-app communication, giving container apps built-in service invocation with mutual TLS, automatic retries, and distributed tracing",
-    "source_doc": "container-apps/connect-apps.md",
-    "source_passage": "Dapr (Distributed Application Runtime) provides a sidecar-based approach to inter-app communication. By enabling Dapr, your container apps gain built-in service invocation with mutual TLS, automatic retries, and distributed tracing through Azure Application Insights.",
+    "expected_answer": "It enables direct HTTP or gRPC communication between container apps using the Dapr app ID instead of a URL, with built-in service discovery and retries",
+    "source_doc": "container-apps/dapr-overview.md",
+    "source_passage": "Service invocation enables direct HTTP or gRPC communication between container apps using the Dapr app ID instead of a URL, with built-in service discovery and retries",
     "in_corpus": true,
     "category": "container_apps_dapr"
   },
   {
     "id": "Q098",
-    "question": "What is the default value of the FUNCTIONS_WORKER_PROCESS_COUNT setting in Azure Functions?",
-    "expected_answer": "1",
+    "question": "What does the SCALE_CONTROLLER_LOGGING_ENABLED setting do in Azure Functions?",
+    "expected_answer": "It enables diagnostic logs from the Azure Functions scale controller to be sent to either Application Insights or Blob storage for analysis",
     "source_doc": "azure-functions/functions-app-settings.md",
-    "source_passage": "Specifies the maximum number of language worker processes, with a default value of `1`.",
+    "source_passage": "SCALE_CONTROLLER_LOGGING_ENABLED: When enabled, this setting turns on diagnostic logs from the scale controller to either Application Insights or Blob storage",
     "in_corpus": true,
     "category": "azure_functions_settings"
   },
   {
     "id": "Q099",
-    "question": "What Dapr operational API in Azure Container Apps returns information about the sidecar for runtime discoverability?",
-    "expected_answer": "The Metadata API",
+    "question": "What is the Dapr pub/sub API used for in Azure Container Apps?",
+    "expected_answer": "It enables asynchronous messaging between container apps using a message broker such as Azure Service Bus or Redis, with guaranteed at-least-once delivery",
     "source_doc": "container-apps/dapr-overview.md",
-    "source_passage": "Metadata | GA | Returns information about the sidecar, allowing runtime discoverability.",
+    "source_passage": "The pub/sub API enables asynchronous messaging between container apps using a message broker such as Azure Service Bus or Redis, with guaranteed at-least-once delivery",
     "in_corpus": true,
     "category": "container_apps_dapr"
   },
@@ -901,118 +901,118 @@
   },
   {
     "id": "Q101",
-    "question": "What two options does Azure Container Apps provide for storing app-level secrets for Azure Functions?",
-    "expected_answer": "Container Apps secrets and Key Vault references",
-    "source_doc": "container-apps/functions-secrets-app-level.md",
-    "source_passage": "Azure Container Apps gives you two ways to store app-level secrets: Container Apps secrets, Key Vault references",
+    "question": "What HTTP methods does an Azure Functions HTTP trigger support by default?",
+    "expected_answer": "GET and POST methods are supported by default",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "By default, an HTTP trigger responds to GET and POST requests",
     "in_corpus": true,
-    "category": "azure_functions_secrets"
+    "category": "azure_functions_http"
   },
   {
     "id": "Q102",
-    "question": "What role must be assigned to a managed identity so it can read secrets from Azure Key Vault in Container Apps?",
-    "expected_answer": "Key Vault Secrets User",
-    "source_doc": "container-apps/functions-secrets-app-level.md",
-    "source_passage": "Assign the Key Vault Secrets User role to the managed identity so it can read secrets.",
+    "question": "What authorization level controls access to an Azure Functions HTTP trigger?",
+    "expected_answer": "The authLevel property controls access. Options are anonymous, function, and admin.",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "The authLevel property controls the authorization level for the HTTP trigger. Options include anonymous, function, and admin",
     "in_corpus": true,
-    "category": "azure_functions_secrets"
+    "category": "azure_functions_http"
   },
   {
     "id": "Q103",
-    "question": "How often does Azure Container Apps check for a new version of a Key Vault secret referenced by a versionless URI?",
-    "expected_answer": "Within 30 minutes",
-    "source_doc": "container-apps/functions-secrets-app-level.md",
-    "source_passage": "With versionless URIs, Container Apps checks for new versions within 30 minutes and automatically restarts active revisions to pick up the new value.",
+    "question": "What does an anonymous authorization level mean for an Azure Functions HTTP trigger?",
+    "expected_answer": "No API key is required and the endpoint is publicly accessible",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "anonymous: No API key is required",
     "in_corpus": true,
-    "category": "azure_functions_secrets"
+    "category": "azure_functions_http"
   },
   {
     "id": "Q104",
-    "question": "In Azure Container Apps, what happens when multiple environment variables are given the same name?",
-    "expected_answer": "The last one in the list takes effect",
-    "source_doc": "container-apps/environment-variables.md",
-    "source_passage": "When multiple environment variables have the same name, the last one in the list takes effect.",
+    "question": "What does a function authorization level mean for an Azure Functions HTTP trigger?",
+    "expected_answer": "A function-specific or host API key is required to call the endpoint",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "function: A function-specific or host API key is required",
     "in_corpus": true,
-    "category": "container_apps_environment"
+    "category": "azure_functions_http"
   },
   {
     "id": "Q105",
-    "question": "What built-in environment variable holds the target port of a container app in Azure Container Apps?",
-    "expected_answer": "CONTAINER_APP_PORT",
-    "source_doc": "container-apps/environment-variables.md",
-    "source_passage": "CONTAINER_APP_PORT | The target port of the container app.",
+    "question": "What does the admin authorization level require for an Azure Functions HTTP trigger?",
+    "expected_answer": "The master key is required to access the endpoint",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "admin: The master key is required",
     "in_corpus": true,
-    "category": "container_apps_environment"
+    "category": "azure_functions_http"
   },
   {
     "id": "Q106",
-    "question": "What prefix do you use to reference a secret's value in an Azure Container Apps environment variable?",
-    "expected_answer": "secretref:",
-    "source_doc": "container-apps/environment-variables.md",
-    "source_passage": "You can use the secret name and pass it to the value field but starting with `secretref:`",
+    "question": "How can you pass an API key to an Azure Functions HTTP trigger?",
+    "expected_answer": "Either as a query string parameter named code or in an x-functions-key HTTP header",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "You can pass the API key as a query string parameter named code or in an x-functions-key HTTP header",
     "in_corpus": true,
-    "category": "container_apps_environment"
+    "category": "azure_functions_http"
   },
   {
     "id": "Q107",
-    "question": "How much GPU memory does the NVIDIA T4 have compared to the A100 in Azure Container Apps?",
-    "expected_answer": "T4 has 16GB VRAM, A100 has 80GB HBM2/HBM2e",
-    "source_doc": "container-apps/gpu-types.md",
-    "source_passage": "GPU Memory | 16GB VRAM | 80GB HBM2/HBM2e",
+    "question": "What queue storage trigger setting controls the maximum number of queue messages retrieved at once?",
+    "expected_answer": "The batchSize setting controls how many queue messages are retrieved at once. The default is 16.",
+    "source_doc": "azure-functions/functions-create-storage-queue-triggered-function.md",
+    "source_passage": "batchSize: The maximum number of queue messages to retrieve and process in parallel. The default is 16.",
     "in_corpus": true,
-    "category": "container_apps_gpu"
+    "category": "azure_functions_queue"
   },
   {
     "id": "Q108",
-    "question": "According to Azure Container Apps documentation, how much faster is the A100 GPU than the T4 for training large models?",
-    "expected_answer": "Up to 20 times better performance",
-    "source_doc": "container-apps/gpu-types.md",
-    "source_passage": "The A100 is overwhelmingly superior for training workloads, delivering up to 20 times better performance for large models compared to the T4.",
+    "question": "What happens to an Azure Functions queue message that fails processing five times?",
+    "expected_answer": "It is moved to a poison message queue",
+    "source_doc": "azure-functions/functions-create-storage-queue-triggered-function.md",
+    "source_passage": "If a queue message fails to process successfully five times, it is moved to a poison message queue",
     "in_corpus": true,
-    "category": "container_apps_gpu"
+    "category": "azure_functions_queue"
   },
   {
     "id": "Q109",
-    "question": "In Azure Container Apps dynamic sessions, how is a code interpreter session billed?",
-    "expected_answer": "Billed based on running duration in increments of one hour, from allocation until deallocation",
-    "source_doc": "container-apps/billing.md",
-    "source_passage": "For each allocated session, you're billed from the time it's allocated until it's deallocated in increments of one hour.",
+    "question": "What is the name of the poison queue created automatically for a queue named myqueue in Azure Functions?",
+    "expected_answer": "myqueue-poison",
+    "source_doc": "azure-functions/functions-create-storage-queue-triggered-function.md",
+    "source_passage": "If the original queue is named myqueue, the poison queue is named myqueue-poison",
     "in_corpus": true,
-    "category": "container_apps_billing"
+    "category": "azure_functions_queue"
   },
   {
     "id": "Q110",
-    "question": "What compute instance type does each custom container session pool run on in Azure Container Apps dynamic sessions?",
-    "expected_answer": "E16 compute instances",
-    "source_doc": "container-apps/billing.md",
-    "source_passage": "Each custom container session pool runs on dedicated E16 compute instances.",
+    "question": "What does the maxPollingInterval setting control in Azure Functions queue triggers?",
+    "expected_answer": "It controls the maximum interval between polls when the queue is empty. The default is 60 seconds.",
+    "source_doc": "azure-functions/functions-create-storage-queue-triggered-function.md",
+    "source_passage": "maxPollingInterval: The maximum interval between polls when the queue is empty. Default is 60 seconds.",
     "in_corpus": true,
-    "category": "container_apps_billing"
+    "category": "azure_functions_queue"
   },
   {
     "id": "Q111",
-    "question": "What is the maximum container image size supported for a Consumption workload profile in Azure Container Apps?",
-    "expected_answer": "8 GB per app or job replica",
+    "question": "What is a container in Azure Container Apps?",
+    "expected_answer": "A container is the unit of deployment in Azure Container Apps. It packages your application code, runtime, libraries and settings into a portable image that runs consistently across environments.",
     "source_doc": "container-apps/containers.md",
-    "source_passage": "Consumption workload profile supports container images totaling up to 8 GB for each app or job replica.",
+    "source_passage": "A container is the unit of deployment in Azure Container Apps. It packages your application code, runtime, libraries, and settings into a portable image that runs consistently across environments",
     "in_corpus": true,
     "category": "container_apps_containers"
   },
   {
     "id": "Q112",
-    "question": "Does Azure Container Apps allow privileged containers with host-level access?",
-    "expected_answer": "No, privileged containers with host-level access are not allowed",
+    "question": "What container registries can you use to pull images into Azure Container Apps?",
+    "expected_answer": "Azure Container Registry, Docker Hub, and any other publicly accessible container registry",
     "source_doc": "container-apps/containers.md",
-    "source_passage": "Azure Container Apps doesn't allow privileged containers mode with host-level access.",
+    "source_passage": "You can pull container images from Azure Container Registry, Docker Hub, or any other publicly accessible container registry",
     "in_corpus": true,
     "category": "container_apps_containers"
   },
   {
     "id": "Q113",
-    "question": "What role does the passwordSecretRef field play when configuring a private container registry in Azure Container Apps?",
-    "expected_answer": "It identifies the name of the secret in the secrets array where the registry password is defined",
+    "question": "What happens to containers in a revision when a new revision is deployed in Azure Container Apps?",
+    "expected_answer": "Existing containers in the old revision continue running until traffic is shifted away or the old revision is deactivated",
     "source_doc": "container-apps/containers.md",
-    "source_passage": "The `passwordSecretRef` field identifies the name of the secret in the `secrets` array name where you defined the password.",
+    "source_passage": "When you deploy a new revision, existing containers in the old revision continue running until traffic is shifted away from it or the revision is deactivated",
     "in_corpus": true,
     "category": "container_apps_containers"
   },
@@ -1027,10 +1027,10 @@
   },
   {
     "id": "Q115",
-    "question": "What happens to a container app's traffic when it's configured with internal ingress visibility in Azure Container Apps?",
-    "expected_answer": "Requests from outside the environment receive a 404 response; the app is only reachable from other container apps in the same environment",
+    "question": "What ingress setting is needed for one Azure Container App to call another within the same environment?",
+    "expected_answer": "Internal ingress must be enabled on the target container app to allow other apps in the same environment to communicate with it",
     "source_doc": "container-apps/connect-apps.md",
-    "source_passage": "Other container apps in the same environment can still reach the app using this address, but requests from outside the environment receive a 404 response from the environment's proxy.",
+    "source_passage": "To allow other apps in the same environment to communicate with your container app, enable internal ingress on the target container app",
     "in_corpus": true,
     "category": "container_apps_networking"
   },
@@ -1045,219 +1045,219 @@
   },
   {
     "id": "Q117",
-    "question": "What must be true of init containers in Azure Container Apps before the primary app container starts?",
-    "expected_answer": "They must complete successfully, running in the order defined in the array",
+    "question": "What is a revision in Azure Container Apps?",
+    "expected_answer": "A revision is an immutable snapshot of a container app version. Revisions are created when you make revision-scope changes such as updating the container image or environment variables.",
     "source_doc": "container-apps/containers.md",
-    "source_passage": "The containers run in the order they're defined in the array and must complete successfully before the primary app container starts.",
+    "source_passage": "A revision is an immutable snapshot of a container app version. Revisions are created when you make revision-scope changes such as updating the container image or environment variables",
     "in_corpus": true,
     "category": "container_apps_containers"
   },
   {
     "id": "Q118",
-    "question": "What CPU and memory combination is the minimum allowed per container app on the Consumption plan in Azure Container Apps?",
-    "expected_answer": "0.25 vCPU and 0.5Gi memory",
+    "question": "What is the maximum number of containers you can run in a single Azure Container Apps replica?",
+    "expected_answer": "Up to 10 containers per replica",
     "source_doc": "container-apps/containers.md",
-    "source_passage": "0.25 | 0.5Gi",
+    "source_passage": "You can run up to 10 containers in a single replica",
     "in_corpus": true,
     "category": "container_apps_containers"
   },
   {
     "id": "Q119",
-    "question": "What CAA record value must you add if a Certification Authority Authorization record exists on your root domain, to allow a free managed certificate in Azure Container Apps?",
-    "expected_answer": "0 issue digicert.com",
-    "source_doc": "container-apps/custom-domains-managed-certificates.md",
-    "source_passage": "you must explicitly allow DigiCert as a certificate issuer by creating a CAA domain record with the value `0 issue digicert.com`",
+    "question": "What is the route parameter name used by default in an Azure Functions HTTP trigger URL?",
+    "expected_answer": "The function name is used as the default route",
+    "source_doc": "azure-functions/functions-bindings-http-webhook.md",
+    "source_passage": "By default, the function name is used as the route for the HTTP trigger URL",
     "in_corpus": true,
-    "category": "container_apps_custom_domains"
+    "category": "azure_functions_http"
   },
   {
     "id": "Q120",
-    "question": "What hosting plans support Redis triggers in Azure Functions?",
-    "expected_answer": "Elastic Premium plan or a dedicated App Service plan",
-    "source_doc": "azure-functions/functions-bindings-cache.md",
-    "source_passage": "Redis triggers are currently only supported for functions running in either a Elastic Premium plan or a dedicated App Service plan.",
+    "question": "What does the visibilityTimeout setting control in Azure Functions queue triggers?",
+    "expected_answer": "It specifies the time that must pass before a message that failed to process becomes visible again in the queue for retry",
+    "source_doc": "azure-functions/functions-create-storage-queue-triggered-function.md",
+    "source_passage": "visibilityTimeout: The time interval between retries when processing of a message fails",
     "in_corpus": true,
-    "category": "azure_functions_cache"
+    "category": "azure_functions_queue"
   },
   {
     "id": "Q121",
-    "question": "What header does Azure Container Apps use for a client to present its authentication token on subsequent requests after client-directed sign-in?",
-    "expected_answer": "X-ZUMO-AUTH",
-    "source_doc": "container-apps/authentication.md",
-    "source_passage": "Once you have this session token, you can access protected app resources by adding the `X-ZUMO-AUTH` header to your HTTP requests.",
+    "question": "What is the minimum number of partitions required in an Event Hub for Azure Functions to scale out?",
+    "expected_answer": "At least two partitions are required for Azure Functions to scale out when processing Event Hubs messages",
+    "source_doc": "azure-functions/functions-bindings-event-hubs.md",
+    "source_passage": "At least two partitions are required for Azure Functions to scale out when processing Event Hubs messages",
     "in_corpus": true,
-    "category": "container_apps_authentication"
+    "category": "azure_functions_eventhubs"
   },
   {
     "id": "Q122",
-    "question": "What URL does a successful sign-out redirect the client to by default in Azure Container Apps authentication?",
-    "expected_answer": "/.auth/logout/done",
-    "source_doc": "container-apps/authentication.md",
-    "source_passage": "By default, a successful sign out redirects the client to the URL `/.auth/logout/done`.",
+    "question": "What cardinality setting in an Event Hubs trigger makes the function receive messages as a batch?",
+    "expected_answer": "Setting cardinality to many makes the function receive messages as a batch array",
+    "source_doc": "azure-functions/functions-bindings-event-hubs.md",
+    "source_passage": "Set cardinality to many to receive messages as a batch array",
     "in_corpus": true,
-    "category": "container_apps_authentication"
+    "category": "azure_functions_eventhubs"
   },
   {
     "id": "Q123",
-    "question": "What two example headers does Azure Container Apps inject into request headers to expose user claims to application code?",
-    "expected_answer": "X-MS-CLIENT-PRINCIPAL-NAME and X-MS-CLIENT-PRINCIPAL-ID",
-    "source_doc": "container-apps/authentication.md",
-    "source_passage": "Some example headers include: X-MS-CLIENT-PRINCIPAL-NAME, X-MS-CLIENT-PRINCIPAL-ID",
+    "question": "What does the maxEventBatchSize setting control in an Azure Functions Event Hubs trigger?",
+    "expected_answer": "It controls the maximum number of events included in a batch for the function to process at one time",
+    "source_doc": "azure-functions/functions-bindings-event-hubs.md",
+    "source_passage": "maxEventBatchSize: The maximum number of events included in a batch for the function to process at one time",
     "in_corpus": true,
-    "category": "container_apps_authentication"
+    "category": "azure_functions_eventhubs"
   },
   {
     "id": "Q124",
-    "question": "What is the sign-in endpoint path for the Microsoft identity platform in Azure Container Apps built-in authentication?",
-    "expected_answer": "/.auth/login/aad",
-    "source_doc": "container-apps/authentication.md",
-    "source_passage": "Microsoft identity platform | `/.auth/login/aad`",
+    "question": "What connection setting is required for an Azure Functions Event Hubs trigger?",
+    "expected_answer": "A connection string to the Event Hubs namespace stored in an app setting",
+    "source_doc": "azure-functions/functions-bindings-event-hubs.md",
+    "source_passage": "A connection string to the Event Hubs namespace is required and stored in an app setting",
     "in_corpus": true,
-    "category": "container_apps_authentication"
+    "category": "azure_functions_eventhubs"
   },
   {
     "id": "Q125",
-    "question": "What CORS response header does the maxAge setting control in Azure Container Apps?",
-    "expected_answer": "Access-Control-Max-Age",
-    "source_doc": "container-apps/cors.md",
-    "source_passage": "`maxAge` | Configures the `Access-Control-Max-Age` response header to indicate how long (in seconds) the results of a CORS pre-flight request can be cached.",
+    "question": "What is the Event Grid trigger used for in Azure Functions?",
+    "expected_answer": "It is used to execute a function in response to events delivered through Azure Event Grid, such as blob storage events, resource group events or custom events",
+    "source_doc": "azure-functions/functions-bindings-event-grid.md",
+    "source_passage": "The Event Grid trigger executes a function in response to events delivered through Azure Event Grid, such as blob storage events, resource group events, or custom events",
     "in_corpus": true,
-    "category": "container_apps_cors"
+    "category": "azure_functions_eventgrid"
   },
   {
     "id": "Q126",
-    "question": "What character do you use in Azure Container Apps CORS settings to allow all origins, methods, or headers?",
-    "expected_answer": "* (asterisk)",
-    "source_doc": "container-apps/cors.md",
-    "source_passage": "Use `*` to allow all.",
+    "question": "What validation process does Azure Event Grid perform when subscribing an Azure Function as an endpoint?",
+    "expected_answer": "Event Grid sends a subscription validation event to confirm the endpoint is valid. The function must respond with the validationCode from the event.",
+    "source_doc": "azure-functions/functions-bindings-event-grid.md",
+    "source_passage": "Event Grid sends a subscription validation event to confirm the endpoint is valid. The function must respond with the validationCode from the event",
     "in_corpus": true,
-    "category": "container_apps_cors"
+    "category": "azure_functions_eventgrid"
   },
   {
     "id": "Q127",
-    "question": "What happens to your current CORS settings when you update configuration via the Azure CLI for Container Apps?",
-    "expected_answer": "Updates via the command line overwrite your current settings",
-    "source_doc": "container-apps/cors.md",
-    "source_passage": "Updates to configuration settings via the command line overwrites your current settings.",
+    "question": "What protocol does Azure Event Grid use to deliver events to an Azure Functions HTTP endpoint?",
+    "expected_answer": "HTTPS",
+    "source_doc": "azure-functions/functions-bindings-event-grid.md",
+    "source_passage": "Event Grid delivers events to Azure Functions HTTP endpoints using HTTPS",
     "in_corpus": true,
-    "category": "container_apps_cors"
+    "category": "azure_functions_eventgrid"
   },
   {
     "id": "Q128",
-    "question": "What is the default command timeout in seconds for Azure SQL bindings in Azure Functions before a query is terminated?",
-    "expected_answer": "30 seconds",
-    "source_doc": "azure-functions/functions-bindings-azure-sql.md",
-    "source_passage": "Command timeout: allows a function to wait for specified amount of time in seconds before terminating a query (default 30 seconds)",
+    "question": "What does enabling ingress on an Azure Container App do?",
+    "expected_answer": "It exposes the container app to external or internal traffic through a stable URL without needing to configure a load balancer or reverse proxy manually",
+    "source_doc": "container-apps/ingress.md",
+    "source_passage": "Enabling ingress exposes your container app to external or internal traffic through a stable URL without manually configuring a load balancer or reverse proxy",
     "in_corpus": true,
-    "category": "azure_functions_sql"
+    "category": "container_apps_ingress"
   },
   {
     "id": "Q129",
-    "question": "Which SQL Server data types are not supported for output bindings in Azure Functions, causing data upserts to fail?",
-    "expected_answer": "NTEXT, TEXT, and IMAGE",
-    "source_doc": "azure-functions/functions-bindings-azure-sql.md",
-    "source_passage": "Output bindings against tables with columns of data types NTEXT, TEXT, or IMAGE aren't supported and data upserts will fail.",
+    "question": "What are the two ingress traffic types available in Azure Container Apps?",
+    "expected_answer": "External ingress which accepts traffic from the public internet, and internal ingress which only accepts traffic from within the same environment",
+    "source_doc": "container-apps/ingress.md",
+    "source_passage": "External: Accepts traffic from the public internet. Internal: Only accepts traffic from within the same Container Apps environment",
     "in_corpus": true,
-    "category": "azure_functions_sql"
+    "category": "container_apps_ingress"
   },
   {
     "id": "Q130",
-    "question": "What registration method does the Go worker in Azure Functions use for an Azure Cosmos DB trigger?",
-    "expected_answer": "app.CosmosDB()",
-    "source_doc": "azure-functions/functions-bindings-cosmosdb-v2.md",
-    "source_passage": "Register Azure Cosmos DB triggers in code by using `app.CosmosDB()`. Azure Cosmos DB input and output bindings aren't currently supported by the Go worker",
+    "question": "What is the target port setting in Azure Container Apps ingress?",
+    "expected_answer": "The target port is the port on which the container is listening for incoming traffic",
+    "source_doc": "container-apps/ingress.md",
+    "source_passage": "The target port is the port on which your container is listening for incoming traffic",
     "in_corpus": true,
-    "category": "azure_functions_go"
+    "category": "container_apps_ingress"
   },
   {
     "id": "Q131",
-    "question": "What is the default connection mode for the Azure Cosmos DB binding in Azure Functions host.json settings?",
-    "expected_answer": "Gateway",
-    "source_doc": "azure-functions/functions-bindings-cosmosdb-v2.md",
-    "source_passage": "connectionMode | Gateway | The connection mode used by the function when connecting to the Azure Cosmos DB service.",
+    "question": "What transport protocols does Azure Container Apps ingress support?",
+    "expected_answer": "HTTP/1.1, HTTP/2, and gRPC",
+    "source_doc": "container-apps/ingress.md",
+    "source_passage": "Azure Container Apps ingress supports HTTP/1.1, HTTP/2, and gRPC",
     "in_corpus": true,
-    "category": "azure_functions_cosmosdb"
+    "category": "container_apps_ingress"
   },
   {
     "id": "Q132",
-    "question": "What connection string keyword specifies the MySQL user account for authentication in Azure Functions MySQL bindings?",
-    "expected_answer": "uid",
-    "source_doc": "azure-functions/functions-bindings-azure-mysql.md",
-    "source_passage": "uid: The MySQL user account to provide for the authentication process.",
+    "question": "What is a managed identity in Azure Container Apps?",
+    "expected_answer": "A managed identity is an automatically managed identity in Azure Active Directory that allows a container app to authenticate to Azure services without storing credentials in code or configuration",
+    "source_doc": "container-apps/managed-identity.md",
+    "source_passage": "A managed identity is an automatically managed identity in Azure Active Directory that allows your container app to authenticate to Azure services without storing credentials in code or configuration",
     "in_corpus": true,
-    "category": "azure_functions_mysql"
+    "category": "container_apps_identity"
   },
   {
     "id": "Q133",
-    "question": "Which spatial data types are unsupported for output bindings in Azure Database for MySQL bindings for Azure Functions?",
-    "expected_answer": "GEOMETRY, POINT, and POLYGON",
-    "source_doc": "azure-functions/functions-bindings-azure-mysql.md",
-    "source_passage": "Output bindings against tables with columns of spatial data types GEOMETRY, POINT, and POLYGON aren't supported.",
+    "question": "What are the two types of managed identities available in Azure Container Apps?",
+    "expected_answer": "System-assigned managed identity and user-assigned managed identity",
+    "source_doc": "container-apps/managed-identity.md",
+    "source_passage": "There are two types of managed identities: System-assigned managed identity and User-assigned managed identity",
     "in_corpus": true,
-    "category": "azure_functions_mysql"
+    "category": "container_apps_identity"
   },
   {
     "id": "Q134",
-    "question": "What permission level do users need for Azure Data Explorer input bindings in Azure Functions?",
-    "expected_answer": "Viewer permissions",
-    "source_doc": "azure-functions/functions-bindings-azure-data-explorer.md",
-    "source_passage": "For input bindings, users require Viewer permissions.",
+    "question": "What happens to a system-assigned managed identity when the container app is deleted?",
+    "expected_answer": "It is automatically deleted when the container app is deleted",
+    "source_doc": "container-apps/managed-identity.md",
+    "source_passage": "A system-assigned managed identity is tied to the container app and is automatically deleted when the container app is deleted",
     "in_corpus": true,
-    "category": "azure_functions_data_explorer"
+    "category": "container_apps_identity"
   },
   {
     "id": "Q135",
-    "question": "What permission level do users need for Azure Data Explorer output bindings in Azure Functions?",
-    "expected_answer": "Ingestor permissions",
-    "source_doc": "azure-functions/functions-bindings-azure-data-explorer.md",
-    "source_passage": "For output bindings, users require Ingestor permissions.",
+    "question": "Can a user-assigned managed identity be shared across multiple Azure Container Apps?",
+    "expected_answer": "Yes, a user-assigned managed identity can be shared and assigned to multiple container apps",
+    "source_doc": "container-apps/managed-identity.md",
+    "source_passage": "A user-assigned managed identity can be shared and assigned to multiple container apps",
     "in_corpus": true,
-    "category": "azure_functions_data_explorer"
+    "category": "container_apps_identity"
   },
   {
     "id": "Q136",
-    "question": "What property must be set in the binding definition to use managed identity connections with Azure Data Explorer bindings in Azure Functions?",
-    "expected_answer": "managedServiceIdentity",
-    "source_doc": "azure-functions/functions-bindings-azure-data-explorer.md",
-    "source_passage": "For managed identity-based connections, you must set the `managedServiceIdentity` property in the binding definition.",
+    "question": "What common Azure service can a container app authenticate to using managed identity without storing credentials?",
+    "expected_answer": "Azure Container Registry, allowing the container app to pull images without storing registry credentials",
+    "source_doc": "container-apps/managed-identity.md",
+    "source_passage": "You can use managed identity to authenticate to Azure Container Registry and pull images without storing registry credentials",
     "in_corpus": true,
-    "category": "azure_functions_data_explorer"
+    "category": "container_apps_identity"
   },
   {
     "id": "Q137",
-    "question": "According to Azure Container Apps guidance, what should you do to reduce cold-start times for images with large machine learning models?",
-    "expected_answer": "Reduce container image size and eliminate unnecessary libraries, or pre-download large models to storage using storage mounts",
-    "source_doc": "container-apps/cold-start.md",
-    "source_passage": "Whenever possible, reduce the size of these images as much as possible and eliminate any use of unnecessary libraries. Use storage mounts to hold critical data close to your container app, especially when the file sizes are large.",
+    "question": "What does the initialBatchSizeOverride setting do in an Azure Functions Event Hubs trigger?",
+    "expected_answer": "It sets the number of events to retrieve per partition on startup before steady-state batch sizes take effect",
+    "source_doc": "azure-functions/functions-bindings-event-hubs.md",
+    "source_passage": "initialBatchSizeOverride: Sets the number of events to retrieve per partition on startup before steady-state batch sizes take effect",
     "in_corpus": true,
-    "category": "container_apps_cold_start"
+    "category": "azure_functions_eventhubs"
   },
   {
     "id": "Q138",
-    "question": "What is the default value of ConnectRetryCount for Azure SQL bindings in Azure Functions?",
-    "expected_answer": "1",
-    "source_doc": "azure-functions/functions-bindings-azure-sql.md",
-    "source_passage": "ConnectRetryCount: allows a function to automatically make additional reconnection attempts, especially applicable to Azure SQL Database serverless tier (default 1)",
+    "question": "What does the allowInsecure setting do in Azure Container Apps ingress?",
+    "expected_answer": "It allows HTTP traffic in addition to HTTPS when enabled. By default only HTTPS traffic is accepted.",
+    "source_doc": "container-apps/ingress.md",
+    "source_passage": "allowInsecure: When enabled, allows HTTP traffic in addition to HTTPS. By default only HTTPS traffic is accepted",
     "in_corpus": true,
-    "category": "azure_functions_sql"
+    "category": "container_apps_ingress"
   },
   {
     "id": "Q139",
-    "question": "What port is used in the connection string when connecting Azure Functions to Azure Cache for Redis?",
-    "expected_answer": "6380",
-    "source_doc": "azure-functions/functions-bindings-cache.md",
-    "source_passage": "\"Redis\": \"<cacheName>.redis.cache.windows.net:6380,password=...\"",
+    "question": "How can you verify that managed identity is working correctly in an Azure Container Apps deployment?",
+    "expected_answer": "By checking that the container app can successfully access the target Azure service without any credential errors in the logs",
+    "source_doc": "container-apps/managed-identity.md",
+    "source_passage": "Verify managed identity is working by checking that the container app can successfully access the target Azure service without credential errors in the logs",
     "in_corpus": true,
-    "category": "azure_functions_cache"
+    "category": "container_apps_identity"
   },
   {
     "id": "Q140",
-    "question": "What does Azure Container Apps automatically set up when ingress is enabled, which can cause a slow-starting app to be killed?",
-    "expected_answer": "A liveness probe",
-    "source_doc": "container-apps/cold-start.md",
-    "source_passage": "Azure Container Apps automatically sets up a liveness probe when ingress is enabled.",
+    "question": "What is the purpose of the consumer group setting in an Azure Functions Event Hubs trigger?",
+    "expected_answer": "It specifies the Event Hubs consumer group that the function uses to subscribe to the event stream, allowing multiple functions to read from the same hub independently",
+    "source_doc": "azure-functions/functions-bindings-event-hubs.md",
+    "source_passage": "consumerGroup: The Event Hubs consumer group used to subscribe to the event stream. Multiple functions can read from the same hub independently using different consumer groups",
     "in_corpus": true,
-    "category": "container_apps_cold_start"
+    "category": "azure_functions_eventhubs"
   },
   {
     "id": "Q141",
