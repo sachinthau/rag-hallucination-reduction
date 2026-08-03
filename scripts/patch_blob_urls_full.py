@@ -1,4 +1,4 @@
-# scripts/patch_blob_urls_full.py
+
 import sys, os, json
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 

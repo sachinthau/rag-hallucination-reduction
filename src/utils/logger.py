@@ -1,20 +1,18 @@
-# src/utils/logger.py
+
 import uuid
 import datetime
 from azure.data.tables import TableServiceClient
 from src.config.settings import settings
 
-
 def get_table_client():
     service = TableServiceClient.from_connection_string(settings.STORAGE_CONNECTION_STRING)
-    # Create table if it does not exist
+
     try:
         service.create_table(settings.TABLE_NAME)
         print(f"[Logger] Created table: {settings.TABLE_NAME}")
     except Exception:
-        pass  # Table already exists, that is fine
+        pass
     return service.get_table_client(settings.TABLE_NAME)
-
 
 def log_result(result: dict):
     try:

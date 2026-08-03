@@ -1,4 +1,4 @@
-# src/ingestion/indexer.py
+
 import time
 import json
 import os
@@ -8,7 +8,6 @@ from src.config.settings import settings
 
 PROGRESS_FILE = "logs/ingestion_progress.json"
 
-
 def get_embeddings():
     return AzureOpenAIEmbeddings(
         azure_deployment=settings.EMBEDDING_DEPLOYMENT,
@@ -16,7 +15,6 @@ def get_embeddings():
         azure_endpoint=settings.AZURE_OPENAI_ENDPOINT,
         api_key=settings.AZURE_OPENAI_API_KEY
     )
-
 
 def save_progress(batch_number: int, total_batches: int, chunks_done: int):
     os.makedirs("logs", exist_ok=True)
@@ -26,7 +24,6 @@ def save_progress(batch_number: int, total_batches: int, chunks_done: int):
             "total_batches": total_batches,
             "chunks_done": chunks_done
         }, f)
-
 
 def load_progress() -> int:
     if os.path.exists(PROGRESS_FILE):
@@ -38,11 +35,9 @@ def load_progress() -> int:
             return last
     return 0
 
-
 def clear_progress():
     if os.path.exists(PROGRESS_FILE):
         os.remove(PROGRESS_FILE)
-
 
 def build_index(chunks: list):
     embeddings = get_embeddings()
@@ -58,7 +53,6 @@ def build_index(chunks: list):
     total = len(chunks)
     total_batches = (total // batch_size) + 1
 
-    # Check if there is a saved progress file
     start_batch = load_progress()
 
     if start_batch > 0:

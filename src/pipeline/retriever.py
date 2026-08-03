@@ -1,21 +1,3 @@
-"""
-src/pipeline/retriever.py
-
-FIXED VERSION: previously used vector_store.similarity_search(), which
-bypasses Azure AI Search's semantic reranking entirely, despite
-semantic_configuration_name="default" being set (it was configured but
-unused). This was confirmed as the likely root cause of several
-retrieval-miss cases identified during manual investigation (Q019, Q085,
-Q122 — see dissertation Chapter 6).
-
-This version uses semantic_hybrid_search_with_score(), which actually
-invokes vector search + keyword search + semantic reranking together.
-The function's return type is kept as a plain list of Document objects
-(same as before) so no changes are needed in config_b.py or config_c.py,
-which both expect retrieve_chunks() to return a list of chunks with
-.page_content.
-"""
-
 from langchain_community.vectorstores.azuresearch import AzureSearch
 from src.ingestion.indexer import get_embeddings
 from src.config.settings import settings
@@ -34,17 +16,11 @@ def retrieve_chunks(question: str) -> list:
         semantic_configuration_name="default"
     )
 
-    # semantic_hybrid_search_with_score actually invokes the semantic
-    # reranker (unlike similarity_search, which only does vector search).
-    # Returns list of (Document, relevance_score) tuples.
     results = vector_store.semantic_hybrid_search_with_score(
         query=question,
         k=settings.TOP_K_CHUNKS
     )
 
-    # Strip the scores to preserve the existing return interface
-    # (list of Document objects) so config_b.py / config_c.py don't
-    # need any changes.
     chunks = [doc for doc, score in results]
     return chunks
 
@@ -83,6 +59,6 @@ def add_sas_token(blob_url: str) -> str:
         blob_name=path_part,
         account_key=account_key,
         permission=BlobSasPermissions(read=True),
-        expiry=datetime.now(timezone.utc) + timedelta(hours=6)   # covers your demo window
+        expiry=datetime.now(timezone.utc) + timedelta(hours=6)
     )
     return f"{blob_url}?{sas_token}"

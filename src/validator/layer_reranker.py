@@ -1,8 +1,4 @@
-# src/validator/layer_reranker.py
-# Layer 3: Relevance ranking using cross-encoder/ms-marco-MiniLM-L6-v2
-# Measures how relevant the answer is to the retrieved context
-# Architecturally independent from GPT-4.1-mini
-# Model: cross-encoder/ms-marco-MiniLM-L6-v2 (75.6M downloads, most proven reranking model)
+
 
 import math
 from sentence_transformers import CrossEncoder
@@ -10,7 +6,6 @@ from sentence_transformers import CrossEncoder
 _model = None
 MODEL_NAME = "cross-encoder/ms-marco-MiniLM-L6-v2"
 
-# Relevance scoring using cross-encoder/ms-marco-MiniLM-L6-v2
 def get_model():
     global _model
     if _model is None:
@@ -18,11 +13,9 @@ def get_model():
         _model = CrossEncoder(MODEL_NAME, max_length=512)
     return _model
 
-
 def sigmoid(x: float) -> float:
     """Normalises raw ms-marco scores to 0-1 range."""
     return 1 / (1 + math.exp(-x))
-
 
 def score(answer: str, chunks: list) -> float:
     """
@@ -39,10 +32,8 @@ def score(answer: str, chunks: list) -> float:
 
     model = get_model()
 
-    # ms-marco expects (document, query) order
     pairs = [(chunk, answer) for chunk in chunks]
     raw_scores = model.predict(pairs)
 
-    # Normalise using sigmoid to convert raw logits to 0-1 range
     normalised = [sigmoid(float(s)) for s in raw_scores]
     return float(sum(normalised) / len(normalised))

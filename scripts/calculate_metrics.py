@@ -1,32 +1,3 @@
-"""
-calculate_metrics.py
-====================
-Run this script after:
-  1. Completing the full evaluation run
-  2. Manually annotating 100-150 Config C responses
-
-Usage:
-    python calculate_metrics.py
-
-Outputs:
-    - Cohen's Kappa between GRV labels and human annotations
-    - Precision, Recall, F1 for hallucination detection
-    - Hallucination rate per configuration
-    - Full summary table printed to terminal
-    - Results saved to logs/metrics_summary.json
-
-UPDATED: Config C responses now go through one of two scoring paths:
-  - "standard_three_layer": 0-1 weighted hybrid score (cross-encoder,
-    RAGAS, reranker)
-  - "abstention_verification": raw Azure AI Search semantic reranker score
-    (~1.0-4.0+), used only for refusal-type answers
-These two scales are NOT comparable, so avg_grv_score is now reported
-separately per scoring path instead of as one blended (and previously
-meaningless) average across both. Older results files without a
-scoring_path column are treated as entirely "standard_three_layer" for
-backward compatibility.
-"""
-
 import os
 import sys
 import json
@@ -42,7 +13,6 @@ from sklearn.metrics import (
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-# -- File paths ----------------------------------------------------------------
 RESULTS_A   = "../results/results_config_A.csv"
 RESULTS_B   = "../results/results_config_B.csv"
 RESULTS_C   = "../results/results_config_C.csv"
@@ -50,7 +20,6 @@ ANNOTATIONS = "../data/annotation_template.csv"
 QA_DATASET  = "../data/questions/qa_dataset.json"
 OUTPUT_JSON = "../logs/metrics_summary.json"
 
-# -- Label mappings --------------------------------------------------------------
 def to_binary(label: str) -> int:
     if label in ("ungrounded", "partially_grounded"):
         return 1
@@ -64,7 +33,6 @@ def header(title):
     print(f"  {title}")
     sep("=")
 
-# -- Hallucination rate ----------------------------------------------------------
 def hallucination_rate(results_path: str, config: str) -> dict:
     if not os.path.exists(results_path):
         print(f"  WARNING: {results_path} not found. Run the evaluation first.")
@@ -89,7 +57,6 @@ def hallucination_rate(results_path: str, config: str) -> dict:
             "hallucination_rate": rate,
         }
 
-        # Split avg score by scoring path if the column exists
         if "scoring_path" in df.columns:
             std = df[df["scoring_path"] == "standard_three_layer"]
             abst = df[df["scoring_path"] == "abstention_verification"]
@@ -103,15 +70,14 @@ def hallucination_rate(results_path: str, config: str) -> dict:
                     abst["grv_score"].dropna().astype(float).mean(), 4
                 )
                 result["n_abstention_path"] = len(abst)
-            # abstention flag breakdown, if present
+
             if "abstention_flag" in df.columns:
                 flags = df["abstention_flag"].dropna()
                 if len(flags) > 0:
                     result["correct_abstentions"] = int((flags == "correct_abstention").sum())
                     result["suspected_retrieval_misses"] = int((flags == "retrieval_miss_suspected").sum())
         else:
-            # Backward compatibility: no scoring_path column means this is
-            # an older results file where every row used the standard path.
+
             result["avg_grv_score"] = round(df["grv_score"].dropna().astype(float).mean(), 4)
 
         return result
@@ -121,7 +87,6 @@ def hallucination_rate(results_path: str, config: str) -> dict:
             "note": "No GRV labels for this config. Hallucination rate from human annotation only."
         }
 
-# -- GRV performance against human annotations ------------------------------------
 def grv_performance(results_path: str, annotations_path: str) -> dict:
     if not os.path.exists(results_path):
         print(f"  ERROR: {results_path} not found.")
@@ -132,10 +97,6 @@ def grv_performance(results_path: str, annotations_path: str) -> dict:
 
     results     = pd.read_csv(results_path)
 
-    # annotation_template.csv is often re-saved through Excel/Numbers, which
-    # can write it as Windows-1252/Latin-1 rather than UTF-8, especially if
-    # it contains smart quotes, em-dashes, or other special characters typed
-    # or pasted during manual annotation. Try UTF-8 first, fall back cleanly.
     try:
         annotations = pd.read_csv(annotations_path, encoding="utf-8")
     except UnicodeDecodeError:
@@ -189,7 +150,6 @@ def grv_performance(results_path: str, annotations_path: str) -> dict:
         "note": "Binary classification: 1=hallucinated (ungrounded/partial), 0=grounded"
     }
 
-    # Optional: break down agreement by scoring path too, if available
     if "scoring_path" in merged.columns:
         for path_name in ("standard_three_layer", "abstention_verification"):
             subset = merged[merged["scoring_path"] == path_name]
@@ -206,7 +166,6 @@ def grv_performance(results_path: str, annotations_path: str) -> dict:
 
     return result
 
-# -- Per-category hallucination analysis -------------------------------------------
 def category_analysis(results_c_path: str, qa_dataset_path: str) -> dict:
     if not os.path.exists(results_c_path):
         return {}
@@ -248,7 +207,6 @@ def category_analysis(results_c_path: str, qa_dataset_path: str) -> dict:
 
     return category_stats
 
-# -- RAGAS scores summary -----------------------------------------------------------
 def ragas_summary(results_path: str) -> dict:
     """
     NOTE: grv_score is intentionally EXCLUDED from this generic summary,
@@ -275,7 +233,6 @@ def ragas_summary(results_path: str) -> dict:
             }
     return summary
 
-# -- MAIN ----------------------------------------------------------------------------
 def main():
     header("RAG Hallucination Reduction - Metrics Calculator")
     print(f"  Dissertation: K.G. Sachintha Udara | MSc Advanced Software Engineering")

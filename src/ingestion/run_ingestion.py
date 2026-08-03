@@ -1,4 +1,4 @@
-# src/ingestion/run_ingestion.py
+
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
 from src.ingestion.chunker import chunk_documents
 from src.ingestion.indexer import build_index

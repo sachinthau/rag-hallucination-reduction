@@ -1,8 +1,3 @@
-"""
-Basic smoke tests for each pipeline configuration.
-These require a working .env file with valid Azure credentials.
-Run with: pytest tests/test_pipeline.py -v
-"""
 import pytest
 
 

@@ -1,14 +1,3 @@
-"""
-show_kappa_calculation.py
-=========================
-Run this script to show exactly how Cohen's Kappa was calculated.
-Use this during viva/presentation to demonstrate the calculation.
-
-Usage:
-    cd ~/Desktop/IIT_Research_Project/rag-project
-    python show_kappa_calculation.py
-"""
-
 import pandas as pd
 from sklearn.metrics import (
     cohen_kappa_score,
@@ -26,7 +15,6 @@ def header(title):
     print(f"  {title}")
     sep()
 
-# ── Load data ─────────────────────────────────────────────────────────────────
 results = pd.read_csv("../results/results_config_C.csv")
 annotations = pd.read_csv("../data/annotation_template_full.csv")
 
@@ -37,7 +25,6 @@ merged = results.merge(
     suffixes=("_results", "_annot")
 )
 
-# ── Binary encoding ───────────────────────────────────────────────────────────
 def to_binary(label):
     """Convert three-class label to binary. 1 = hallucinated, 0 = grounded."""
     if str(label).strip() in ("ungrounded", "partially_grounded"):
@@ -47,7 +34,6 @@ def to_binary(label):
 grv   = [to_binary(l) for l in merged["grv_label_results"].fillna("ungrounded")]
 human = [to_binary(l) for l in merged["human_label"].fillna("ungrounded")]
 
-# ── Step 1: Data overview ─────────────────────────────────────────────────────
 header("STEP 1: Data Overview")
 print(f"  Results file:      results/results_config_C.csv")
 print(f"  Annotation file:   data/annotation_template_full.csv")
@@ -60,7 +46,6 @@ print()
 print(f"  Human labels:  grounded={human.count(0)},  hallucinated={human.count(1)}")
 print(f"  GRV labels:    grounded={grv.count(0)},  hallucinated={grv.count(1)}")
 
-# ── Step 2: Confusion Matrix ──────────────────────────────────────────────────
 cm = confusion_matrix(human, grv)
 TN = cm[0][0]
 FP = cm[0][1]
@@ -81,7 +66,6 @@ print(f"  False Negatives (GRV missed):              {FN}")
 print(f"  True Positives  (both said hallucinated):  {TP}")
 print(f"  Total:                                     {total}")
 
-# ── Step 3: Cohen's Kappa manual calculation ──────────────────────────────────
 header("STEP 3: Cohen's Kappa Calculation")
 
 Po = (TP + TN) / total
@@ -110,13 +94,11 @@ print(f"        = ({Po:.4f} - {Pe:.4f}) / (1 - {Pe:.4f})")
 print(f"        = {Po - Pe:.4f} / {1 - Pe:.4f}")
 print(f"        = {kappa:.4f}")
 
-# Verify with sklearn
 kappa_sklearn = cohen_kappa_score(human, grv)
 print()
 print(f"  Verified with sklearn.metrics.cohen_kappa_score: {kappa_sklearn:.4f}")
 print(f"  Match: {'YES' if abs(kappa - kappa_sklearn) < 0.0001 else 'NO'}")
 
-# ── Step 4: Precision, Recall, F1 ─────────────────────────────────────────────
 precision = precision_score(human, grv, zero_division=0)
 recall    = recall_score(human, grv, zero_division=0)
 f1        = f1_score(human, grv, zero_division=0)
@@ -138,7 +120,6 @@ print(f"  F1 Score  = 2 x (Precision x Recall) / (Precision + Recall)")
 print(f"            = 2 x ({precision:.4f} x {recall:.4f}) / ({precision:.4f} + {recall:.4f})")
 print(f"            = {f1:.4f}")
 
-# ── Step 5: Interpretation ────────────────────────────────────────────────────
 header("STEP 5: Interpretation")
 print("  Cohen's Kappa interpretation scale (Cohen, 1960):")
 print()
@@ -157,7 +138,6 @@ else:
     print(f"  RESULT: Kappa = {kappa:.4f} < 0.6 threshold")
     print(f"  CONCLUSION: Agreement below substantial threshold")
 
-# ── Step 6: Summary ───────────────────────────────────────────────────────────
 header("FINAL SUMMARY")
 print(f"  Sample size:    {total} annotated Config C responses")
 print(f"  Cohen's Kappa:  {kappa:.4f}  (substantial agreement)")

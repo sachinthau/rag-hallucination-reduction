@@ -1,4 +1,4 @@
-# scripts/upload_to_blob.py
+
 import sys, os
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))

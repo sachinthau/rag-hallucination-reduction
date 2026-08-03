@@ -1,17 +1,3 @@
-"""
-src/validator/abstention.py
-
-Detects whether a generated answer is a refusal/abstention rather than a
-substantive, claim-bearing answer. This is the trigger condition for routing
-a response through the abstention verification path in grv.py instead of
-the standard three-layer weighted validator.
-
-The patterns below are based on the exact RAG_SYSTEM_PROMPT wording in
-src/pipeline/config_b.py, which explicitly instructs the model to say:
-"I could not find relevant information in the available documents."
-Additional loose variants are included in case the model paraphrases.
-"""
-
 import re
 
 REFUSAL_PATTERNS = [

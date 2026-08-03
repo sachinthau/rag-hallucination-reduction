@@ -1,4 +1,4 @@
-# src/validator/layer_ragas.py
+
 import warnings
 import asyncio
 warnings.filterwarnings("ignore", category=RuntimeWarning)
@@ -7,7 +7,6 @@ from ragas.metrics import faithfulness
 from datasets import Dataset
 from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
 from src.config.settings import settings
-
 
 def score(question: str, answer: str, chunks: list) -> float:
     if not chunks:

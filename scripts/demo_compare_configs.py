@@ -1,4 +1,4 @@
-# scripts/demo_compare_configs.py
+
 import sys, os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -8,10 +8,9 @@ from src.pipeline.retriever import retrieve_chunks, get_chunk_sources
 DEMO_QUESTIONS = [
     "How do I create an Azure Function trigger?",
     "What is the default scaling limit for Container Apps?",
-    "What is the capital of France?",  # out-of-corpus control question
+    "What is the capital of France?",
 ]
 
-# --- Simple ANSI color helpers ---
 class C:
     RESET = "\033[0m"
     BOLD = "\033[1m"
@@ -24,15 +23,12 @@ class C:
     CYAN = "\033[36m"
     WHITE = "\033[37m"
 
-
 def header(text, color=C.CYAN):
     line = "=" * 78
     print(f"\n{color}{C.BOLD}{line}\n{text}\n{line}{C.RESET}")
 
-
 def subheader(text, color=C.BLUE):
     print(f"\n{color}{C.BOLD}--- {text} ---{C.RESET}")
-
 
 def label_color(label):
     if label == "grounded":
@@ -43,17 +39,14 @@ def label_color(label):
         return C.RED
     return C.WHITE
 
-
 def demo_question(question: str, index: int, total: int):
     header(f"QUESTION {index}/{total}: {question}", color=C.MAGENTA)
 
-    # --- Config A ---
     result_a = config_a.query(question)
     subheader("CONFIG A — Baseline LLM (no retrieval)", color=C.WHITE)
     print(f"{C.DIM}Answer:{C.RESET} {result_a['answer']}")
     print(f"{C.DIM}Latency:{C.RESET} {result_a['latency_ms']}ms")
 
-    # --- Config B ---
     result_b = config_b.query(question)
     subheader("CONFIG B — RAG with hybrid retrieval", color=C.BLUE)
     print(f"{C.DIM}Answer:{C.RESET} {result_b['answer']}")
@@ -65,7 +58,6 @@ def demo_question(question: str, index: int, total: int):
     for i, src in enumerate(sources, 1):
         print(f"  {C.CYAN}[{i}]{C.RESET} {src['blob_url']}")
 
-    # --- Config C ---
     result_c = config_c.query(question)
     subheader("CONFIG C — RAG + Grounded Response Validator", color=C.GREEN)
     print(f"{C.DIM}Answer:{C.RESET} {result_c['answer']}")
@@ -87,7 +79,6 @@ def demo_question(question: str, index: int, total: int):
     print(f"{C.DIM}Generation latency:{C.RESET} {result_c['latency_ms']}ms   "
           f"{C.DIM}GRV latency:{C.RESET} {result_c['grv_latency_ms']}ms   "
           f"{C.DIM}Total:{C.RESET} {result_c['total_latency_ms']}ms")
-
 
 if __name__ == "__main__":
     total = len(DEMO_QUESTIONS)
