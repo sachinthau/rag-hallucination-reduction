@@ -13,10 +13,12 @@
     "partially_grounded": 5,
     "ungrounded": 1,
     "hallucination_rate": 0.03,
-    "avg_grv_score_standard_path": 0.6866,
+    "avg_grv_score_standard_path": 0.6871,
     "n_standard_path": 146,
     "avg_relevance_score_abstention_path": 2.1834,
-    "n_abstention_path": 54
+    "n_abstention_path": 54,
+    "correct_abstentions": 54,
+    "suspected_retrieval_misses": 0
   },
   "grv_performance": {
     "n_samples": 200,
@@ -241,11 +243,11 @@
   },
   "ragas_summary": {
     "ragas_faithfulness": {
-      "mean": 0.9643,
+      "mean": 0.9658,
       "median": 1.0,
       "min": 0.0,
       "max": 1.0,
-      "std": 0.1235,
+      "std": 0.1215,
       "n": 146
     }
   }
